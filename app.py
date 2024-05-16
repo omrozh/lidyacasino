@@ -160,6 +160,20 @@ class SitePartner(db.Model):
     partnership_status = db.Column(db.String)
 
 
+class UserAssignedPermission(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_fk = db.Column(db.String)
+    permission_fk = db.Column(db.String)
+
+
+class UserPermissions(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    permissions_list = db.Column(db.String)
+
+
+# TO DO: Create panel user, permission
+
+
 class ContactM2(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String)
@@ -408,6 +422,11 @@ class User(db.Model, UserMixin):
     sports_bonus_balance = db.Column(db.Float)
     completed_first_deposit = db.Column(db.Boolean)
     site_partner_fk = db.Column(db.Integer)
+
+    def user_has_permission(self, permission_to_check):
+        assigned_permission = UserAssignedPermission.query.filter_by(user_fk=self.id)
+        user_permission = UserPermissions.query.get(assigned_permission.permission_fk)
+        return permission_to_check in user_permission.permissions_list.split("&&")
 
     @property
     def site_partner(self):
@@ -720,7 +739,6 @@ class BetOption(db.Model):
             return processed_bet_odds
 
         return bet_odds
-
 
     @property
     def open_bet_obj(self):
@@ -1114,42 +1132,42 @@ def admin_console():
                 <br>
                 // Affiliate ekle
                 <br>
-                
+
                 add-team <takım_adı> <görsel_url>
                 <br>
                 // Takım ekle
                 <br>
-                
+
                 add-athlete <oyuncu_adı> <oyuncu_maliyeti> <takım_adı>
                 <br>
                 // Oyuncu ekle
                 <br>
-                
+
                 add-match <maçın_bugünden_kaç_gün_sonra_olacağı> <takım_1> <takım_2> <maçın_ligi>
                 <br>
                 // Maç ekle
                 <br>
-                
+
                 change-request-status <status_id> <new_status>
                 <br>
                 // Ödeme Statüsü Değiştir
                 <br>
-                
+
                 add-points <puan_miktarı> <oyuncu_adı> <puanın_kaç_gün_önce_kazanıldığı>
                 <br>
                 // Puan ekle
                 <br>
-                
+
                 remove-athlete <oyuncu_adı>
                 <br>
                 // Oyuncuyu sil
                 <br>
-                
+
                 list-players
                 <br>
                 // Oyuncuların listesi
                 <br>
-                
+
                 list-teams
                 <br>
                 // Takımların listesi 
@@ -1243,6 +1261,7 @@ def profile():
     return flask.render_template("profile.html", current_user=current_user, withdrawal_requests=reversed(
         WithdrawalRequest.query.filter_by(user_fk=current_user.id).all()))
 
+
 # TO DO: Implement bonuses in profile.
 
 
@@ -1314,7 +1333,8 @@ def index():
             pass
     resp = flask.make_response(
         flask.render_template("anasayfa-yeni.html", current_user=current_user, providers=providers,
-                              games_popular=games_popular, live_casino_games=live_casino_games, sliders_main=sliders_main, sliders_sub=sliders_sub))
+                              games_popular=games_popular, live_casino_games=live_casino_games,
+                              sliders_main=sliders_main, sliders_sub=sliders_sub))
     if flask.request.args.get("ref", False):
         resp.set_cookie('referrer', flask.request.args.get("ref"))
     return resp
@@ -1709,6 +1729,7 @@ def bahis():
                                  number_of_chunks=number_of_chunks, offset=offset,
                                  sports_and_leagues=sports_and_leagues)
 
+
 # TO DO: Complete sports betting integration FE.
 
 
@@ -1719,7 +1740,9 @@ def canli_bahis():
     league = flask.request.args.get("league", None)
     search_q = flask.request.args.get("search_q", None)
     if search_q:
-        open_bets = OpenBet.query.filter(OpenBet.bet_ending_datetime <= datetime.datetime.now(), or_(OpenBet.team_1.like('%' + search_q + '%'), OpenBet.team_2.like('%' + search_q + '%'))).filter_by(
+        open_bets = OpenBet.query.filter(OpenBet.bet_ending_datetime <= datetime.datetime.now(),
+                                         or_(OpenBet.team_1.like('%' + search_q + '%'),
+                                             OpenBet.team_2.like('%' + search_q + '%'))).filter_by(
             live_betting_expired=False).filter_by(has_odds=True)
     else:
         open_bets = OpenBet.query.filter(OpenBet.bet_ending_datetime <= datetime.datetime.now()).filter_by(
@@ -2228,7 +2251,8 @@ def admin_panel_cms():
 
         return flask.redirect("/admin/cms")
 
-    return flask.render_template("panel/cms.html", css_dict=css_dict, images=images, option=flask.request.args.get("option"))
+    return flask.render_template("panel/cms.html", css_dict=css_dict, images=images,
+                                 option=flask.request.args.get("option"))
 
 
 @app.route("/admin/home")
@@ -2417,7 +2441,6 @@ def admin_panel_players():
     users = User.query.all()
     number_of_users = len(users)
     return flask.render_template("panel/players.html", users=users, number_of_users=number_of_users)
-
 
 
 @app.route("/admin/remove_user")
