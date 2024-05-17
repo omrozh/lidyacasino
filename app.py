@@ -22,12 +22,6 @@ from imap_tools import MailBox
 import schedule
 import time
 
-def run_pending_jobs():
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-
-
 app = flask.Flask(__name__)
 
 games_and_descriptions = {
