@@ -6,16 +6,13 @@ total_minutes = 0
 
 with app.app_context():
     while True:
-        try:
-            print(total_minutes)
-            if total_minutes == 120:
-                register_open_bet()
-                total_minutes = 0
-            live_betting()
-            total_minutes += 1
-            time.sleep(60)
-        except:
-            pass
+        print(total_minutes)
+        if total_minutes == 120:
+            register_open_bet()
+            total_minutes = 0
+        live_betting()
+        total_minutes += 1
+        time.sleep(60)
 
 # latest process id: kmcron
 # tmux attach-session -t
