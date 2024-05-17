@@ -5,14 +5,15 @@ import time
 total_minutes = 0
 
 with app.app_context():
-    try:
-        if total_minutes == 120:
-            register_open_bet()
-            total_minutes = 0
-        live_betting()
-        time.sleep(60)
-    except:
-        pass
+    while True:
+        try:
+            if total_minutes == 120:
+                register_open_bet()
+                total_minutes = 0
+            live_betting()
+            time.sleep(60)
+        except:
+            pass
 
 # latest process id: kmcron
 # tmux attach-session -t
