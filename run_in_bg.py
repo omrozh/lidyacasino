@@ -21,6 +21,7 @@ with app.app_context():
         time.sleep(60)
 
 # latest process id: kmcron
-# tmux attach-session -t
+# tmux attach-session -t kmcron
+# tmux kill-session -t kmcron
 # tmux ls
 # tmux new -s kmcron
