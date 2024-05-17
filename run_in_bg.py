@@ -8,15 +8,9 @@ with app.app_context():
     while True:
         print(total_minutes)
         if total_minutes == 120:
-            try:
-                register_open_bet()
-            except:
-                pass
+            register_open_bet()
             total_minutes = 0
-        try:
-            live_betting()
-        except:
-            pass
+        live_betting()
         total_minutes += 1
         time.sleep(60)
 
