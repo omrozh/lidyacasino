@@ -12,6 +12,7 @@ with app.app_context():
                 register_open_bet()
                 total_minutes = 0
             live_betting()
+            total_minutes += 1
             time.sleep(60)
         except:
             pass
