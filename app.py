@@ -2707,6 +2707,7 @@ def casino_result_bet():
                 "error": "Authorization Error"
             }
         }
+    print(flask.request.values.get("eventType"))
     if flask.request.values.get("eventType") == "Win":
         new_transaction = TransactionLog(transaction_amount=float(flask.request.values.get("amount")),
                                          transaction_type="casino_win", transaction_date=datetime.date.today(),
@@ -2714,7 +2715,7 @@ def casino_result_bet():
                                          payment_unique_number=f"Casino Kazancı - Oyun ID: {flask.request.values.get('gameId')}")
         db.session.add(new_transaction)
 
-        subject_user.balance -= float(flask.request.values.get("amount"))
+        subject_user.balance += float(flask.request.values.get("amount"))
 
         if subject_user.referrer:
             if subject_user.referrer.site_partner:
