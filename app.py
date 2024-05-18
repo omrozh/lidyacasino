@@ -2578,7 +2578,7 @@ def admin_panel_finance_deposit_methods():
         db.session.add(new_payment_source)
         db.session.commit()
         return flask.redirect("/admin/deposit-methods")
-    return flask.render_template("panel/deposit-methods.html", manuel_payment_sources=manual_payment_sources)
+    return flask.render_template("panel/deposit-methods.html", manual_payment_sources=manual_payment_sources)
 
 
 @app.route("/admin/players")
