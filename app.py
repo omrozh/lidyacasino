@@ -2291,6 +2291,19 @@ def admin_panel_cms():
                                  option=flask.request.args.get("option"))
 
 
+@app.route("/admin/update/withdraw")
+def update_withdraw():
+    if not current_user.user_has_permission("transactions"):
+        return flask.redirect("/admin/home")
+
+    withdraw_request = WithdrawalRequest.query.get(flask.request.args.get("withdraw_request_id"))
+    withdraw_request.user.balance -= withdraw_request.withdrawal_amount
+    withdraw_request.status = flask.request.args.get("update_to")
+    db.session.commit()
+
+    return flask.redirect("/admin/home")
+
+
 @app.route("/admin/home")
 def admin_panel():
     if not current_user.user_has_permission("general"):
