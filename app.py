@@ -408,10 +408,10 @@ class User(db.Model, UserMixin):
     site_partner_fk = db.Column(db.Integer)
 
     @property
-    def permission_class(self):
+    def permission_name(self):
         assigned_permission = UserAssignedPermission.query.filter_by(user_fk=self.id)
         user_permission = UserPermissions.query.get(assigned_permission.permission_fk)
-        return user_permission
+        return user_permission.permission_name
 
     def user_has_permission(self, permission_to_check):
         assigned_permission = UserAssignedPermission.query.filter_by(user_fk=self.id)
