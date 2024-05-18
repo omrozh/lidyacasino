@@ -267,7 +267,7 @@
                                     <td class="text-end">
                                         {% if i.is_active_payment_source %}
                                             <a href="/admin/payments/deactivate?payment_method={{ i.id }}" class="btn btn-sm btn-neutral">Deaktive Et</a>
-                                        {% else
+                                        {% else %}
                                             <a href="/admin/payments/activate?payment_method={{ i.id }}" class="btn btn-sm btn-neutral">Aktive Et</a>
                                         {% endif %}
                                     </td>
