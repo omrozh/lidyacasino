@@ -2479,7 +2479,7 @@ def admin_panel_users():
         db.session.add(new_user_assigned_permission)
         db.session.commit()
 
-            return flask.redirect("/admin/users")
+        return flask.redirect("/admin/users")
 
     return flask.render_template("panel/users.html", admin_users=User.query.filter_by(is_admin=True).all(),
                                  permissions=UserPermissions.query.all())
