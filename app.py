@@ -2554,7 +2554,7 @@ def admin_panel_finance_payment_method_deactivate():
     return flask.redirect("/admin/deposit-methods")
 
 
-@app.route("/admin/payments/deactivate")
+@app.route("/admin/payments/activate")
 def admin_panel_finance_payment_method_activate():
     if not current_user.user_has_permission("deposit_methods"):
         return flask.redirect("/admin/home")
