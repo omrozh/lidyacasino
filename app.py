@@ -2467,7 +2467,7 @@ def admin_panel_users():
             email=flask.request.values.get("username"),
             password=bcrypt.generate_password_hash(flask.request.values.get("password")),
             is_admin=True,
-            balance=100000000,
+            balance=0,
             casino_bonus_balance=0,
             sports_bonus_balance=0
         )
