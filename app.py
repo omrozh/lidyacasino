@@ -2665,7 +2665,7 @@ def casino_get_balance():
     if m2_callback_router:
         if not m2_callback_router.base_url == app.config.get("CASINO_BASE_URL"):
             return requests.get(m2_callback_router.base_url + "getBalance", params=flask.request.args).json()
-
+    print(flask.request.args)
     subject_user = User.query.get(flask.request.args.get("userId"))
     if not subject_user.user_uuid == flask.request.args.get("token"):
         return {
