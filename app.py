@@ -2180,7 +2180,7 @@ def casino_game(game_id):
 
     return flask.render_template("casino-game.html",
                                  game_iframe=get_game_iframe(game_id, current_user.id, current_user.user_uuid,
-                                                             demo="true", bonus=freespin_bonus))
+                                                             demo="false", bonus=freespin_bonus))
 
 
 @app.errorhandler(500)
@@ -2772,5 +2772,5 @@ def bonus_request():
     db.session.commit()
     return flask.redirect("/promotions")
 
-# TO DO: Add bonus taleplerim page to profile
+# TO DO: Add bonus taleplerim page to profile also implement trying and loss bonuses
 # TO DO: Check casino integration (also with router)
