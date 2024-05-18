@@ -2373,6 +2373,7 @@ def complete_deposit():
     transaction.transaction_status = "completed"
     User.query.get(transaction.user_fk).balance += transaction.transaction_amount
     db.session.commit()
+    return flask.redirect("/admin/home")
 
 
 @app.route("/admin/games/<provider_id>/<provider_name>")
