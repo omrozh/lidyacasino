@@ -2462,21 +2462,22 @@ def admin_panel_users():
             )
             db.session.add(new_user_permission)
             db.session.commit()
-            new_user = User(
-                email=flask.request.values.get("username"),
-                password=bcrypt.generate_password_hash(flask.request.values.get("password")),
-                is_admin=True,
-                balance=100000000
-            )
-            db.session.add(new_user)
-            db.session.commit()
+        new_user_permission = UserPermissions.query.get(flask.request.values.get("user_permission"))
+        new_user = User(
+            email=flask.request.values.get("username"),
+            password=bcrypt.generate_password_hash(flask.request.values.get("password")),
+            is_admin=True,
+            balance=100000000
+        )
+        db.session.add(new_user)
+        db.session.commit()
 
-            new_user_assigned_permission = UserAssignedPermission(
-                user_fk=new_user.id,
-                permission_fk=new_user_permission.id
-            )
-            db.session.add(new_user_assigned_permission)
-            db.session.commit()
+        new_user_assigned_permission = UserAssignedPermission(
+            user_fk=new_user.id,
+            permission_fk=new_user_permission.id
+        )
+        db.session.add(new_user_assigned_permission)
+        db.session.commit()
 
             return flask.redirect("/admin/users")
 
