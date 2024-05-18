@@ -2570,7 +2570,7 @@ def admin_panel_finance_deposit_methods():
     manual_payment_sources = PaymentSource.query.all()
     if flask.request.method == "POST":
         new_payment_source = PaymentSource(
-            is_active_payment_souce=True,
+            is_active_payment_source=True,
             payment_type=flask.request.values.get("payment_type"),
             payment_number=flask.request.values.get("payment_number"),
             account_holder_name=flask.request.values.get("account_holder_name")
