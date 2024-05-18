@@ -2642,6 +2642,7 @@ def casino_player_details():
         if not m2_callback_router.base_url == app.config.get("CASINO_BASE_URL"):
             return requests.get(m2_callback_router.base_url + "playerDetails", params=flask.request.args).json()
     subject_user = User.query.get(flask.request.args.get("userId"))
+    print(flask.request.args)
     if not subject_user.user_uuid == flask.request.args.get("token"):
         return {
             "status": False,
