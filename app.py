@@ -2683,7 +2683,7 @@ def casino_get_balance():
 def casino_result_bet():
     m2_callback_router = M2CallbackRouter.query.filter_by(user_uuid=flask.request.args.get("token")).first()
     print(flask.request.args.get("token"))
-    print(flask.request.args)
+    print(flask.request.values)
     if m2_callback_router:
         if not m2_callback_router.base_url == app.config.get("CASINO_BASE_URL"):
             return requests.get(m2_callback_router.base_url + "moveFunds", params=flask.request.args).json()
