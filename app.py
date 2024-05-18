@@ -1447,7 +1447,7 @@ def deposit_bank():
                                          payment_unique_number=flask.request.values["name"])
         db.session.add(new_transaction)
         db.session.commit()
-        get_first_active_method = PaymentSource.query.filter_by(payment_type="bank").filter_by(is_active_payment_method=True).first()
+        get_first_active_method = PaymentSource.query.filter_by(payment_type="bank").filter_by(is_active_payment_source=True).first()
         return flask.render_template("bank_deposit.html", fullname=get_first_active_method.account_holder_name,
                                      iban=get_first_active_method.payment_number)
     return flask.render_template("bank_deposit_form.html")
@@ -1466,7 +1466,7 @@ def deposit_papara():
         db.session.add(new_transaction)
         db.session.commit()
         get_first_active_method = PaymentSource.query.filter_by(payment_type="papara").filter_by(
-            is_active_payment_method=True).first()
+            is_active_payment_source=True).first()
 
         return flask.render_template("papara_deposit.html", transaction=new_transaction, papara_no=get_first_active_method.payment_number,
                                      papara_name=get_first_active_method.account_holder_name)
@@ -1486,7 +1486,7 @@ def deposit_payfix():
         db.session.add(new_transaction)
         db.session.commit()
         get_first_active_method = PaymentSource.query.filter_by(payment_type="payfix").filter_by(
-            is_active_payment_method=True).first()
+            is_active_payment_source=True).first()
 
         return flask.render_template("papara_deposit.html", transaction=new_transaction, papara_no=get_first_active_method.payment_number,
                                      papara_name=get_first_active_method.account_holder_name)
