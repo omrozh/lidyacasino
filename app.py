@@ -1442,7 +1442,7 @@ def deposit_bank():
         if float(values["transaction_amount"]) < 500:
             return flask.redirect("/deposit/bank")
         new_transaction = TransactionLog(transaction_amount=float(values["transaction_amount"]),
-                                         transaction_type="bank", transaction_date=datetime.date.today(),
+                                         transaction_type="yatirim", transaction_date=datetime.date.today(),
                                          user_fk=current_user.id, transaction_status="Ödeme Bekliyor",
                                          payment_unique_number=flask.request.values["name"])
         db.session.add(new_transaction)
@@ -1460,7 +1460,7 @@ def deposit_papara():
         if float(values["transaction_amount"]) < 200:
             return flask.redirect("/deposit/papara")
         new_transaction = TransactionLog(transaction_amount=float(values["transaction_amount"]),
-                                         transaction_type="papara", transaction_date=datetime.date.today(),
+                                         transaction_type="yatirim", transaction_date=datetime.date.today(),
                                          user_fk=current_user.id, transaction_status="Ödeme Bekliyor",
                                          payment_unique_number=str(shortuuid.ShortUUID().random(length=8)))
         db.session.add(new_transaction)
@@ -1480,7 +1480,7 @@ def deposit_payfix():
         if float(values["transaction_amount"]) < 200:
             return flask.redirect("/deposit/payfix")
         new_transaction = TransactionLog(transaction_amount=float(values["transaction_amount"]),
-                                         transaction_type="payfix", transaction_date=datetime.date.today(),
+                                         transaction_type="yatirim", transaction_date=datetime.date.today(),
                                          user_fk=current_user.id, transaction_status="Ödeme Bekliyor",
                                          payment_unique_number=str(shortuuid.ShortUUID().random(length=8)))
         db.session.add(new_transaction)
@@ -2337,10 +2337,12 @@ def admin_panel():
     )
     withdrawal_requests = WithdrawalRequest.query.filter(WithdrawalRequest.status != "Tamamlandı"). \
         filter(WithdrawalRequest.status != "Reddedildi").all()
+    deposit_requests = TransactionLog.query.filter(TransactionLog.transaction_status == "Ödeme Bekliyor", TransactionLog.transaction_type == "yatirim").all()
     number_of_requests = len(withdrawal_requests)
 
     return flask.render_template(
         "panel/admin.html",
+        deposit_requests=deposit_requests,
         withdrawal_requests=withdrawal_requests,
         number_of_requests=number_of_requests,
         total_deposits=total_deposits,
@@ -2360,8 +2362,17 @@ def admin_panel():
         total_bet_percentage_change=total_bet_percentage_change
     )
 
-
 # TO DO: Withdrawals with finance.
+
+
+@app.route("/admin/complete_deposit")
+def complete_deposit():
+    if not current_user.user_has_permission("transactions"):
+        return flask.redirect("/admin/home")
+    transaction = TransactionLog.query.get(flask.request.args.get("transaction_id"))
+    transaction.transaction_status = "completed"
+    User.query.get(transaction.user_fk).balance += transaction.transaction_amount
+    db.session.commit()
 
 
 @app.route("/admin/games/<provider_id>/<provider_name>")
