@@ -163,9 +163,6 @@ class UserPermissions(db.Model):
     permission_name = db.Column(db.String)
 
 
-# TO DO: Create panel user, permission
-
-
 class ContactM2(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String)
@@ -1754,9 +1751,6 @@ def bahis():
                                  sports_and_leagues=sports_and_leagues)
 
 
-# TO DO: Complete sports betting integration FE.
-
-
 @app.route("/canli_bahis")
 def canli_bahis():
     offset = int(flask.request.args.get("offset", 0))
@@ -2774,11 +2768,9 @@ def bonus_request():
 
     new_bonus_assigned = BonusAssigned(user_fk=current_user.id, bonus_fk=flask.request.args.get("promotion_id"),
                                        status="Talep Edildi")
-    # TO DO: Update bonus_assigned_date and bonus_amount when bonus request is approved.
     db.session.add(new_bonus_assigned)
     db.session.commit()
     return flask.redirect("/promotions")
 
 # TO DO: Add bonus taleplerim page to profile
-# TO DO: Implement bonuses
-# TO DO: Check casino integration (also with router.
+# TO DO: Check casino integration (also with router)
