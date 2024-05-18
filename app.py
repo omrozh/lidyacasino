@@ -1679,7 +1679,7 @@ def signup():
 def save_user_to_m2router():
     if flask.request.method == "POST":
         new_m2_router = M2CallbackRouter(id=str(uuid4()), user_uuid=flask.request.values["user_uuid"],
-                                         base_url=flask.request.values("base_url"))
+                                         base_url=flask.request.values.get("base_url"))
         db.session.add(new_m2_router)
         db.session.commit()
         return "OK"
@@ -2641,7 +2641,7 @@ def casino_player_details():
     if m2_callback_router:
         if not m2_callback_router.base_url == app.config.get("CASINO_BASE_URL"):
             return requests.get(m2_callback_router.base_url + "playerDetails", params=flask.request.args).json()
-    subject_user = User.query.get(int(flask.request.args.get("userId")))
+    subject_user = User.query.get(flask.request.args.get("userId"))
     print(flask.request.args)
     if not subject_user.user_uuid == flask.request.args.get("token"):
         return {
@@ -2665,8 +2665,8 @@ def casino_get_balance():
     if m2_callback_router:
         if not m2_callback_router.base_url == app.config.get("CASINO_BASE_URL"):
             return requests.get(m2_callback_router.base_url + "getBalance", params=flask.request.args).json()
-    print(flask.request.args)
-    subject_user = User.query.get(int(flask.request.args.get("userId")))
+
+    subject_user = User.query.get(flask.request.args.get("userId"))
     if not subject_user.user_uuid == flask.request.args.get("token"):
         return {
             "status": False,
@@ -2687,7 +2687,7 @@ def casino_result_bet():
         if not m2_callback_router.base_url == app.config.get("CASINO_BASE_URL"):
             return requests.get(m2_callback_router.base_url + "moveFunds", params=flask.request.args).json()
 
-    subject_user = User.query.get(int(flask.request.args.get("userId")))
+    subject_user = User.query.get(flask.request.args.get("userId"))
     casino_bonus_balance = current_user.casino_bonus_balance
 
     net_change = float(flask.request.args.get("amount")) - casino_bonus_balance
