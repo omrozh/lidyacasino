@@ -152,6 +152,7 @@ class UserAssignedPermission(db.Model):
 class UserPermissions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     permissions_list = db.Column(db.String)
+    permission_name = db.Column(db.String)
 
 
 # TO DO: Create panel user, permission
@@ -405,6 +406,12 @@ class User(db.Model, UserMixin):
     sports_bonus_balance = db.Column(db.Float)
     completed_first_deposit = db.Column(db.Boolean)
     site_partner_fk = db.Column(db.Integer)
+
+    @property
+    def permission_class(self):
+        assigned_permission = UserAssignedPermission.query.filter_by(user_fk=self.id)
+        user_permission = UserPermissions.query.get(assigned_permission.permission_fk)
+        return user_permission
 
     def user_has_permission(self, permission_to_check):
         assigned_permission = UserAssignedPermission.query.filter_by(user_fk=self.id)
@@ -2162,6 +2169,8 @@ def error_500(e):
 
 @app.route("/admin/games")
 def admin_panel_providers():
+    if not current_user.user_has_permission("providers"):
+        return flask.redirect("/admin/home")
     from casino_utils import get_providers, get_games
     providers = []
     for c in get_providers():
@@ -2175,6 +2184,8 @@ def admin_panel_providers():
 
 @app.route("/admin/partnership", methods=["POST", "GET"])
 def admin_panel_partnership():
+    if not current_user.user_has_permission("partnerships"):
+        return flask.redirect("/admin/home")
     partner = User.query.get(flask.request.args["user_id"])
 
     if flask.request.method == "POST":
@@ -2204,6 +2215,8 @@ def admin_panel_partnership():
 
 @app.route("/admin/partnership/balance", methods=["POST", "GET"])
 def admin_panel_partnership_operations():
+    if not current_user.user_has_permission("partnerships"):
+        return flask.redirect("/admin/home")
     partnership = SitePartner.query.get(flask.request.args["partnership_id"])
     if flask.request.method == "POST":
         partnership.partnership_balance += float(flask.request.values["balance_increase"])
@@ -2215,6 +2228,8 @@ def admin_panel_partnership_operations():
 
 @app.route("/admin/cms", methods=["POST", "GET"])
 def admin_panel_cms():
+    if not current_user.user_has_permission("cms"):
+        return flask.redirect("/admin/home")
     css_dict = []
     with open("css/cms-styles.css", 'r') as file:
         for line in file:
@@ -2255,6 +2270,8 @@ def admin_panel_cms():
 
 @app.route("/admin/home")
 def admin_panel():
+    if not current_user.user_has_permission("general"):
+        return flask.redirect("/")
     import admin_utils
     day_difference = int(flask.request.args.get("days", 1))
 
@@ -2322,6 +2339,8 @@ def admin_panel():
 
 @app.route("/admin/games/<provider_id>/<provider_name>")
 def admin_panel_provider_details(provider_id, provider_name):
+    if not current_user.user_has_permission("providers"):
+        return flask.redirect("/admin/home")
     from casino_utils import get_providers, get_games
     from urllib.parse import unquote
     games = []
@@ -2340,6 +2359,8 @@ def admin_panel_provider_details(provider_id, provider_name):
 
 @app.route("/admin/game/<provider_id>/<game_id>")
 def admin_panel_game_details(provider_id, game_id):
+    if not current_user.user_has_permission("providers"):
+        return flask.redirect("/admin/home")
     from casino_utils import get_games
     for c in get_games(provider_id).get("games"):
         if str(game_id) == str(c.get("id")):
@@ -2357,6 +2378,8 @@ def admin_panel_game_details(provider_id, game_id):
 
 @app.route("/admin/bonuses", methods=["POST", "GET"])
 def admin_panel_bonuses():
+    if not current_user.user_has_permission("bonuses"):
+        return flask.redirect("/admin/home")
     bonuses = Bonus.query.all()
     number_of_bonuses = len(bonuses)
     if flask.request.method == "POST":
@@ -2391,6 +2414,8 @@ def admin_panel_bonuses():
 
 @app.route("/admin/bonus_requests", methods=["POST", "GET"])
 def admin_panel_bonus_request():
+    if not current_user.user_has_permission("bonuses"):
+        return flask.redirect("/admin/home")
     bonus_requests = BonusAssigned.query.filter_by(status="Talep Edildi").all()
     return flask.render_template("panel/bonus_request.html", bonus_requests=bonus_requests,
                                  number_of_requests=len(bonus_requests))
@@ -2398,6 +2423,8 @@ def admin_panel_bonus_request():
 
 @app.route("/admin/accept_bonus_request", methods=["POST", "GET"])
 def admin_panel_accept_bonus_request():
+    if not current_user.user_has_permission("bonuses"):
+        return flask.redirect("/admin/home")
     subject_bonus_request = BonusAssigned.query.get(flask.request.args["bonus_id"])
     if flask.request.method == "POST":
         subject_bonus_request.status = "Kullanılabilir"
@@ -2410,19 +2437,65 @@ def admin_panel_accept_bonus_request():
 
 @app.route("/admin/decline_bonus_request")
 def admin_panel_decline_bonus_request():
+    if not current_user.user_has_permission("bonuses"):
+        return flask.redirect("/admin/home")
     subject_bonus_request = BonusAssigned.query.get(flask.request.args["bonus_id"])
     subject_bonus_request.status = "Reddedildi"
     db.session.commit()
     return flask.redirect("/admin/bonus_requests")
 
 
-@app.route("/admin/users")
+@app.route("/admin/users", methods=["POST", "GET"])
 def admin_panel_users():
-    return flask.render_template("panel/users.html")
+    if not current_user.user_has_permission("add_users"):
+        return flask.redirect("/admin/home")
+    if flask.request.method == "POST":
+        user_permission = flask.request.values.get("user_permission")
+        if user_permission == "new-class":
+            permissions_list = []
+            for i in flask.request.values:
+                if "permissions_" in i:
+                    permissions_list.append(i.replace("permissions_", ""))
+            new_user_permission = UserPermissions(
+                permission_name=flask.request.values.get("permission_name"),
+                permissions_list="&&".join(permissions_list)
+            )
+            db.session.add(new_user_permission)
+            db.session.commit()
+            new_user = User(
+                email=flask.request.values.get("username"),
+                password=bcrypt.generate_password_hash(flask.request.values.get("password")),
+                is_admin=True
+            )
+            db.session.add(new_user)
+            db.session.commit()
+
+            new_user_assigned_permission = UserAssignedPermission(
+                user_fk=new_user.id,
+                permission_fk=new_user_permission.id
+            )
+            db.session.add(new_user_assigned_permission)
+            db.session.commit()
+
+            return flask.redirect("/admin/users")
+
+    return flask.render_template("panel/users.html", admin_users=User.query.filter_by(is_admin=True).all(),
+                                 permissions=UserPermissions.query.all())
+
+
+@app.route("/admin/remove_user")
+def remove_admin_user():
+    if not current_user.user_has_permission("add_users"):
+        return flask.redirect("/admin/home")
+    db.session.delete(User.query.get(flask.request.args.get("user_id")))
+    db.session.commit()
+    return flask.redirect("/admin/users")
 
 
 @app.route("/admin/finance")
 def admin_panel_finance():
+    if not current_user.user_has_permission("transactions"):
+        return flask.redirect("/admin/home")
     transactions = TransactionLog.query.all()
     number_of_transactions = len(transactions)
     return flask.render_template("panel/finance.html", transactions=transactions,
@@ -2431,11 +2504,15 @@ def admin_panel_finance():
 
 @app.route("/admin/deposit-methods")
 def admin_panel_finance_deposit_methods():
+    if not current_user.user_has_permission("deposit_methods"):
+        return flask.redirect("/admin/home")
     return flask.render_template("panel/deposit-methods.html")
 
 
 @app.route("/admin/players")
 def admin_panel_players():
+    if not current_user.user_has_permission("players"):
+        return flask.redirect("/admin/home")
     users = User.query.all()
     number_of_users = len(users)
     return flask.render_template("panel/players.html", users=users, number_of_users=number_of_users)
@@ -2443,6 +2520,8 @@ def admin_panel_players():
 
 @app.route("/admin/remove_user")
 def remove_user():
+    if not current_user.user_has_permission("players"):
+        return flask.redirect("/admin/home")
     db.session.delete(User.query.get(flask.request.args["user_id"]))
     db.session.commit()
     return flask.redirect("/admin/players")
