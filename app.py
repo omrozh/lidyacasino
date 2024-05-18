@@ -2678,7 +2678,7 @@ def casino_get_balance():
         }
     return flask.jsonify({
         "status": True,
-        "balance": round(current_user.balance, 2)
+        "balance": round(subject_user.balance, 2)
     })
 
 
@@ -2739,7 +2739,7 @@ def casino_result_bet():
     db.session.commit()
     return flask.jsonify({
         "status": True,
-        "balance": round(current_user.balance, 2)
+        "balance": round(subject_user.balance, 2)
     })
 
 
