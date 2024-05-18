@@ -409,12 +409,12 @@ class User(db.Model, UserMixin):
 
     @property
     def permission_name(self):
-        assigned_permission = UserAssignedPermission.query.filter_by(user_fk=self.id)
+        assigned_permission = UserAssignedPermission.query.filter_by(user_fk=self.id).first()
         user_permission = UserPermissions.query.get(assigned_permission.permission_fk)
         return user_permission.permission_name
 
     def user_has_permission(self, permission_to_check):
-        assigned_permission = UserAssignedPermission.query.filter_by(user_fk=self.id)
+        assigned_permission = UserAssignedPermission.query.filter_by(user_fk=self.id).first()
         user_permission = UserPermissions.query.get(assigned_permission.permission_fk)
         return permission_to_check in user_permission.permissions_list.split("&&")
 
