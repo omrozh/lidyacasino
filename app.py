@@ -125,6 +125,14 @@ def get_unread_email(username, password):
     return unread_emails
 
 
+class PaymentSource(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    is_active_payment_source = db.Column(db.Boolean)
+    payment_type = db.Column(db.String)
+    payment_number = db.Column(db.String)
+    account_holder_name = db.Column(db.String)
+
+
 class Referrer(db.Model):
     id = db.Column(db.String, primary_key=True)
     user_fk = db.Column(db.Integer)
@@ -1429,19 +1437,19 @@ def refresh_balance():
 
 @app.route("/deposit/bank", methods=["POST", "GET"])
 def deposit_bank():
-    return flask.render_template("temporary_closed.html")
     if flask.request.method == "POST":
         values = flask.request.values
         if float(values["transaction_amount"]) < 500:
             return flask.redirect("/deposit/bank")
         new_transaction = TransactionLog(transaction_amount=float(values["transaction_amount"]),
                                          transaction_type="bank", transaction_date=datetime.date.today(),
-                                         user_fk=current_user.id,
+                                         user_fk=current_user.id, transaction_status="Ödeme Bekliyor",
                                          payment_unique_number=flask.request.values["name"])
         db.session.add(new_transaction)
         db.session.commit()
-        return flask.render_template("bank_deposit.html", fullname="Ömer Özhan",
-                                     iban="TR91 0006 7010 0000 0096 8371 49")
+        get_first_active_method = PaymentSource.query.filter_by(payment_type="bank").filter_by(is_active_payment_method=True).first()
+        return flask.render_template("bank_deposit.html", fullname=get_first_active_method.account_holder_name,
+                                     iban=get_first_active_method.payment_number)
     return flask.render_template("bank_deposit_form.html")
 
 
@@ -1453,16 +1461,35 @@ def deposit_papara():
             return flask.redirect("/deposit/papara")
         new_transaction = TransactionLog(transaction_amount=float(values["transaction_amount"]),
                                          transaction_type="papara", transaction_date=datetime.date.today(),
-                                         user_fk=current_user.id,
+                                         user_fk=current_user.id, transaction_status="Ödeme Bekliyor",
                                          payment_unique_number=str(shortuuid.ShortUUID().random(length=8)))
         db.session.add(new_transaction)
         db.session.commit()
-        if float(values["transaction_amount"]) > 7000:
-            return flask.render_template("papara_deposit.html", transaction=new_transaction, papara_no="1857243951",
-                                         papara_name="Çağatay Burhan Aydoğdu")
-        else:
-            return flask.render_template("papara_deposit.html", transaction=new_transaction, papara_no="1964943663",
-                                         papara_name="Eray Efe Sakarya")
+        get_first_active_method = PaymentSource.query.filter_by(payment_type="papara").filter_by(
+            is_active_payment_method=True).first()
+
+        return flask.render_template("papara_deposit.html", transaction=new_transaction, papara_no=get_first_active_method.payment_number,
+                                     papara_name=get_first_active_method.account_holder_name)
+    return flask.render_template("papara_deposit_form.html")
+
+
+@app.route("/deposit/payfix", methods=["POST", "GET"])
+def deposit_payfix():
+    if flask.request.method == "POST":
+        values = flask.request.values
+        if float(values["transaction_amount"]) < 200:
+            return flask.redirect("/deposit/payfix")
+        new_transaction = TransactionLog(transaction_amount=float(values["transaction_amount"]),
+                                         transaction_type="payfix", transaction_date=datetime.date.today(),
+                                         user_fk=current_user.id, transaction_status="Ödeme Bekliyor",
+                                         payment_unique_number=str(shortuuid.ShortUUID().random(length=8)))
+        db.session.add(new_transaction)
+        db.session.commit()
+        get_first_active_method = PaymentSource.query.filter_by(payment_type="payfix").filter_by(
+            is_active_payment_method=True).first()
+
+        return flask.render_template("papara_deposit.html", transaction=new_transaction, papara_no=get_first_active_method.payment_number,
+                                     papara_name=get_first_active_method.account_holder_name)
     return flask.render_template("papara_deposit_form.html")
 
 
@@ -2507,11 +2534,40 @@ def admin_panel_finance():
                                  number_of_transactions=number_of_transactions)
 
 
-@app.route("/admin/deposit-methods")
+@app.route("/admin/payments/deactivate")
+def admin_panel_finance_payment_method_deactivate():
+    if not current_user.user_has_permission("deposit_methods"):
+        return flask.redirect("/admin/home")
+    PaymentSource.query.get(flask.request.args.get("payment_method")).is_active_payment_source = False
+    db.session.commit()
+    return flask.redirect("/admin/deposit-methods")
+
+
+@app.route("/admin/payments/deactivate")
+def admin_panel_finance_payment_method_activate():
+    if not current_user.user_has_permission("deposit_methods"):
+        return flask.redirect("/admin/home")
+    PaymentSource.query.get(flask.request.args.get("payment_method")).is_active_payment_source = True
+    db.session.commit()
+    return flask.redirect("/admin/deposit-methods")
+
+
+@app.route("/admin/deposit-methods", methods=["POST", "GET"])
 def admin_panel_finance_deposit_methods():
     if not current_user.user_has_permission("deposit_methods"):
         return flask.redirect("/admin/home")
-    return flask.render_template("panel/deposit-methods.html")
+    manual_payment_sources = PaymentSource.query.all()
+    if flask.request.method == "POST":
+        new_payment_source = PaymentSource(
+            is_active_payment_souce=True,
+            payment_type=flask.request.values.get("payment_type"),
+            payment_number=flask.request.values.get("payment_number"),
+            account_holder_name=flask.request.values.get("account_holder_name")
+        )
+        db.session.add(new_payment_source)
+        db.session.commit()
+        return flask.redirect("/admin/deposit-methods")
+    return flask.render_template("panel/deposit-methods.html", manuel_payment_sources=manual_payment_sources)
 
 
 @app.route("/admin/players")
