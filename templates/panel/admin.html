@@ -361,7 +361,7 @@
                                             ₺{{ i.transaction_amount }} (Yatırım)
                                         </td>
                                         <td class="text-end">
-                                            <a href="/admin/complete_deposit" class="btn btn-sm btn-neutral">Tamamla</a>
+                                            <a href="/admin/complete_deposit?transaction_id={{ i.id }}" class="btn btn-sm btn-neutral">Tamamla</a>
                                         </td>
                                     </tr>
                                 {% endfor %}
