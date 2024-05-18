@@ -2297,7 +2297,8 @@ def update_withdraw():
         return flask.redirect("/admin/home")
 
     withdraw_request = WithdrawalRequest.query.get(flask.request.args.get("withdraw_request_id"))
-    withdraw_request.user.balance -= withdraw_request.withdrawal_amount
+    if flask.request.args.get("update_to") == "Tamamlandı":
+        withdraw_request.user.balance -= withdraw_request.withdrawal_amount
     withdraw_request.status = flask.request.args.get("update_to")
     db.session.commit()
 
