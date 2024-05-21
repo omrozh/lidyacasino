@@ -2479,7 +2479,7 @@ def admin_panel_accept_bonus_request():
     if flask.request.method == "POST":
         subject_bonus_request.status = "Kullanılabilir"
         subject_bonus_request.bonus_assigned_date = datetime.datetime.today().date()
-        subject_bonus_request.bonus_amount = flask.request.values["bonus_amount"]
+        subject_bonus_request.bonus_amount = float(flask.request.values["bonus_amount"])
         if subject_bonus_request.bonus.bonus_type in ["kayip-bonusu", "deneme-bonusu"]:
             if subject_bonus_request.bonus.bonus_product == "casino":
                 subject_bonus_request.user.casino_bonus_balance += subject_bonus_request.bonus_amount
