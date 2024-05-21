@@ -2480,11 +2480,11 @@ def admin_panel_accept_bonus_request():
         subject_bonus_request.status = "Kullanılabilir"
         subject_bonus_request.bonus_assigned_date = datetime.datetime.today().date()
         subject_bonus_request.bonus_amount = flask.request.values["bonus_amount"]
-        if subject_bonus_request.bonus_type in ["kayip-bonusu", "deneme-bonusu"]:
-            if subject_bonus_request.bonus_product == "casino":
-                subject_bonus_request.user.casino_bonus_balance += subject_bonus_request.bonus_amount
-            elif subject_bonus_request.bonus_product == "sport-betting":
-                subject_bonus_request.user.sports_bonus_balance += subject_bonus_request.bonus_amount
+        if subject_bonus_request.bonus.bonus_type in ["kayip-bonusu", "deneme-bonusu"]:
+            if subject_bonus_request.bonus.bonus_product == "casino":
+                subject_bonus_request.user.casino_bonus_balance += subject_bonus_request.bonus.bonus_amount
+            elif subject_bonus_request.bonus.bonus_product == "sport-betting":
+                subject_bonus_request.user.sports_bonus_balance += subject_bonus_request.bonus.bonus_amount
         db.session.commit()
         return flask.redirect("/admin/bonus_requests")
     return flask.render_template("panel/accept_bonus_request.html", bonus_request=subject_bonus_request)
