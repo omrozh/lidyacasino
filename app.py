@@ -2480,6 +2480,11 @@ def admin_panel_accept_bonus_request():
         subject_bonus_request.status = "Kullanılabilir"
         subject_bonus_request.bonus_assigned_date = datetime.datetime.today().date()
         subject_bonus_request.bonus_amount = flask.request.values["bonus_amount"]
+        if subject_bonus_request.bonus_type in ["kayip_bonusu", "deneme_bonusu"]:
+            if subject_bonus_request.bonus_product == "casino":
+                subject_bonus_request.user.casino_bonus_balance += subject_bonus_request.bonus_amount
+            elif subject_bonus_request.bonus_product == "sport-betting":
+                subject_bonus_request.user.sports_bonus_balance += subject_bonus_request.bonus_amount
         db.session.commit()
         return flask.redirect("/admin/bonus_requests")
     return flask.render_template("panel/accept_bonus_request.html", bonus_request=subject_bonus_request)
@@ -2552,6 +2557,8 @@ def admin_panel_finance():
     if not current_user.user_has_permission("transactions"):
         return flask.redirect("/admin/home")
     transactions = TransactionLog.query.all()
+    if flask.request.args.get("user_id", None):
+        transactions = TransactionLog.query.filter_by(user_fk=flask.request.args.get("user_id", None)).all()
     number_of_transactions = len(transactions)
     return flask.render_template("panel/finance.html", transactions=transactions,
                                  number_of_transactions=number_of_transactions)
