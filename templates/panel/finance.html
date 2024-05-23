@@ -40,7 +40,7 @@
                     </li>
                     <li class="nav-item" onclick="document.location = '/admin/finance'">
                         <a class="nav-link" href="#">
-                            <i class="bi bi-bar-chart"></i> Finans
+                            <i class="bi bi-bar-chart"></i> İşlemler
                         </a>
                     </li>
                     <li class="nav-item" onclick="document.location = '/admin/games'">
@@ -166,7 +166,7 @@
                                     <span class=" pe-2">
                                         <i class="bi bi-pencil"></i>
                                     </span>
-                                    <span>Ara</span>
+                                    <span>Filtrele</span>
                                 </a>
                                 <a href="/admin/deposit-methods" class="btn d-inline-flex btn-sm btn-primary mx-1">
                                     <span>Para Yatırma Kaynakları</span>
@@ -196,6 +196,32 @@
                     </div>
                         <br>
                         <input type="text" oninput="searchRow()" id="search-box" placeholder="İşlem Ara" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
+                        <select id="transaction_type" class="filter" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
+                            <option value="">İşlem Türü</option>
+                            {% for i in transaction_types %}
+                                <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                        <input class="filter" id="user_id" type="text" placeholder="Kullanıcı ID" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
+                        <input class="filter" id="amount_gte" type="text" placeholder="Minimum Tutar" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
+                        <input class="filter" id="amount_lte" type="text" placeholder="Maksimum Tutar" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
+                        <input class="filter" id="date_after" type="date" placeholder="İşlem Tarihi Aralığı (Başlangıç)" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
+                        <input class="filter" id="date_before" type="date" placeholder="İşlem Tarihi Aralığı (Bitiş)" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
+                        <br style="display: block">
+                        <br>
+                        <button onclick="doFilter()" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">Filtrele</button>
+                        <script>
+                            function doFilter(){
+                                let all_filters = document.getElementsByClassName("filter")
+                                let url_string = "?";
+                                for(let i = 0; i < all_filters.length; i++){
+                                    if(all_filters[i].value !== ""){
+                                        url_string += all_filters[i].id + "=" + all_filters[i].value + "&";
+                                    }
+                                }
+                                document.location = url_string;
+                            }
+                        </script>
                         <br>
                         <br>
                     <div class="table-responsive">
@@ -252,7 +278,7 @@
                                     <td>
 
                                         <a class="text-heading font-semibold" href="#">
-                                            {{ i.payment_unique_number }}
+                                            {{ i.transaction_type }}
                                         </a>
                                     </td>
                                     <td>
