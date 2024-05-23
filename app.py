@@ -2682,7 +2682,8 @@ def admin_panel_finance():
 
     transactions = transactions.all()
     number_of_transactions = len(transactions)
-    return flask.render_template("panel/finance.html", transactions=transactions,
+    total_amount = sum([i.transaction_amount for i in transactions])
+    return flask.render_template("panel/finance.html", transactions=transactions, total_amount=total_amount,
                                  number_of_transactions=number_of_transactions, transaction_types=transaction_types)
 
 
