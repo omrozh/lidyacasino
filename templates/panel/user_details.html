@@ -251,7 +251,7 @@
                                       Bonus Bakiyesi | Spor: {{ user.sports_bonus_balance }} Casino {{ user.casino_bonus_balance }}₺
                                         <br>
                                         <form method="post" id="bonus_form" enctype="multipart/form-data"></form>
-                                        <select style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none" name="bonus_id" onchange="document.getElementById('bonus_form').submit()">
+                                        <select name="bonus_id" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none" name="bonus_id" onchange="document.getElementById('bonus_form').submit()">
                                             <option value="">Oyuncu Adına Bonus Talep Et</option>
                                             {% for i in available_bonuses %}
                                             <option value="{{ i.id }}">{{ i.bonus_name }}</option>

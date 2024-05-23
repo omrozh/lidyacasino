@@ -2288,6 +2288,7 @@ def admin_panel_user_profile():
                                                status="Talep Edildi")
             db.session.add(new_bonus_assigned)
             db.session.commit()
+            return flask.redirect(f"/admin/user_details?user_id={user.id}")
 
     return flask.render_template("panel/user_details.html", user=user, transactions=transactions,
                                  bonus_requests=bonus_requests, withdrawal_requests=withdrawal_requests,
