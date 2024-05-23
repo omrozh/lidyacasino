@@ -254,7 +254,7 @@
                                         <select style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none" name="bonus_id" onchange="document.getElementById('bonus_form').submit()">
                                             <option value="">Oyuncu Adına Bonus Talep Et</option>
                                             {% for i in available_bonuses %}
-                                            <option value="{{ i.id }}">{{ i.bonus.bonus_name }}</option>
+                                            <option value="{{ i.id }}">{{ i.bonus_name }}</option>
                                             {% endfor %}
                                         </select>
                                       <br>
