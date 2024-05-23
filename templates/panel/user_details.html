@@ -273,6 +273,7 @@
                                                 <th scope="col">Kullanıcı Id</th>
                                                 <th scope="col">Kullanıcı Adı</th>
                                                 <th scope="col">Bonus Id</th>
+                                                <th scope="col">Bonus Durumu</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -294,15 +295,20 @@
                                                     {{ i.user.username }}
                                                 </td>
                                                 <td>
+                                                    {{ i.status }}
+                                                </td>
+                                                <td>
                                                     <a class="text-heading font-semibold" href="#">
                                                         {{ i.bonus.id }}
                                                     </a>
                                                 </td>
                                                 <td class="text-end">
-                                                    <a href="#" class="btn btn-sm btn-neutral" onclick="document.location = '/admin/accept_bonus_request?bonus_id={{ i.id }}'">Kabul Et</a>
-                                                    <button onclick="document.location = '/admin/decline_bonus_request?bonus_id={{ i.id }}'" type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                                        X
-                                                    </button>
+                                                    {% if i.status == "Talep Edildi" %}
+                                                        <a href="#" class="btn btn-sm btn-neutral" onclick="document.location = '/admin/accept_bonus_request?bonus_id={{ i.id }}'">Kabul Et</a>
+                                                        <button onclick="document.location = '/admin/decline_bonus_request?bonus_id={{ i.id }}'" type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                            X
+                                                        </button>
+                                                    {% endif %}
                                                 </td>
                                             </tr>
                                             {% endfor %}
