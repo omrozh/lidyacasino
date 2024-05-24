@@ -811,8 +811,6 @@ class TransactionLog(db.Model):
     transaction_amount = db.Column(db.Float)
     transaction_type = db.Column(db.String)
     transaction_status = db.Column(db.String, default="initiated")
-    transaction_place = db.Column(db.String)
-    transaction_provider = db.Column(db.String)
     transaction_date = db.Column(db.Date)
     payment_channel = db.Column(db.String)
     user_fk = db.Column(db.Integer)
@@ -1986,8 +1984,7 @@ def coupon():
         new_transaction = TransactionLog(transaction_amount=float(flask.request.values["coupon_value"]),
                                          transaction_type="place_bet", transaction_date=datetime.date.today(),
                                          user_fk=current_user.id, transaction_status="Tamamlandı",
-                                         payment_unique_number=f"Spor Bahisi - Kupon {current_coupon.id}",
-                                         transaction_place="Spor Bahisi", transaction_provider="M2 Betting")
+                                         payment_unique_number=f"Spor Bahisi - Kupon {current_coupon.id}")
 
         db.session.add(new_transaction)
 
