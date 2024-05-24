@@ -1257,6 +1257,7 @@ def profile():
     if not current_user.is_authenticated:
         return flask.redirect("/")
 
+    available_manual_accounts = PaymentSource.query.all()
     available_withdraw_methods = {}
 
     from finance_utils import deposit_types, get_available_banks_kralpay
@@ -1317,7 +1318,7 @@ def profile():
             db.session.commit()
 
     return flask.render_template("profile.html", bank_banks=bank_list, available_withdraw_methods=available_withdraw_methods, current_user=current_user, withdrawal_requests=reversed(
-        WithdrawalRequest.query.filter_by(user_fk=current_user.id).all()))
+        WithdrawalRequest.query.filter_by(user_fk=current_user.id).all()), available_manual_accounts=available_manual_accounts)
 
 
 # TO DO: Implement bonuses in profile.
@@ -2879,7 +2880,6 @@ def casino_result_bet():
             provider_id = c.get("name")
 
     game_info += f" | {provider_id}"
-
 
     if flask.request.values.get("eventType") == "Win":
         new_transaction = TransactionLog(transaction_amount=float(flask.request.values.get("amount")),
