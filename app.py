@@ -2401,6 +2401,9 @@ def update_withdraw():
             if "kralpay" in withdraw_request.withdraw_type:
                 withdraw_kralpay(withdraw_request)
 
+        else:
+            withdraw_request.user.balance -= withdraw_request.withdrawal_amount
+
     withdraw_request.status = flask.request.args.get("update_to")
     db.session.commit()
 
