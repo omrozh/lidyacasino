@@ -112,7 +112,7 @@ def calculate_ggr(date_start, date_end, compare_date_delta):
             TransactionLog.transaction_date >= date_start,
             TransactionLog.transaction_date <= date_end,
             TransactionLog.transaction_status == "Tamamlandı",
-            TransactionLog.transaction_type.in_(["place_bet", "casino_win", "casino_bet"])
+            TransactionLog.transaction_type.in_(["place_bet", "casino_bet"])
         ).all()])
         bet_win_transactions = sum([i.transaction_amount for i in TransactionLog.query.filter(
             TransactionLog.transaction_date <= date_end,
@@ -128,7 +128,7 @@ def calculate_ggr(date_start, date_end, compare_date_delta):
             TransactionLog.transaction_date <= previous_end,
             TransactionLog.transaction_date >= previous_start,
             TransactionLog.transaction_status == "Tamamlandı",
-            TransactionLog.transaction_type.in_(["place_bet", "casino_win", "casino_bet"])
+            TransactionLog.transaction_type.in_(["place_bet", "casino_bet"])
         ).all()])
         bet_win_transactions_for_previous_period = sum([i.transaction_amount for i in TransactionLog.query.filter(
             TransactionLog.transaction_date <= previous_end,
@@ -154,7 +154,7 @@ def total_bet(date_start, date_end, compare_date_delta):
             TransactionLog.transaction_date <= date_end,
             TransactionLog.transaction_date >= date_start,
             TransactionLog.transaction_status == "Tamamlandı",
-            TransactionLog.transaction_type.in_(["place_bet", "casino_win", "casino_bet"])
+            TransactionLog.transaction_type.in_(["place_bet", "casino_bet"])
         ).all()])
 
         previous_start = date_start - timedelta(days=compare_date_delta)
@@ -164,7 +164,7 @@ def total_bet(date_start, date_end, compare_date_delta):
             TransactionLog.transaction_date <= previous_end,
             TransactionLog.transaction_date >= previous_start,
             TransactionLog.transaction_status == "Tamamlandı",
-            TransactionLog.transaction_type.in_(["place_bet", "casino_win", "casino_bet"])
+            TransactionLog.transaction_type.in_(["place_bet", "casino_bet"])
         ).all()])
 
         if bet_transactions_for_previous_period > 0:
