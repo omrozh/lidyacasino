@@ -1984,7 +1984,7 @@ def coupon():
         new_transaction = TransactionLog(transaction_amount=float(flask.request.values["coupon_value"]),
                                          transaction_type="place_bet", transaction_date=datetime.date.today(),
                                          user_fk=current_user.id, transaction_status="Tamamlandı",
-                                         payment_unique_number=f"Spor Bahisi - Kupon {current_coupon.id}")
+                                         payment_unique_number=f"Spor Bahisi - Kupon {current_coupon.id} - {str(' | '.join([c.odd.bet_option.open_bet_obj.match_league for c in current_coupon.all_selects]))} - {str(' | '.join([c.odd.bet_option.open_bet_obj.sport for c in current_coupon.all_selects]))}")
 
         db.session.add(new_transaction)
 
