@@ -2901,7 +2901,7 @@ def casino_result_bet():
         new_transaction = TransactionLog(transaction_amount=float(flask.request.values.get("amount")),
                                          transaction_type="casino_bet", transaction_date=datetime.date.today(),
                                          user_fk=subject_user.id, transaction_status="Tamamlandı",
-                                         payment_unique_number=f"Casino Kaybı - Oyun ID: {flask.request.values.get('gameId')} - {game_info}")
+                                         payment_unique_number=f"Casino Bahisi - Oyun ID: {flask.request.values.get('gameId')} - {game_info}")
         db.session.add(new_transaction)
         subject_user.balance -= net_change
 
