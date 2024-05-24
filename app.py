@@ -513,7 +513,7 @@ class User(db.Model, UserMixin):
             TransactionLog.transaction_status == "Tamamlandı",
             TransactionLog.transaction_type == transaction_type,
             TransactionLog.user_fk == self.id
-        ).order_by(desc(TransactionLog.transaction_date)).first()
+        ).order_by(desc(TransactionLog.transaction_date)).all()
 
         if transaction_type == "çekim":
             latest_transactions = TransactionLog.query.filter(
