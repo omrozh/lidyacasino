@@ -2865,11 +2865,27 @@ def casino_result_bet():
                 "error": "Authorization Error"
             }
         }
+    game_info = ""
+    provider_id = 0
+    from casino_utils import get_games, get_providers
+
+    for c in get_games().get("games"):
+        if int(flask.request.values.get('gameId')) in int(c.get("gameId")):
+            game_info = f"{c.get('type')} | {c.get('name')}"
+            provider_id = c.get("providerId")
+
+    for c in get_providers():
+        if int(c.get("id")) == provider_id:
+            provider_id = c.get("name")
+
+    game_info += f" | {provider_id}"
+
+
     if flask.request.values.get("eventType") == "Win":
         new_transaction = TransactionLog(transaction_amount=float(flask.request.values.get("amount")),
                                          transaction_type="casino_win", transaction_date=datetime.date.today(),
                                          user_fk=subject_user.id, transaction_status="Tamamlandı",
-                                         payment_unique_number=f"Casino Kazancı - Oyun ID: {flask.request.values.get('gameId')}")
+                                         payment_unique_number=f"Casino Kazancı - Oyun ID: {flask.request.values.get('gameId')} - {game_info}")
         db.session.add(new_transaction)
 
         subject_user.balance += float(flask.request.values.get("amount"))
