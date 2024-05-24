@@ -156,13 +156,13 @@
                                             {{ i.bonus.bonus_name }}
                                         </a>
                                     </td>
-                                    <td>
+                                    <td onclick="document.location = '/admin/user_details?user_id{{ i.user_fk }}'">
 
                                         <a class="text-heading font-semibold" href="#">
                                             {{ i.user_fk }}
                                         </a>
                                     </td>
-                                    <td>
+                                    <td onclick="document.location = '/admin/user_details?user_id{{ i.user_fk }}'">
                                         {{ i.user.username }}
                                     </td>
                                     <td>

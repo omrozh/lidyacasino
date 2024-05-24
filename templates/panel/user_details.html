@@ -239,7 +239,8 @@
                                       <br>
                                       Telefon Numarası: {{ user.user_information.tel_no }}
                                       <br>
-                                      IP Adresi: {{ user.ip_address }}
+                                      IP Adresi: {{ user.ip_address }} (Bu IP Adresine Sahip Kullanıcı Sayısı: {{ number_of_users_with_same_ip }})
+                                        <a href="/admin/players?user_ip={{user.ip_address}}" style="color: dodgerblue;">İncele</a>
                                       <br>
                                       Notlar:
                                         <br>

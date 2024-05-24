@@ -8,7 +8,7 @@ def calculate_transaction_volume_for_date(date_start, date_end, compare_date_del
         transactions = TransactionLog.query.filter(
             TransactionLog.transaction_date >= date_start,
             TransactionLog.transaction_date <= date_end,
-            TransactionLog.transaction_status == "completed",
+            TransactionLog.transaction_status == "Tamamlandı",
             TransactionLog.transaction_type == "yatirim"
         ).all()
 
@@ -17,7 +17,7 @@ def calculate_transaction_volume_for_date(date_start, date_end, compare_date_del
         transactions_compare = TransactionLog.query.filter(
             TransactionLog.transaction_date <= previous_end,
             TransactionLog.transaction_date >= previous_start,
-            TransactionLog.transaction_status == "completed",
+            TransactionLog.transaction_status == "Tamamlandı",
             TransactionLog.transaction_type == "yatirim"
         ).all()
 
@@ -111,13 +111,13 @@ def calculate_ggr(date_start, date_end, compare_date_delta):
         bet_transactions = sum([i.transaction_amount for i in TransactionLog.query.filter(
             TransactionLog.transaction_date >= date_start,
             TransactionLog.transaction_date <= date_end,
-            TransactionLog.transaction_status == "completed",
+            TransactionLog.transaction_status == "Tamamlandı",
             TransactionLog.transaction_type.in_(["place_bet", "casino_win", "casino_loss"])
         ).all()])
         bet_win_transactions = sum([i.transaction_amount for i in TransactionLog.query.filter(
             TransactionLog.transaction_date <= date_end,
             TransactionLog.transaction_date >= date_start,
-            TransactionLog.transaction_status == "completed",
+            TransactionLog.transaction_status == "Tamamlandı",
             TransactionLog.transaction_type.in_(["bet_win", "casino_win"])
         ).all()])
 
@@ -127,13 +127,13 @@ def calculate_ggr(date_start, date_end, compare_date_delta):
         bet_transactions_for_previous_period = sum([i.transaction_amount for i in TransactionLog.query.filter(
             TransactionLog.transaction_date <= previous_end,
             TransactionLog.transaction_date >= previous_start,
-            TransactionLog.transaction_status == "completed",
+            TransactionLog.transaction_status == "Tamamlandı",
             TransactionLog.transaction_type.in_(["place_bet", "casino_win", "casino_loss"])
         ).all()])
         bet_win_transactions_for_previous_period = sum([i.transaction_amount for i in TransactionLog.query.filter(
             TransactionLog.transaction_date <= previous_end,
             TransactionLog.transaction_date >= previous_start,
-            TransactionLog.transaction_status == "completed",
+            TransactionLog.transaction_status == "Tamamlandı",
             TransactionLog.transaction_type.in_(["bet_win", "casino_win"])
         ).all()])
 
@@ -153,7 +153,7 @@ def total_bet(date_start, date_end, compare_date_delta):
         bet_transactions = sum([i.transaction_amount for i in TransactionLog.query.filter(
             TransactionLog.transaction_date <= date_end,
             TransactionLog.transaction_date >= date_start,
-            TransactionLog.transaction_status == "completed",
+            TransactionLog.transaction_status == "Tamamlandı",
             TransactionLog.transaction_type.in_(["place_bet", "casino_win", "casino_loss"])
         ).all()])
 
@@ -163,7 +163,7 @@ def total_bet(date_start, date_end, compare_date_delta):
         bet_transactions_for_previous_period = sum([i.transaction_amount for i in TransactionLog.query.filter(
             TransactionLog.transaction_date <= previous_end,
             TransactionLog.transaction_date >= previous_start,
-            TransactionLog.transaction_status == "completed",
+            TransactionLog.transaction_status == "Tamamlandı",
             TransactionLog.transaction_type.in_(["place_bet", "casino_win", "casino_loss"])
         ).all()])
 

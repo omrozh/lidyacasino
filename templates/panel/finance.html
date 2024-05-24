@@ -141,13 +141,17 @@
                                 <option value="{{ i }}">{{ i }}</option>
                             {% endfor %}
                         </select>
+                        <select id="transaction_status" class="filter" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
+                            <option value="">İşlem Durumu</option>
+                            {% for i in transaction_statuses %}
+                                <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
                         <input class="filter" id="user_id" type="text" placeholder="Kullanıcı ID" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
                         <input class="filter" id="amount_gte" type="text" placeholder="Minimum Tutar" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
                         <input class="filter" id="amount_lte" type="text" placeholder="Maksimum Tutar" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
                         <input class="filter" id="date_after" type="date" placeholder="İşlem Tarihi Aralığı (Başlangıç)" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
                         <input class="filter" id="date_before" type="date" placeholder="İşlem Tarihi Aralığı (Bitiş)" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
-                        <br style="display: block">
-                        <br>
                         <button onclick="doFilter()" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">Filtrele</button>
                         <script>
                             function doFilter(){

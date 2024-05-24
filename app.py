@@ -811,6 +811,8 @@ class TransactionLog(db.Model):
     transaction_amount = db.Column(db.Float)
     transaction_type = db.Column(db.String)
     transaction_status = db.Column(db.String, default="initiated")
+    transaction_place = db.Column(db.String)
+    transaction_provider = db.Column(db.String)
     transaction_date = db.Column(db.Date)
     payment_channel = db.Column(db.String)
     user_fk = db.Column(db.Integer)
@@ -1426,7 +1428,7 @@ def coupon_result(bet_coupon_id):
     bet_coupon.status = f"Sonuçlandı | Kazanç: { total_reward }"
     new_transaction = TransactionLog(transaction_amount=float(total_reward),
                                      transaction_type="bet_win", transaction_date=datetime.date.today(),
-                                     user_fk=current_user.id, transaction_status="completed",
+                                     user_fk=current_user.id, transaction_status="Tamamlandı",
                                      payment_unique_number=f"Spor Bahisi Kazancı - Kupon {bet_coupon_id}")
 
     db.session.add(new_transaction)
@@ -1721,7 +1723,8 @@ def signup():
             freebet_usable=0,
             freebet=0,
             registration_date=datetime.datetime.now(),
-            user_uuid=str(uuid4())
+            user_uuid=str(uuid4()),
+            ip_address=flask.requests.environ["REMOTE_ADDR"] if not flask.request.environ.get('HTTP_X_FORWARDED_FOR') else flask.request.environ.get('HTTP_X_FORWARDED_FOR')
         )
         db.session.add(new_user)
         db.session.commit()
@@ -1982,8 +1985,9 @@ def coupon():
 
         new_transaction = TransactionLog(transaction_amount=float(flask.request.values["coupon_value"]),
                                          transaction_type="place_bet", transaction_date=datetime.date.today(),
-                                         user_fk=current_user.id, transaction_status="completed",
-                                         payment_unique_number=f"Spor Bahisi - Kupon {current_coupon.id}")
+                                         user_fk=current_user.id, transaction_status="Tamamlandı",
+                                         payment_unique_number=f"Spor Bahisi - Kupon {current_coupon.id}",
+                                         transaction_place="Spor Bahisi", transaction_provider="M2 Betting")
 
         db.session.add(new_transaction)
 
@@ -2275,6 +2279,7 @@ def admin_panel_user_profile():
                                  Bonus.end_date >= datetime.datetime.today().date()).all()
 
     user = User.query.get(flask.request.args.get("user_id"))
+    number_of_users_with_same_ip = len(User.query.filter_by(ip_address=user.ip_address).all())
     transactions = TransactionLog.query.filter_by(user_fk=user.id).all()
     bonus_requests = BonusAssigned.query.filter_by(user_fk=user.id).all()
     withdrawal_requests = WithdrawalRequest.query.filter_by(user_fk=user.id).all()
@@ -2293,7 +2298,8 @@ def admin_panel_user_profile():
 
     return flask.render_template("panel/user_details.html", user=user, transactions=transactions,
                                  bonus_requests=bonus_requests, withdrawal_requests=withdrawal_requests,
-                                 coupons=coupons, available_bonuses=available_bonuses)
+                                 coupons=coupons, available_bonuses=available_bonuses,
+                                 number_of_users_with_same_ip=number_of_users_with_same_ip)
 
 # TO DO: Complete profile page based on platin gaming, match different accounts via IP addresses.
 # TO DO: Deposit and withdraw in different pages.
@@ -2485,7 +2491,7 @@ def complete_deposit():
     if not current_user.user_has_permission("transactions"):
         return flask.redirect("/admin/home")
     transaction = TransactionLog.query.get(flask.request.args.get("transaction_id"))
-    transaction.transaction_status = "completed"
+    transaction.transaction_status = "Tamamlandı"
     User.query.get(transaction.user_fk).balance += transaction.transaction_amount
     User.query.get(transaction.user_fk).update_bonus_balance(transaction.transaction_amount)
     db.session.commit()
@@ -2661,11 +2667,14 @@ def remove_admin_user():
 def admin_panel_finance():
     if not current_user.user_has_permission("transactions"):
         return flask.redirect("/admin/home")
-    transaction_types = ["casino_win", "casino_loss", "yatirim", "çekim", "place_bet", "bet_win"]
+    transaction_types = ["casino_win", "casino_loss", "yatirim", "çekim", "place_bet", "bet_win", "casino_all"]
+    transaction_statuses = ["Tamamlandı", "Ödeme Bekliyor", "Reddedildi", "Oluşturuluyor", "Oluşturuldu", "Talep Edildi", "Aktif"]
     transactions = TransactionLog.query
 
     if flask.request.args.get("user_id", None):
         transactions = transactions.filter(TransactionLog.user_fk == flask.request.args.get("user_id", None))
+    if flask.request.args.get("transaction_status", None):
+        transactions = transactions.filter(TransactionLog.transaction_status == flask.request.args.get("transaction_status", None))
     if flask.request.args.get("amount_gte", None):
         transactions = transactions.filter(TransactionLog.transaction_amount >= flask.request.args.get("amount_gte", None))
     if flask.request.args.get("amount_lte", None):
@@ -2677,14 +2686,19 @@ def admin_panel_finance():
         transactions = transactions.filter(
             TransactionLog.transaction_date >= datetime.datetime.strptime(flask.request.args.get("date_after", None), '%Y-%m-%d'))
     if flask.request.args.get("transaction_type", None):
-        transactions = transactions.filter(
-            TransactionLog.transaction_type == flask.request.args.get("transaction_type", None))
+        if flask.request.args.get("transaction_type", None) == "casino_all":
+            transactions = transactions.filter(
+                TransactionLog.transaction_type.in_(["casino_loss", "casino_win"]))
+        else:
+            transactions = transactions.filter(
+                TransactionLog.transaction_type == flask.request.args.get("transaction_type", None))
 
     transactions = transactions.all()
     number_of_transactions = len(transactions)
     total_amount = sum([i.transaction_amount for i in transactions])
     return flask.render_template("panel/finance.html", transactions=transactions, total_amount=total_amount,
-                                 number_of_transactions=number_of_transactions, transaction_types=transaction_types)
+                                 number_of_transactions=number_of_transactions, transaction_types=transaction_types,
+                                 transaction_statuses=transaction_statuses)
 
 
 @app.route("/admin/payments/deactivate")
@@ -2727,7 +2741,10 @@ def admin_panel_finance_deposit_methods():
 def admin_panel_players():
     if not current_user.user_has_permission("players"):
         return flask.redirect("/admin/home")
-    users = User.query.all()
+    users = User.query
+    if flask.request.args.get("user_ip", None):
+        users = users.filter(User.ip_address == flask.request.args.get("user_ip", None))
+    users = users.all()
     number_of_users = len(users)
     return flask.render_template("panel/players.html", users=users, number_of_users=number_of_users)
 
@@ -2854,7 +2871,7 @@ def casino_result_bet():
     if flask.request.values.get("eventType") == "Win":
         new_transaction = TransactionLog(transaction_amount=float(flask.request.values.get("amount")),
                                          transaction_type="casino_win", transaction_date=datetime.date.today(),
-                                         user_fk=subject_user.id, transaction_status="completed",
+                                         user_fk=subject_user.id, transaction_status="Tamamlandı",
                                          payment_unique_number=f"Casino Kazancı - Oyun ID: {flask.request.values.get('gameId')}")
         db.session.add(new_transaction)
 
@@ -2870,7 +2887,7 @@ def casino_result_bet():
     if flask.request.values.get("eventType") == "BetPlacing":
         new_transaction = TransactionLog(transaction_amount=float(flask.request.values.get("amount")),
                                          transaction_type="casino_loss", transaction_date=datetime.date.today(),
-                                         user_fk=subject_user.id, transaction_status="completed",
+                                         user_fk=subject_user.id, transaction_status="Tamamlandı",
                                          payment_unique_number=f"Casino Kaybı - Oyun ID: {flask.request.values.get('gameId')}")
         db.session.add(new_transaction)
         subject_user.balance -= net_change

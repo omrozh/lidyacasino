@@ -1,7 +1,7 @@
 import requests
 
-kralpay_site_id = "kralpay_site_id"
-kralpay_merchant_key = "kralpay_merchant_key"
+kralpay_site_id = "643"
+kralpay_merchant_key = "9cj4aj2b53jmk6c534c2sufrop750ab39407e34jnh04bic07l9cyd2ziuytmn6kchka"
 
 vevopay_firma_key = "vevopay_key"
 
