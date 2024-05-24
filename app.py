@@ -2403,6 +2403,7 @@ def update_withdraw():
 
         else:
             withdraw_request.user.balance -= withdraw_request.withdrawal_amount
+            db.session.commit()
 
     withdraw_request.status = flask.request.args.get("update_to")
     db.session.commit()
