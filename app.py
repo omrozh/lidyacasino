@@ -530,7 +530,7 @@ class User(db.Model, UserMixin):
     @property
     def total_bets(self):
         return sum([i.transaction_amount for i in TransactionLog.query.filter(
-            TransactionLog.transaction_type in ["place_bet", "casino_win", "casino_bet"]
+            TransactionLog.transaction_type.in_(["place_bet", "casino_win", "casino_bet"])
         ).all()])
 
     @property
