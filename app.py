@@ -2393,7 +2393,6 @@ def update_withdraw():
     withdraw_request = WithdrawalRequest.query.get(flask.request.args.get("withdraw_request_id"))
 
     if flask.request.args.get("update_to") == "Tamamlandı":
-        print(withdraw_request.withdraw_type)
         if "auto_" in withdraw_request.withdraw_type:
             from finance_utils import withdraw_vevopay, withdraw_kralpay
             # Complete implementations for withdrawals
@@ -2401,10 +2400,9 @@ def update_withdraw():
                 withdraw_vevopay(withdraw_request)
             if "kralpay" in withdraw_request.withdraw_type:
                 withdraw_kralpay(withdraw_request)
-
-        else:
-            withdraw_request.user.balance -= withdraw_request.withdrawal_amount
-            db.session.commit()
+            else:
+                withdraw_request.user.balance -= withdraw_request.withdrawal_amount
+                db.session.commit()
 
     withdraw_request.status = flask.request.args.get("update_to")
     db.session.commit()
