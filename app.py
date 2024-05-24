@@ -530,7 +530,7 @@ class User(db.Model, UserMixin):
     @property
     def total_bets(self):
         return sum([i.transaction_amount for i in TransactionLog.query.filter(
-            TransactionLog.transaction_type in ["place_bet", "casino_win", "casino_loss"]
+            TransactionLog.transaction_type in ["place_bet", "casino_win", "casino_bet"]
         ).all()])
 
     @property
@@ -2665,7 +2665,7 @@ def remove_admin_user():
 def admin_panel_finance():
     if not current_user.user_has_permission("transactions"):
         return flask.redirect("/admin/home")
-    transaction_types = ["casino_win", "casino_loss", "yatirim", "çekim", "place_bet", "bet_win", "casino_all"]
+    transaction_types = ["casino_win", "casino_bet", "yatirim", "çekim", "place_bet", "bet_win", "casino_all"]
     transaction_statuses = ["Tamamlandı", "Ödeme Bekliyor", "Reddedildi", "Oluşturuluyor", "Oluşturuldu", "Talep Edildi", "Aktif"]
     transactions = TransactionLog.query
 
@@ -2686,7 +2686,7 @@ def admin_panel_finance():
     if flask.request.args.get("transaction_type", None):
         if flask.request.args.get("transaction_type", None) == "casino_all":
             transactions = transactions.filter(
-                TransactionLog.transaction_type.in_(["casino_loss", "casino_win"]))
+                TransactionLog.transaction_type.in_(["casino_bet", "casino_win"]))
         else:
             transactions = transactions.filter(
                 TransactionLog.transaction_type == flask.request.args.get("transaction_type", None))
@@ -2899,9 +2899,9 @@ def casino_result_bet():
                     subject_user.referrer.site_partner.partnership_balance -= float(flask.request.values.get("amount"))
     if flask.request.values.get("eventType") == "BetPlacing":
         new_transaction = TransactionLog(transaction_amount=float(flask.request.values.get("amount")),
-                                         transaction_type="casino_loss", transaction_date=datetime.date.today(),
+                                         transaction_type="casino_bet", transaction_date=datetime.date.today(),
                                          user_fk=subject_user.id, transaction_status="Tamamlandı",
-                                         payment_unique_number=f"Casino Kaybı - Oyun ID: {flask.request.values.get('gameId')}")
+                                         payment_unique_number=f"Casino Kaybı - Oyun ID: {flask.request.values.get('gameId')} - {game_info}")
         db.session.add(new_transaction)
         subject_user.balance -= net_change
 
