@@ -2871,9 +2871,7 @@ def casino_result_bet():
     from casino_utils import get_games, get_providers
 
     for c in get_games().get("games"):
-        print(c)
-        print(flask.request.values.get("gameId"))
-        if int(flask.request.values.get('gameId')) in int(c.get("gameId")):
+        if int(flask.request.values.get('gameId')) in int(c.get("id")):
             game_info = f"{c.get('type')} | {c.get('name')}"
             provider_id = c.get("providerId")
 
