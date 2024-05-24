@@ -508,7 +508,7 @@
                             <img src="/img/payment_methods/{{ i.payment_type.lower() }}.jpg" style="width: 150px; border-radius: 15px" alt="">
                         </div>
                         <div style="color: white; font-family: 'Open Sans', sans-serif; background-color: var(--baseColor); width: 200px; margin-top: -15px; padding: 10px; box-sizing: border-box; border-radius: 0 0 15px 15px">
-                            {{ i.payment_type }}
+                            {{ i.payment_type.capitalize() }} Yatırım Talebi
                         </div>
                     </div>
                 {% endfor %}
