@@ -19,9 +19,6 @@ import feedparser
 import base64
 from imap_tools import MailBox
 
-import schedule
-import time
-
 app = flask.Flask(__name__)
 
 games_and_descriptions = {
@@ -2299,11 +2296,7 @@ def admin_panel_user_profile():
                                  coupons=coupons, available_bonuses=available_bonuses,
                                  number_of_users_with_same_ip=number_of_users_with_same_ip)
 
-# TO DO: Complete profile page based on platin gaming, match different accounts via IP addresses.
-# TO DO: Deposit and withdraw in different pages.
-# TO DO: Filtering on admin plus clicking on main page items for auto filtering.
 # TO DO: Affiliate panel and promo code creating. Bonus based on promo code.
-# TO DO: Adding bonus without user requesting.
 
 
 @app.route("/admin/partnership", methods=["POST", "GET"])
