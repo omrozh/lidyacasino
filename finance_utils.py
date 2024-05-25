@@ -89,5 +89,4 @@ def withdraw_kralpay(withdrawal_request):
         "account": withdrawal_request.withdraw_to
     }
     r = requests.post("https://kralpy.com/api/v1/cekim", data=data, verify=False)
-    print(r.text)
     return int(r.json().get("status")) == 1
