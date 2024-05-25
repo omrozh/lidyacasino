@@ -529,24 +529,23 @@
             <div id="deposit-options-div">
                 {% for i in available_manual_accounts %}
                     <div onclick="document.getElementById('manual_deposit_{{ i.id }}').style.display = 'block'; document.getElementById('deposit-options-div').style.display = 'none'" style="display: inline-block" class="select-payment">
-                        <div style="border-radius: 15px 15px 0 0; font-family: sans-serif; height: fit-content; padding: 15px; display: inline-block; margin: 15px; background: #333333; box-sizing: border-box; width: 200px">
-                            <img src="/img/payment_methods/{{ i.payment_type.lower() }}.jpg" style="width: 150px; border-radius: 15px" alt="">
-                        </div>
-                        <div style="color: white; font-family: 'Open Sans', sans-serif; background-color: var(--baseColor); width: 200px; margin-top: -15px; padding: 10px; box-sizing: border-box; border-radius: 0 0 15px 15px">
+                        <div style="color: white; font-family: 'Open Sans', sans-serif; background-color: var(--categoryBackground); width: 200px; margin-top: -15px; padding: 10px; box-sizing: border-box; border-radius: 15px">
                             {{ i.payment_type.capitalize() }} Yatırım Talebi
                         </div>
                     </div>
                 {% endfor %}
                 {% for key, item in available_withdraw_methods.items() %}
                     <div onclick="document.getElementById('deposit_type_{{ item }}').value = '{{ item }}'; this.style.opacity = 0.3; let withdraw_methods = document.getElementsByClassName('searchable-div'); document.getElementById('deposit_form_{{ item }}').style.display = 'block'; for(let i = 0; i < withdraw_methods.length; i++){withdraw_methods[i].onclick = function(){console.log('cannot change payment type')}}; document.getElementById('deposit-options-div').style.display = 'none'" style="display: inline-block" class="select-payment">
-                        <div>
+                        <div style="border-radius: 15px 15px 0 0; font-family: sans-serif; height: fit-content; padding: 15px; display: inline-block; margin: 15px; background: var(--categoryBackground); box-sizing: border-box; width: 200px">
                             {% if "kralpay_" not in item %}
                                 <img src="/img/payment_methods/{{ item }}.jpg" style="width: 150px; border-radius: 15px" alt="">
                             {% else %}
                                 <img src="/img/payment_methods/kralpay.png" style="width: 150px; border-radius: 15px" alt="">
                             {% endif %}
                         </div>
-
+                        <div style="color: white; font-family: 'Open Sans', sans-serif; background-color: var(--baseColor); width: 200px; margin-top: -15px; padding: 10px; box-sizing: border-box; border-radius: 0 0 15px 15px">
+                            {{ key }}
+                        </div>
                     </div>
                 {% endfor %}
             </div>
