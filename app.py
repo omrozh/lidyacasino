@@ -491,9 +491,9 @@ class User(db.Model, UserMixin):
         ).order_by(desc(TransactionLog.transaction_date)).first()
 
         if transaction_type == "çekim":
-            latest_transaction = TransactionLog.query.filter(
+            latest_transaction = WithdrawalRequest.query.filter(
                 WithdrawalRequest.status == "Tamamlandı",
-                TransactionLog.user_fk == self.id
+                WithdrawalRequest.user_fk == self.id
             ).order_by(desc(WithdrawalRequest.request_date)).first()
             if latest_transaction:
                 return latest_transaction.request_date
