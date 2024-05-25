@@ -18,9 +18,7 @@ deposit_types = {
     "vevopay_parazula": "Vevopay Parazula",
     "vevopay_fups": "Vevopay Fups",
     "vevopay_pep": "Vevopay PeP",
-    "vevopay_cmt": "Vevopay CMT",
-    "vevopay_popy": "Vevopay Popy",
-    "vevopay_kripto": "Vevopay Kripto"
+    "vevopay_cmt": "Vevopay CMT"
 }
 
 withdraw_types_kralpay = {
