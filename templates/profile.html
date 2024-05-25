@@ -619,6 +619,7 @@
                         <p style="color: white; margin-bottom: 5px; margin-top: 5px">Para yatırmak için lütfen aşağıdaki tüm gerekli alanları doldurun.</p>
                     </div>
                     {% if item == "kralpay_banka" %}
+                    <br>
                     <select name="bank_id" style="width: 300px; max-width: 90%; padding: 5px; font-family: sans-serif; outline: none; font-size: 1rem; border: 1px solid white; background-color: transparent; color: white; -webkit-appearance: none;">
                         <option value="no-bank">Banka Seçin</option>
                         {% for key, item in bank_banks.items() %}
