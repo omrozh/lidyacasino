@@ -1262,7 +1262,7 @@ def profile():
     for key, item in deposit_types.items():
         available_withdraw_methods[item] = key
 
-    bank_list = {"s": 1}
+    bank_list = get_available_banks_kralpay()
 
     if flask.request.method == "POST":
         values = flask.request.values

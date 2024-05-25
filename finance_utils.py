@@ -60,7 +60,6 @@ def get_iframe_vevopay(transaction, method):
             "referans": transaction.id,
             "yontem": method.replace("vevopay_", "")
         }
-    print(requests.post("https://management.vevopay.com/api/veri", data=data).url)
     return requests.post("https://management.vevopay.com/api/veri", data=data).json().get("iframe_bilgileri", {}).get("link", None)
 
 
