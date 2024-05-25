@@ -550,11 +550,26 @@
             {% endfor %}
 
             {% for key, item in available_withdraw_methods.items() %}
-                <form method="post" id="deposit_form_{{ item }}" enctype="multipart/form-data" style="background-color: #292d30; border-radius: 5px; color: white; box-sizing: border-box; width: fit-content; height: fit-content; max-width: 70vw; display: none; padding: 15px;">
+                <form method="post" id="deposit_form_{{ item }}" enctype="multipart/form-data" style="background-color: var(--backgroundDark); border-radius: 5px; color: white; box-sizing: border-box; width: fit-content; height: fit-content; max-width: 70vw; display: none; padding: 15px;">
                     <br>
-                    <h3 style="color: white; font-family: 'Open Sans', sans-serif">
-                      {{ key }} ile para yatır
-                    </h3>
+                    <div style="background-color: var(--categoryBackground);">
+                        <div style="display: inline-block">
+                            <p style="color: grey; font-size: 12px;">Yöntem Adı</p>
+                            {{ item }}
+                        </div>
+                        <div style="display: inline-block">
+                            <p style="color: grey; font-size: 12px;">Ücret</p>
+                            Ücretsiz
+                        </div>
+                        <div style="display: inline-block">
+                            <p style="color: grey; font-size: 12px;">İşlem Süresi</p>
+                            Anlık
+                        </div>
+                        <div style="display: inline-block">
+                            <p style="color: grey; font-size: 12px;">Minimum Tutar</p>
+                            100₺
+                        </div>
+                    </div>
                     <br>
                     {% if item == "kralpay_banka" %}
                     <select name="bank_id" style="width: 300px; max-width: 90%; padding: 5px; font-family: sans-serif; outline: none; font-size: 1rem; border: 1px solid white; background-color: transparent; color: white; -webkit-appearance: none;">
