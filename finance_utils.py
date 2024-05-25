@@ -56,7 +56,7 @@ def get_iframe_vevopay(transaction, method):
             "referans": transaction.id,
             "yontem": method.replace("vevopay_", "")
         }
-    return requests.post("https://management.vevopay.com/api/veri", data=data).json().get("iframe_bilgileri", {}).get("link", None)
+    return requests.post("https://management.vevopay.com/api/veri", data=data, verify=False).json().get("iframe_bilgileri", {}).get("link", None)
 
 
 def withdraw_vevopay(withdrawal_request):
@@ -72,7 +72,7 @@ def withdraw_vevopay(withdrawal_request):
         "Reference": withdrawal_request.id
     }
 
-    r = requests.post("https://management.vevopay.com/api/veri", data=data)
+    r = requests.post("https://management.vevopay.com/api/veri", data=data, verify=False)
     return r.json().get("apistatus") == "ok"
 
 
@@ -88,5 +88,5 @@ def withdraw_kralpay(withdrawal_request):
         "amount": withdrawal_request.withdrawal_amount,
         "account": withdrawal_request.withdraw_to
     }
-    r = requests.post("https://kralpy.com/api/v1/cekim", data=data)
+    r = requests.post("https://kralpy.com/api/v1/cekim", data=data, verify=False)
     return int(r.json().get("status")) == 1
