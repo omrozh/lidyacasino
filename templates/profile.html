@@ -590,7 +590,7 @@
             <br>
 
             {% for i in available_manual_accounts %}
-                <iframe style="display: none; width: 70vw; height: 40vw;" src="/deposit/{{ i.payment_type }}" id="manual_deposit_{{ i.id }}" frameborder="0"></iframe>
+                <iframe style="display: none; width: 70vw; height: 40vw; min-height: 500px" src="/deposit/{{ i.payment_type }}" id="manual_deposit_{{ i.id }}" frameborder="0"></iframe>
             {% endfor %}
 
             {% for key, item in available_withdraw_methods.items() %}
