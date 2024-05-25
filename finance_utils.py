@@ -45,6 +45,7 @@ def get_available_banks_kralpay():
     bank_list = {}
     for i in r.json().get("banks"):
         bank_list[i.get("name")] = i.get("id")
+    print(bank_list)
     return bank_list
 
 
