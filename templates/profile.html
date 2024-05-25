@@ -550,9 +550,9 @@
             {% endfor %}
 
             {% for key, item in available_withdraw_methods.items() %}
-                <form method="post" id="deposit_form_{{ item }}" enctype="multipart/form-data" style="background-color: var(--backgroundDark); border-radius: 5px; color: white; box-sizing: border-box; width: fit-content; height: fit-content; max-width: 70vw; display: none; padding: 15px;">
+                <form method="post" id="deposit_form_{{ item }}" enctype="multipart/form-data" style="background-color: var(--backgroundDark); border-radius: 5px; color: white; box-sizing: border-box; width: fit-content; height: fit-content; max-width: 70vw; display: none; padding: 15px; text-align: left">
                     <br>
-                    <div style="background-color: var(--categoryBackground); text-align: left; padding: 15px; white-space: nowrap; max-width: 80vw; overflow-x: auto">
+                    <div style="background-color: var(--categoryBackground); text-align: left; padding: 15px; white-space: nowrap; max-width: 80vw; overflow-x: auto; border-radius: 5px">
                         <div style="display: inline-block">
                             <p style="color: grey; font-size: 12px;">Yöntem Adı</p>
                             {{ key }}
@@ -570,7 +570,9 @@
                             100₺
                         </div>
                     </div>
-                    <br>
+                    <div style="background-color: var(--categoryBackground); text-align: left; padding: 15px; white-space: nowrap; max-width: 80vw; overflow-x: auto; border-radius: 5px">
+                        <p style="color: white">Para yatırmak için lütfen aşağıdaki tüm gerekli alanları doldurun.</p>
+                    </div>
                     {% if item == "kralpay_banka" %}
                     <select name="bank_id" style="width: 300px; max-width: 90%; padding: 5px; font-family: sans-serif; outline: none; font-size: 1rem; border: 1px solid white; background-color: transparent; color: white; -webkit-appearance: none;">
                         <option value="no-bank">Banka Seçin</option>
