@@ -3,7 +3,7 @@ import requests
 kralpay_site_id = "643"
 kralpay_merchant_key = "9cj4aj2b53jmk6c534c2sufrop750ab39407e34jnh04bic07l9cyd2ziuytmn6kchka"
 
-vevopay_firma_key = "vevopay_key"
+vevopay_firma_key = "c800e21052a99ac4e8bf349487721db1"
 
 deposit_types = {
     "kralpay_papara": "Kralpay Papara",
