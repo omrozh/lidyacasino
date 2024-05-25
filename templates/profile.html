@@ -400,11 +400,11 @@
                         </div>
                       {% endfor %}
                       {% for key, item in available_withdraw_methods.items() %}
+                        {% if not item == "kralpay_creditCard" %}
                         <div onclick="document.getElementById('withdraw_type_{{item}}').value = '{{ item }}'; this.style.opacity = 0.3; let withdraw_methods = document.getElementsByClassName('searchable-div'); document.getElementById('form_{{ item }}').style.display = 'block'; for(let i = 0; i < withdraw_methods.length; i++){withdraw_methods[i].onclick = function(){console.log('cannot change payment type')}}" class="searchable-div" style="background-color: var(--backgroundDark); min-width: fit-content; padding: 15px; border-radius: 15px; display: inline-block; margin-left: 15px; margin-bottom: 15px">
-                            {% if not item == "kralpay_creditCard" %}
                                 <p id="{{ item }}" style="font-family: 'Open Sans', sans-serif; color: white; font-size: 16px; margin-bottom: 5px; overflow-x: auto; width: 150px; max-width: 30vw; white-space: nowrap">{{ key }}</p>
-                            {% endif %}
                         </div>
+                        {% endif %}
                       {% endfor %}
                 </div>
                 {% for i in available_manual_accounts %}
