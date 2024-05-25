@@ -43,6 +43,7 @@ def get_available_banks_kralpay():
     url = f"https://kralpy.com/api/v1/available-banks/?sid={kralpay_site_id}"
     r = requests.get(url, verify=False)
     bank_list = []
+    print(r.json())
     for i in r.json().get("banks"):
         bank_list.append({
             i.get("name"): i.get("id")
