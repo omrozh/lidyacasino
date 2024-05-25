@@ -513,9 +513,9 @@ class User(db.Model, UserMixin):
         ).order_by(desc(TransactionLog.transaction_date)).all()
 
         if transaction_type == "çekim":
-            latest_transactions = TransactionLog.query.filter(
+            latest_transactions = WithdrawalRequest.query.filter(
                 WithdrawalRequest.status == "Tamamlandı",
-                TransactionLog.user_fk == self.id
+                WithdrawalRequest.user_fk == self.id
             ).order_by(desc(WithdrawalRequest.request_date)).all()
             return sum([i.withdrawal_amount for i in latest_transactions])
 
