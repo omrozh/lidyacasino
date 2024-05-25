@@ -33,7 +33,7 @@ withdraw_types_kralpay = {
 
 def get_iframe_url_kralpay(transaction, method, base_url, bank_id):
     user = transaction.user
-    url = f"https://hizliyatir.com/next/{method.replace('kralpay_', '')}?sid={kralpay_site_id}&username={user.user_uuid}&userID={user.id}&fullname={user.user_uuid}&trx={transaction.id}&amount={transaction.transaction_amount}&return_url={base_url.replace('/profile', '')}/transaction_return"
+    url = f"https://hizliyatir.com/next/{method.replace('kralpay_', '')}?sid={kralpay_site_id}&username={user.user_uuid}&userID={user.id}&fullname={user.user_information.name}&trx={transaction.id}&amount={transaction.transaction_amount}&return_url={base_url.replace('/profile', '')}/transaction_return"
     if bank_id:
         url += f"&bankId={bank_id}"
     return url
@@ -45,7 +45,6 @@ def get_available_banks_kralpay():
     bank_list = {}
     for i in r.json().get("banks"):
         bank_list[i.get("isim")] = i.get("id")
-    print(bank_list)
     return bank_list
 
 
@@ -54,7 +53,7 @@ def get_iframe_vevopay(transaction, method):
     data = {
             "islem": "iframeolustur",
             "firma_key": vevopay_firma_key,
-            "kullanici_isim": user.username,
+            "kullanici_isim": user.user_information.name,
             "kullanici_id": user.id,
             "referans": transaction.id,
             "yontem": method.replace("vevopay_", "")
