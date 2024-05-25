@@ -7,10 +7,7 @@ vevopay_firma_key = "c800e21052a99ac4e8bf349487721db1"
 
 deposit_types = {
     "kralpay_papara": "Kralpay Papara",
-    "kralpay_crypto": "Kralpay Kripto",
-    "kralpay_mft": "Kralpay Mefete",
     "kralpay_banka": "Kralpay Banka Transferi",
-    "kralpay_creditCard": "Kralpay Kredi Kartı",
     "vevopay_papara": "Vevopay Papara",
     "vevopay_havale": "Vevopay Havale",
     "vevopay_mefete": "Vevopay Mefete",
@@ -20,6 +17,8 @@ deposit_types = {
     "vevopay_pep": "Vevopay PeP",
     "vevopay_cmt": "Vevopay CMT"
 }
+
+# TO DO: Add kralpay kripto, mefete and kredi kartı back.
 
 withdraw_types_kralpay = {
     "auto_kralpay_papara": "Papara",
