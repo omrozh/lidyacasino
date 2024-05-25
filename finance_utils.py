@@ -40,7 +40,7 @@ def get_iframe_url_kralpay(transaction, method, base_url, bank_id):
 
 
 def get_available_banks_kralpay():
-    url = f"https://kralpy.com/api/v1/available-banks?sid={kralpay_site_id}"
+    url = f"http://kralpy.com/api/v1/available-banks?sid={kralpay_site_id}"
     r = requests.get(url)
     bank_list = []
     for i in r.json():
