@@ -1502,7 +1502,8 @@ def deposit_bank():
         new_transaction = TransactionLog(transaction_amount=float(values["transaction_amount"]),
                                          transaction_type="yatirim", transaction_date=datetime.date.today(),
                                          user_fk=current_user.id, transaction_status="Ödeme Bekliyor",
-                                         payment_unique_number=flask.request.values["name"])
+                                         payment_unique_number=flask.request.values["name"],
+                                         payment_channel="Papara Yatırım Talebi")
         db.session.add(new_transaction)
         db.session.commit()
         get_first_active_method = PaymentSource.query.filter_by(payment_type="bank").filter_by(is_active_payment_source=True).first()
