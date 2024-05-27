@@ -235,11 +235,11 @@ class PromoCode(db.Model):
 
     @property
     def n_players_using_promo_code(self):
-        return len(AssignedPromoCode.query.filter_by(promo_code_fk=self.id))
+        return len(AssignedPromoCode.query.filter_by(promo_code_fk=self.id).all())
 
     @property
     def players_using_promo_code(self):
-        return [i.user for i in AssignedPromoCode.query.filter_by(promo_code_fk=self.id)]
+        return [i.user for i in AssignedPromoCode.query.filter_by(promo_code_fk=self.id).all()]
 
 
 class AssignedPromoCode(db.Model):
@@ -3083,6 +3083,7 @@ def transaction_callback_vevopay():
         if values.get("islem", None) == "yatirimsonuc":
             if values.get("durum", None) == "onay":
                 subject_user.balance += transaction.transaction_amount
+                subject_user.update_bonus_balance(float(values.get("amount")))
 
         if values.get("Process", None) == "WithdrawalReturn":
             withdrawal_request = WithdrawalRequest.query.get(values.get("Reference", None))
@@ -3117,6 +3118,7 @@ def transaction_callback_kralpay():
             transaction.transaction_status = "Tamamlandı"
             subject_user = transaction.user
             subject_user.balance += float(values.get("amount"))
+            subject_user.update_bonus_balance(float(values.get("amount")))
             db.session.commit()
             return flask.jsonify({
                 "code": 200,
