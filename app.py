@@ -2571,6 +2571,16 @@ def complete_deposit():
     return flask.redirect("/admin/home")
 
 
+@app.route("/admin/cancel_Deposit")
+def complete_deposit():
+    if not current_user.user_has_permission("transactions"):
+        return flask.redirect("/admin/home")
+    transaction = TransactionLog.query.get(flask.request.args.get("transaction_id"))
+    db.session.delete(transaction)
+    db.session.commit()
+    return flask.redirect("/admin/home")
+
+
 @app.route("/admin/games/<provider_id>/<provider_name>")
 def admin_panel_provider_details(provider_id, provider_name):
     if not current_user.user_has_permission("providers"):
