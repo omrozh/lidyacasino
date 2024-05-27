@@ -235,11 +235,11 @@ class PromoCode(db.Model):
 
     @property
     def n_players_using_promo_code(self):
-        return len(AssignedPromoCode.query.filter_by(promo_code_fk=self.id).all())
+        return len(list(filter(lambda item: item is not None, AssignedPromoCode.query.filter_by(promo_code_fk=self.id).all())))
 
     @property
     def players_using_promo_code(self):
-        return [i.user for i in AssignedPromoCode.query.filter_by(promo_code_fk=self.id).all()]
+        return [i.user for i in list(filter(lambda item: item is not None, AssignedPromoCode.query.filter_by(promo_code_fk=self.id).all()))]
 
 
 class AssignedPromoCode(db.Model):
