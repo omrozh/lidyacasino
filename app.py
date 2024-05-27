@@ -1784,7 +1784,7 @@ def signup():
                     user_fk=new_user.id,
                     promo_code_fk=promo_code.id
                 )
-                new_bonus_assigned = BonusAssigned(user_fk=current_user.id,
+                new_bonus_assigned = BonusAssigned(user_fk=new_user.id,
                                                    bonus_fk=promo_code.bonus_fk,
                                                    status="Kullanılabilir",
                                                    bonus_assigned_date=datetime.datetime.today().date(),
