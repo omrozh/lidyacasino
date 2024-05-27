@@ -426,7 +426,7 @@ class M2CallbackRouter(db.Model):
 
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String, primary_key=True)
     username = db.Column(db.String)
     user_uuid = db.Column(db.String)
     email = db.Column(db.String, unique=True)
@@ -1758,6 +1758,7 @@ def signup():
         values = flask.request.values
 
         new_user = User(
+            id=str(uuid4()),
             completed_first_deposit=False,
             casino_bonus_balance=0,
             sports_bonus_balance=0,
@@ -2743,6 +2744,7 @@ def admin_panel_users():
         else:
             new_user_permission = UserPermissions.query.get(flask.request.values.get("user_permission"))
         new_user = User(
+            id=str(uuid4()),
             email=flask.request.values.get("username"),
             password=bcrypt.generate_password_hash(flask.request.values.get("password")),
             is_admin=True,
