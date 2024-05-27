@@ -2571,8 +2571,8 @@ def complete_deposit():
     return flask.redirect("/admin/home")
 
 
-@app.route("/admin/cancel_Deposit")
-def complete_deposit():
+@app.route("/admin/cancel_deposit")
+def cancel_deposit():
     if not current_user.user_has_permission("transactions"):
         return flask.redirect("/admin/home")
     transaction = TransactionLog.query.get(flask.request.args.get("transaction_id"))
