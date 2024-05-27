@@ -237,6 +237,10 @@ class PromoCode(db.Model):
     def n_players_using_promo_code(self):
         return len(AssignedPromoCode.query.filter_by(promo_code_fk=self.id))
 
+    @property
+    def players_using_promo_code(self):
+        return [i.user for i in AssignedPromoCode.query.filter_by(promo_code_fk=self.id)]
+
 
 class AssignedPromoCode(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -2857,6 +2861,8 @@ def admin_panel_players():
     if flask.request.args.get("user_ip", None):
         users = users.filter(User.ip_address == flask.request.args.get("user_ip", None))
     users = users.all()
+    if flask.request.args.get("promo_code", None):
+        users = PromoCode.query.get(flask.request.args.get("promo_code", None)).players_using_promo_code
     number_of_users = len(users)
     return flask.render_template("panel/players.html", users=users, number_of_users=number_of_users)
 
