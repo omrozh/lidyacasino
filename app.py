@@ -1778,7 +1778,7 @@ def signup():
         if values.get("promo_code"):
             promo_code = PromoCode.query.filter_by(code=values.get("promo_code")).first()
             promo_code = PromoCode.query.filter(PromoCode.code == values.get("promo_code"),
-                                                PromoCode.number_of_users < promo_code.number_of_users).first()
+                                                promo_code.n_players_using_promo_code < promo_code.number_of_users).first()
             if promo_code:
                 new_assigned_promo_code = AssignedPromoCode(
                     user_fk=new_user.id,
