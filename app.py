@@ -1275,8 +1275,16 @@ def create_iframe_session():
 
 @app.route("/howtoplay")
 def how_to_play():
-    return flask.render_template("how_to_play.html", current_user=current_user)
-    # TO DO: write a how to play page.
+    data = flask.request.args.get("data", "generalTermsAndConditions")
+    info_file = os.listdir(f"img/text/{data}")[0]
+    data_dict = {
+        "generalTermsAndConditions": "Genel Kural ve Şartlar",
+        "contact": "Firma Bilgileri ve İletişim",
+        "generalBonusConditions": "Bonus Kuralları ve Şartları"
+    }
+    with open(f"img/text/{data}/{info_file}") as f:
+        info = f.read()
+    return flask.render_template("sss1.html", current_user=current_user, info=info, data=data, title=data_dict.get("data"))
 
 
 @app.route("/logout")
@@ -2569,6 +2577,7 @@ def complete_deposit():
     User.query.get(transaction.user_fk).update_bonus_balance(transaction.transaction_amount)
     db.session.commit()
     return flask.redirect("/admin/home")
+
 
 
 @app.route("/admin/cancel_deposit")
