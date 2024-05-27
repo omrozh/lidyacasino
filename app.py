@@ -1284,7 +1284,7 @@ def how_to_play():
     }
     with open(f"img/text/{data}/{info_file}") as f:
         info = f.read()
-    return flask.render_template("sss1.html", current_user=current_user, info=info, data=data, title=data_dict.get("data"))
+    return flask.render_template("sss1.html", current_user=current_user, info=info, data=data, title=data_dict.get(data))
 
 
 @app.route("/logout")
