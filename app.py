@@ -1692,6 +1692,8 @@ def login():
                 login_user(user_from_email, remember=False)
                 user_from_email.last_login = datetime.datetime.now()
                 db.session.commit()
+                if flask.request.args.get("continue") == "admin":
+                    return flask.redirect("/admin/home")
                 return flask.redirect("/")
     return flask.render_template("login.html")
 
@@ -2487,7 +2489,7 @@ def admin_panel():
         if not current_user.user_has_permission("general"):
             return flask.redirect("/")
     except:
-        return flask.redirect("/login")
+        return flask.redirect("/login?continue=admin")
     import admin_utils
     day_difference = int(flask.request.args.get("days", 1))
 
