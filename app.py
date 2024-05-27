@@ -1755,6 +1755,7 @@ def signup():
         except AttributeError or KeyError:
             pass
     if flask.request.method == "POST":
+        values = flask.request.values
 
         new_user = User(
             completed_first_deposit=False,
@@ -1773,7 +1774,6 @@ def signup():
         )
         db.session.add(new_user)
         db.session.commit()
-        values = flask.request.values
 
         if values.get("promo_code"):
             promo_code = PromoCode.query.filter_by(code=values.get("promo_code")).first()
