@@ -5,6 +5,15 @@ kralpay_merchant_key = "9cj4aj2b53jmk6c534c2sufrop750ab39407e34jnh04bic07l9cyd2z
 
 vevopay_firma_key = "c800e21052a99ac4e8bf349487721db1"
 
+deposit_keys_vevopay = {
+    "vevopay_papara": "c800e21052a99ac4e8bf349487721db1",
+    "vevopay_havale": "9b10b8e92204a56ad64daaaa3f9b85a9",
+    "vevopay_mefete": "691b79f195b9cdb422eb1a73accd54e8",
+    "vevopay_payfix": "1ef7651f987cbc76aa13fc5e4ea5046d",
+    "vevopay_parazula": "eddf7d08c0ffab9486b40eb5fe489622",
+    "vevopay_cmt": "2fca0aa40f29e90b7468382a8f628b64",
+}
+
 deposit_types = {
     "kralpay_papara": "Kralpay Papara",
     "kralpay_banka": "Kralpay Banka Transferi",
@@ -13,8 +22,6 @@ deposit_types = {
     "vevopay_mefete": "Vevopay Mefete",
     "vevopay_payfix": "Vevopay Payfix",
     "vevopay_parazula": "Vevopay Parazula",
-    "vevopay_fups": "Vevopay Fups",
-    "vevopay_pep": "Vevopay PeP",
     "vevopay_cmt": "Vevopay CMT"
 }
 
@@ -62,7 +69,7 @@ def withdraw_vevopay(withdrawal_request):
     user = withdrawal_request.user
     data = {
         "Process": "Withdrawal",
-        "firma_key": vevopay_firma_key,
+        "firma_key": deposit_keys_vevopay.get(withdrawal_request.withdraw_type.replace("auto_", "")),
         "UserID": user.id,
         "NameSurname": user.user_information.name,
         "BankAccountNo": withdrawal_request.withdraw_to,
