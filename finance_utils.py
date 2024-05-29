@@ -56,7 +56,7 @@ def get_iframe_vevopay(transaction, method):
     user = transaction.user
     data = {
             "islem": "iframeolustur",
-            "firma_key": vevopay_firma_key,
+            "firma_key": deposit_keys_vevopay.get(method),
             "kullanici_isim": user.user_information.name,
             "kullanici_id": user.id,
             "referans": transaction.id,
