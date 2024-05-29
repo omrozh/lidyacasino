@@ -1920,9 +1920,9 @@ def bahis():
 
     open_bets = open_bets.all()
 
-    number_of_chunks = range(int(len(open_bets) / 10) + 1)
+    number_of_chunks = range(int(len(open_bets) / 50) + 1)
 
-    return flask.render_template("bahis/bahis-yeni.html", open_bets=open_bets[offset * 10:(offset + 1) * 10],
+    return flask.render_template("bahis/bahis-yeni.html", open_bets=open_bets[offset * 50:(offset + 1) * 50],
                                  canli_bahis=False,
                                  number_of_chunks=number_of_chunks, offset=offset,
                                  sports_and_leagues=sports_and_leagues)
