@@ -1891,8 +1891,6 @@ def admin_portal():
 
 @app.route("/bahis")
 def bahis():
-    import time
-    start_time = time.time()
     offset = int(flask.request.args.get("offset", 0))
     sport = flask.request.args.get("sport", None)
     league = flask.request.args.get("league", None)
@@ -1923,8 +1921,6 @@ def bahis():
     open_bets = open_bets.all()
 
     number_of_chunks = range(int(len(open_bets) / 50) + 1)
-
-    print(time.time() - start_time)
 
     return flask.render_template("bahis/bahis-yeni.html", open_bets=open_bets[offset * 50:(offset + 1) * 50],
                                  canli_bahis=False,
