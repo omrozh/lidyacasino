@@ -674,6 +674,10 @@ class OpenBet(db.Model):
 
     @property
     def who_wins_bet(self):
+        import time
+        start_time = time.time()
+        BetOption.query.filter_by(open_bet_fk=self.id).filter_by(game_name="Maç Sonucu").first()
+        print(time.time() - start_time)
         return BetOption.query.filter_by(open_bet_fk=self.id).filter_by(game_name="Maç Sonucu").first()
 
     @property
