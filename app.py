@@ -674,10 +674,6 @@ class OpenBet(db.Model):
 
     @property
     def who_wins_bet(self):
-        import time
-        start_time = time.time()
-        BetOption.query.filter_by(open_bet_fk=self.id).filter_by(game_name="Maç Sonucu").first()
-        print(time.time() - start_time)
         return BetOption.query.filter_by(open_bet_fk=self.id).filter_by(game_name="Maç Sonucu").first()
 
     @property
@@ -1924,9 +1920,9 @@ def bahis():
 
     open_bets = open_bets.all()
 
-    number_of_chunks = range(int(len(open_bets) / 50) + 1)
+    number_of_chunks = range(int(len(open_bets) / 10) + 1)
 
-    return flask.render_template("bahis/bahis-yeni.html", open_bets=open_bets[offset * 50:(offset + 1) * 50],
+    return flask.render_template("bahis/bahis-yeni.html", open_bets=open_bets[offset * 10:(offset + 1) * 10],
                                  canli_bahis=False,
                                  number_of_chunks=number_of_chunks, offset=offset,
                                  sports_and_leagues=sports_and_leagues)
