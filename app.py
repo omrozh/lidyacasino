@@ -3219,5 +3219,27 @@ def transaction_callback_kralpay():
 def transaction_return():
     return flask.render_template("payment_form_submit.html")
 
+
+@app.route("/casino-callback/notification/ggr")
+def ggr_limit_skip():
+    return flask.jsonify(
+        {
+            "status": True,
+            "platform": "kadromilyon",
+            "limits": [
+                {
+                    "amount": 0,
+                    "limit": 10000,
+                    "currency": "€",
+                    "percent": 0,
+                    "platform": "kadromilyon",
+                    "category": "casino",
+                    "invoiceCalculation": True
+                }
+            ]
+        }
+
+    )
+
 # TO DO: Add bonus taleplerim page to profile also implement trying and loss bonuses
 # TO DO: Check casino integration (also with router)
