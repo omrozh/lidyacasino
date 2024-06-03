@@ -1891,7 +1891,6 @@ def admin_portal():
 
 @app.route("/loading")
 def loading_page():
-    print(flask.request.args.get("continue").replace("!", "&"))
     return flask.render_template("loading_page.html", route_to=flask.request.args.get("continue").replace("!", "&"))
 
 
