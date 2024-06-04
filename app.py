@@ -3147,6 +3147,8 @@ def bonus_request():
 
 @app.route("/transaction_callback/<type>", methods=["POST", "GET"])
 def transaction_callback_vevopay(type):
+    with open("logs.txt", "a") as f:
+        f.write("Start Request\n")
     if flask.request.method == "POST":
         values = flask.request.values
 
