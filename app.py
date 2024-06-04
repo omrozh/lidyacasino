@@ -3148,9 +3148,11 @@ def bonus_request():
 @app.route("/transaction_callback/<type>", methods=["POST", "GET"])
 def transaction_callback_vevopay(type):
     if flask.request.method == "POST":
-
         values = flask.request.values
+        print(values)
+        print(type)
         transaction = TransactionLog.query.get(int(values.get("referans", None)))
+        print(transaction)
 
         subject_user = User.query.get(int(values.get("kullanici_id")))
 
