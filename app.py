@@ -3149,10 +3149,10 @@ def bonus_request():
 def transaction_callback_vevopay(type):
     if flask.request.method == "POST":
         values = flask.request.values
-        print(values)
-        print(type)
+
         transaction = TransactionLog.query.get(int(values.get("referans", None)))
-        print(transaction)
+        with open("logs.txt", "a") as f:
+            f.write(f"{values} \n {type} \n {transaction.id}")
 
         subject_user = User.query.get(int(values.get("kullanici_id")))
 
