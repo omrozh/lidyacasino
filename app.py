@@ -3145,8 +3145,8 @@ def bonus_request():
     return flask.redirect("/promotions")
 
 
-@app.route("/transaction_callback", methods=["POST", "GET"])
-def transaction_callback_vevopay():
+@app.route("/transaction_callback/<type>", methods=["POST", "GET"])
+def transaction_callback_vevopay(type):
     if flask.request.method == "POST":
 
         values = flask.request.values
@@ -3154,12 +3154,12 @@ def transaction_callback_vevopay():
 
         subject_user = User.query.get(int(values.get("kullanici_id")))
 
-        if values.get("islem", None) == "yatirimsonuc":
+        if type == "deposit":
             if values.get("durum", None) == "onay":
                 subject_user.balance += transaction.transaction_amount
                 subject_user.update_bonus_balance(float(values.get("amount")))
 
-        if values.get("Process", None) == "WithdrawalReturn":
+        if type == "withdraw":
             withdrawal_request = WithdrawalRequest.query.get(values.get("Reference", None))
             subject_user.balance -= transaction.transaction_amount
             withdrawal_request.status = "Tamamlandı"
