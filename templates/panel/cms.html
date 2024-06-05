@@ -163,7 +163,7 @@
                                         <select onchange="previewImage()" id="file-select" name="file-select" style="-webkit-appearance: none; border: 1px solid gray; padding: 5px; border-radius: 5px; outline: none">
                                             <option value="">Güncellemek için görsel seçin</option>
                                             {% for i in images %}
-                                                {% if "png" in i or "jpg" in i or "webp" in i or "gif" in i or "jpeg" in i %}
+                                                {% if "png" in i or "jpg" in i or "webp" in i or "gif" in i or "jpeg" in i or "css" in i %}
                                                     <option value="{{ i }}">{{ i }}</option>
                                                 {% endif %}
                                             {% endfor %}
