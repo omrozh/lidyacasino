@@ -2080,7 +2080,7 @@ def bahis_mac(bahis_id):
     from_frame = flask.request.args.get("iframe", False) == "True"
     is_canli_bahis = open_bet.bet_ending_datetime >= datetime.datetime.now(),
     return flask.render_template("bahis/bahis_detay_yeni.html", open_bet=open_bet, from_frame=from_frame,
-                                 is_canli_bahis=is_canli_bahis)
+                                 is_canli_bahis=is_canli_bahis, datestring=str(open_bet.bet_ending_datetime).replace(" ", "T"))
 
 
 @app.route("/take_bet/<odd_id>")
