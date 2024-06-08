@@ -17,6 +17,16 @@
 						<div class="firsdt">
 							<div class="league">
 								<span class="match-league"> {{ open_bet.match_league }} </span>
+								<div>
+									{% if open_bet.sport == "soccer" and is_canli_bahis %}
+										<span style="background-color: var(--baseColor); color: var(--generalTextColor); opacity: 0.8; width: fit-content; border-radius: 10px 0 0 10px; padding: 10px;">
+											<span id="half"></span>.Yarı
+										</span>
+										<span id="minute" style="background-color: var(--baseColor); color: var(--generalTextColor); width: fit-content; border-radius: 0 10px 10px 0; padding: 10px;">
+											62'
+										</span>
+									{% endif %}
+								</div>
 							</div>
 							<div class="match-details">
 								<div class="date"> {{ open_bet.bet_ending_datetime }} </div>
@@ -29,7 +39,13 @@
 										</div>
 										<div class="team-name"> {{ open_bet.team_1 }} </div>
 									</div>
-									<div class="teamvs"> VS </div>
+									{% if open_bet.sport == "soccer" and is_canli_bahis %}
+										<span class="teamvs">1</span>
+										<div class="teamvs"> : </div>
+										<span class="teamvs">2</span>
+									{% else %}
+										<div class="teamvs"> VS </div>
+									{% endif %}
 									<div class="team-cont">
 										<div class="team-logo">
 											<div class="team-sep">
@@ -42,6 +58,9 @@
 							</div>
 						</div>
 					</div>
+					<script>
+
+					</script>
 
 					<div class="odds-cont">
 						<div class="odds-opts">

@@ -2078,7 +2078,9 @@ def canli_bahis_mobile():
 def bahis_mac(bahis_id):
     open_bet = OpenBet.query.get(bahis_id)
     from_frame = flask.request.args.get("iframe", False) == "True"
-    return flask.render_template("bahis/bahis_detay_yeni.html", open_bet=open_bet, from_frame=from_frame)
+    is_canli_bahis = open_bet.bet_ending_datetime >= datetime.datetime.now(),
+    return flask.render_template("bahis/bahis_detay_yeni.html", open_bet=open_bet, from_frame=from_frame,
+                                 is_canli_bahis=is_canli_bahis)
 
 
 @app.route("/take_bet/<odd_id>")
