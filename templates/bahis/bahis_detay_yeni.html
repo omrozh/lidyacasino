@@ -62,7 +62,7 @@
 						let start_time = Date.now() - Date.parse("{{ datestring }}");
 						function updateTime(){
 							start_time += 60*1000;
-							let elapsed_minute = Math.round(start_time/60/1000)
+							let elapsed_minute = Math.round(start_time/60/1000) - 2
 
 							if(60 > elapsed_minute > 45) {
 								document.getElementById("half").innerText = "Devre Arası";
