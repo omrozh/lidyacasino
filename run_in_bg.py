@@ -9,7 +9,7 @@ with app.app_context():
         print(total_minutes)
         if total_seconds > 7200:
             register_open_bet()
-            total_minutes = 0
+            total_seconds = 0
         live_betting()
         total_seconds += 3
         time.sleep(3)
