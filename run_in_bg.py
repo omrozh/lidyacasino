@@ -1,16 +1,18 @@
 from app import app
-from betting_utils import live_betting, register_open_bet
+from betting_utils import live_betting, register_open_bet, open_bet_garbage_collector
 import time
 
-total_seconds = 0
+total_minutes = 0
 
 with app.app_context():
     while True:
-        if total_seconds > 7200:
+        print(total_minutes)
+        if total_minutes == 120:
+            open_bet_garbage_collector()
             register_open_bet()
-            total_seconds = 0
+            total_minutes = 0
         live_betting()
-        total_seconds += 60
+        total_minutes += 1
         time.sleep(60)
 
 # latest process id: kmcron
