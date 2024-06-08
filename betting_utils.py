@@ -23,6 +23,11 @@ def get_live_score(open_bet):
             if match_likelihood > 2:
                 return match
 
+    return {
+        "HomeGoals": "-",
+        "AwayGoals": "-"
+    }
+
 
 def get_team_badge(team_name):
     try:
