@@ -59,12 +59,15 @@
 						</div>
 					</div>
 					<script>
-						let start_time = Date.parse("{{ datestring }}") - Date.now();
+						let start_time = Date.now() - Date.parse("{{ datestring }}");
 						function updateTime(){
 							start_time += 60*1000;
-							document.getElementById("minute").innerText = start_time/60/1000;
-							if(start_time > 45){
+							let elapsed_minute = Math.round(start_time/60/1000)
+							document.getElementById("minute").innerText = elapsed_minute;
+							if(elapsed_minute > 45){
 								document.getElementById("half").innerText = "2"
+							}else{
+								document.getElementById("half").innerText = "1"
 							}
 						}
 						setInterval(updateTime, 1000*60)
