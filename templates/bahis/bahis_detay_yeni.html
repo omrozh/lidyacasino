@@ -40,9 +40,9 @@
 										<div class="team-name"> {{ open_bet.team_1 }} </div>
 									</div>
 									{% if open_bet.sport == "soccer" and is_canli_bahis %}
-										<span class="teamvs">1</span>
+										<span class="teamvs">{{ current_score.HomeGoals }}</span>
 										<div class="teamvs"> : </div>
-										<span class="teamvs">2</span>
+										<span class="teamvs">{{ current_score.AwayGoals }}</span>
 									{% else %}
 										<div class="teamvs"> VS </div>
 									{% endif %}
@@ -83,7 +83,7 @@
 						setInterval(updateTime, 1000*60)
 						updateTime()
 					</script>
-					<div style="white-space: nowrap; overflow-x: auto">
+					<div style="white-space: nowrap; overflow-x: auto; padding-left: 15px">
 						{% for i in bet_categories %}
 							<div onclick="searchCategory('{{ i }}')" style="background-color: var(--categoryBackground); border-radius: 5px; padding: 10px; box-sizing: border-box; margin-top: 5px; width: fit-content; color: var(--generalTextColor); display: inline-block">
 								{{ i }}

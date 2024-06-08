@@ -9,6 +9,21 @@ from sqlalchemy import text
 api_key = "na"
 
 
+def get_live_score(open_bet):
+    r = requests.get("www.thesportsdb.com/api/v1/json/3/latestsoccer.php")
+    match_likelihood = 0
+    for i in r.json().get("teams"):
+        for match in i.get("Match"):
+            for c in open_bet.team_1.split(" "):
+                if c in match.get("HomeTeam"):
+                    match_likelihood += 1
+            for c in open_bet.team_2.split(" "):
+                if c in match.get("AwayTeam"):
+                    match_likelihood += 1
+            if match_likelihood > 2:
+                return match
+
+
 def get_team_badge(team_name):
     try:
         r = requests.get(f"https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t={team_name}")
