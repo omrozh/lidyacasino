@@ -15,6 +15,7 @@ def get_live_score(open_bet):
     print(r.json())
     for i in r.json().get("teams"):
         print(i)
+        continue
         for match in i.get("Match"):
             for c in open_bet.team_1.split(" "):
                 if c in match.get("HomeTeam"):
