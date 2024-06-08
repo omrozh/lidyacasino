@@ -10,8 +10,8 @@ with app.app_context():
             register_open_bet()
             total_seconds = 0
         live_betting()
-        total_seconds += 3
-        time.sleep(3)
+        total_seconds += 15
+        time.sleep(15)
 
 # latest process id: kmcron
 # tmux attach-session -t kmcron
