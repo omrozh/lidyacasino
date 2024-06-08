@@ -49,7 +49,7 @@
 								<div class="odds-list">
                                     {% for i in open_bet.bet_options %}
                                     	{% if i.has_odds %}
-										<div class="odd-detail" style="border-radius: 5px; padding: 10px; box-sizing: border-box; margin-top: 5px;">
+										<div class="odd-detail" style="background-color: var(--categoryBackground); border-radius: 5px; padding: 10px; box-sizing: border-box; margin-top: 5px;">
 											<div class="odd-title"> <h6>{{ i.game_name }}</h6> </div>
 											<div class="odds">
 											{% for c in i.bet_odds %}
