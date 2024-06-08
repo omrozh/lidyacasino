@@ -20,7 +20,7 @@
 								<div>
 									{% if open_bet.sport == "soccer" and is_canli_bahis %}
 										<span style="background-color: var(--baseColor); color: var(--generalTextColor); opacity: 0.8; width: fit-content; border-radius: 10px 0 0 10px; padding: 10px;">
-											<span id="half"></span>.Yarı
+											<span id="half"></span>
 										</span>
 										<span id="minute" style="background-color: var(--baseColor); color: var(--generalTextColor); width: fit-content; border-radius: 0 10px 10px 0; padding: 10px;">
 											62'
@@ -63,12 +63,22 @@
 						function updateTime(){
 							start_time += 60*1000;
 							let elapsed_minute = Math.round(start_time/60/1000)
-							document.getElementById("minute").innerText = elapsed_minute;
-							if(elapsed_minute > 45){
-								document.getElementById("half").innerText = "2"
-							}else{
-								document.getElementById("half").innerText = "1"
+
+							if(60 > elapsed_minute > 45) {
+								document.getElementById("half").innerText = "Devre Arası";
+								document.getElementById("minute").innerText = "45";
+								return;
 							}
+
+							if(elapsed_minute > 45){
+								document.getElementById("half").innerText = "2.Yarı";
+								elapsed_minute -= 15;
+							}
+							else
+							{
+								document.getElementById("half").innerText = "1.Yarı";
+							}
+							document.getElementById("minute").innerText = elapsed_minute.toString();
 						}
 						setInterval(updateTime, 1000*60)
 						updateTime()
