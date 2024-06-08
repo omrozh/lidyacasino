@@ -88,6 +88,8 @@ app.config['MAIL_USERNAME'] = 'operations@m2betting.com'
 app.config['MAIL_PASSWORD'] = 'qvegsrxwmbwrxaxx'
 app.config['MAIL_DEFAULT_SENDER'] = 'operations@m2betting.com'
 
+bet_categories = ["Handikaplar", "Goller", "Maç Sonucu", "Yarılar", "Penaltılar", "Tüm Bahisler"]
+
 mail = Mail(app)
 
 db = SQLAlchemy(app)
@@ -867,6 +869,7 @@ class BetOption(db.Model):
     game_details = db.Column(db.String)
     open_bet_fk = db.Column(db.Integer)
     match_name_row = db.Column(db.String)
+    category = db.Column(db.String)
 
     @property
     def match_name(self):
@@ -2080,6 +2083,7 @@ def bahis_mac(bahis_id):
     from_frame = flask.request.args.get("iframe", False) == "True"
     is_canli_bahis = open_bet.bet_ending_datetime <= datetime.datetime.now()
     return flask.render_template("bahis/bahis_detay_yeni.html", open_bet=open_bet, from_frame=from_frame,
+                                 bet_categories=bet_categories,
                                  is_canli_bahis=is_canli_bahis, datestring=str(open_bet.bet_ending_datetime).replace(" ", "T"))
 
 

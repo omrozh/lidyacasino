@@ -111,7 +111,8 @@ def register_open_bet():
                     new_bet_option = BetOption(
                         game_name=bet_option.get("gameName"),
                         game_details=bet_option.get("gameDetails"),
-                        open_bet_fk=new_open_bet.id
+                        open_bet_fk=new_open_bet.id,
+                        category=bet_option.get("category")
                     )
                     db.session.add(new_bet_option)
                     db.session.commit()
@@ -221,7 +222,8 @@ def live_betting():
                             new_bet_option = BetOption(
                                 game_name=bet_option.get("gameName"),
                                 game_details=bet_option.get("gameDetails"),
-                                open_bet_fk=new_open_bet.id
+                                open_bet_fk=new_open_bet.id,
+                                category=bet_option.get("category")
                             )
                             db.session.add(new_bet_option)
                             db.session.commit()
