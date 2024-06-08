@@ -1815,6 +1815,8 @@ def login():
                 db.session.commit()
                 if flask.request.args.get("continue") == "admin":
                     return flask.redirect("/admin/home")
+                elif flask.request.args.get("continue", None):
+                    return flask.redirect(flask.request.args.get("continue", None))
                 return flask.redirect("/")
     return flask.render_template("login.html")
 
@@ -2445,6 +2447,8 @@ def casino():
 
 @app.route("/casino/<game_id>")
 def casino_game(game_id):
+    if not current_user.is_authenticated:
+        return flask.redirect(f"/login?continue=/casino/{game_id}")
     freespin_bonus = current_user.get_bonuses("casino", "freespin")
     if freespin_bonus:
         current_user.get_bonuses("casino", "freespin").status = "Kullanıldı"
