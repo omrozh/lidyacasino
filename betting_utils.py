@@ -10,7 +10,7 @@ api_key = "na"
 
 
 def get_live_score(open_bet):
-    r = requests.get("www.thesportsdb.com/api/v1/json/3/latestsoccer.php")
+    r = requests.get("https://www.thesportsdb.com/api/v1/json/3/latestsoccer.php")
     match_likelihood = 0
     for i in r.json().get("teams"):
         for match in i.get("Match"):
