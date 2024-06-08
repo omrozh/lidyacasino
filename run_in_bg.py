@@ -6,7 +6,6 @@ total_seconds = 0
 
 with app.app_context():
     while True:
-        print(total_minutes)
         if total_seconds > 7200:
             register_open_bet()
             total_seconds = 0
