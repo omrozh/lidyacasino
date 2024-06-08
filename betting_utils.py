@@ -24,7 +24,8 @@ def get_live_score(open_bet):
 
     return {
         "HomeGoals": "-",
-        "AwayGoals": "-"
+        "AwayGoals": "-",
+        "Time": "N/A"
     }
 
 
