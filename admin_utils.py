@@ -183,3 +183,14 @@ def list_directory_contents_recursive(directory_path):
         for name in files:
             contents.append(os.path.join(root, name))
     return contents
+
+
+def signup_all_users_to_m2():
+    import requests
+    with app.app_context():
+        for i in User.query.all():
+            data = {
+                "user_uuid": i.user_uuid,
+                "base_url": app.config.get("CASINO_BASE_URL")
+            }
+            requests.post("https://kadromilyon.com/save_user_to_m2router", data=data)
