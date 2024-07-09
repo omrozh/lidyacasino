@@ -2469,12 +2469,6 @@ def casino_game(game_id):
     if freespin_bonus:
         current_user.get_bonuses("casino", "freespin").status = "Kullanıldı"
     from casino_utils import get_game_iframe
-    if app.config.get("DO_ROUTE_USERS"):
-        data = {
-            "user_uuid": current_user.user_uuid,
-            "base_url": app.config.get("CASINO_BASE_URL")
-        }
-        requests.post("https://kadromilyon.com/save_user_to_m2router", data=data)
 
     return flask.render_template("casino-game.html",
                                  game_iframe=get_game_iframe(game_id, current_user.id, current_user.user_uuid,
