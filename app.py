@@ -1465,8 +1465,8 @@ def profile():
 
     return flask.render_template("profile.html", bank_banks=bank_list,
                                  available_withdraw_methods=available_withdraw_methods, current_user=current_user,
-                                 withdrawal_requests=reversed(
-                                     WithdrawalRequest.query.filter_by(user_fk=current_user.id).all()),
+                                 withdrawal_requests=list(reversed(
+                                     WithdrawalRequest.query.filter_by(user_fk=current_user.id).all())),
                                  available_manual_accounts=available_manual_accounts, transactions=transactions)
 
 
