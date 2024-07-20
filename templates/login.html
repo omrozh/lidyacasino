@@ -5,221 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Lidya Casino | Güvenilir Casino</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <style>
-        *,
-        *::after,
-        *::before {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            font-family: "Roboto", sans-serif;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f8efef;
-            cursor:default;
-        }
-
-        .form-container {
-            height: 500px;
-            width: 750px;
-            max-width: 100vw;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            background-color: white;
-            overflow: hidden;
-            position: relative;
-            min-height: fit-content;
-        }
-
-        .login-container,.signup-container {
-            width: 50%;
-            padding: 40px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 15px;
-            transition: all 500ms ease;
-
-        }
-        .signup-container{
-          transform:scale(0);
-        }
-
-        .title{
-            font-size: 20px;
-            font-weight: 500;
-        }
-
-        .desc {
-            font-size: 12px;
-        }
-
-        .input-container {
-            margin-top: 10px;
-            width: 100%;
-            height: 40px;
-            border-radius: 5px;
-            border: 2px solid #d6e0eb;
-            display: flex;
-            align-items: center;
-        }
-
-        input{
-            height: 100%;
-            border: none;
-            margin-left: 5px;
-            outline: none;
-            font-family: "Roboto", sans-serif;
-            width: 100%;
-        }
-
-        .account-controls {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .account-controls>a {
-            text-decoration: none;
-            color: #5293aa;
-            font-size: 12px;
-        }
-
-        .account-controls>button {
-            width: 65px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            border: none;
-            background: #7b00ff;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 500ms ease;
-            box-shadow: 0 3px 10px -5px #73aabb;
-            &:hover {
-                transform: scale(1.1);
-            }
-        }
-
-        .line {
-            width: 100%;
-            height: 2px;
-            background-color: #bfc0c9;
-            border-radius: 10px;
-        }
-
-        .other-login-text {
-            text-align: center;
-            font-size: 12px;
-            color: #64656a;
-        }
-
-        .placeholder-banner {
-            width: 65%;
-            height: 100%;
-            position:absolute;
-            right:0;
-            transition: all 500ms ease;
-            z-index:4;
-        }
-
-        .social-logins {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .social-login {
-
-            height: 40px;
-            aspect-ratio: 1/1;
-            border: 2px solid #bfc0c9;
-            background-color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap:5px;
-            cursor: pointer;
-            transition:transform 500ms ease;
-            &:hover{
-                transform:scale(1.1);
-            }
-        }
-        .signup-text{
-            margin-top: 5px;
-            font-size: 12px;
-        }
-        #signup-form-toggler,#login-form-toggler{
-            cursor: pointer;
-            text-decoration: none;
-            color:#046586;
-          &:hover{
-            border-bottom:1px solid;
-          }
-        }
-        .banner {
-            width: 100%;
-            height: inherit;
-        }
-        @media screen and (max-width: 800px) {
-            .placeholder-banner{
-                display: none;
-            }
-            .login-container{
-                width: 100%;
-            }
-        }
-    </style>
 </head>
 
-<body style="background: #0f1012">
-    <div class="form-container" style="background: #2e2f33">
-        <div class="login-container" id="login-container">
-            <img src="/img/logo.png" style="width: 200px" alt="">
+<body style="background: #0f1012; margin: 0; padding: 0;">
+    <iframe src="/" style="width: 100vw; height: 100vh; position: relative; opacity: 0.3; z-index: -1" frameborder="0"></iframe>
+    <center class="form-container" style="background: #2e2f33; max-width: 100vw; position: absolute; top: 0; bottom: 0; right: 0; left: 0; margin: auto; width: 350px; height: fit-content; padding: 10px; padding-top: 20px; box-sizing: border-box; border-radius: 5px">
+        <div style="height: 78px">
+            <span style="font-family: 'Roboto', sans-serif; color: white;">HENÜZ HESABINIZ YOK MU?</span>
+            <br>
+            <button onclick="document.location = '/signup'" style="background: #101213; color: white; font-size: 1rem; padding: .7rem .75rem; margin-top: 5px; font-weight: 400; width: 100%; border-radius: 5px; border: none; outline: none;">Hemen Üye Ol</button>
+        </div>
+        <div class="login-container" style="background: #26292d; padding: 15px; position: relative" id="login-container">
+            <img src="/img/logo.png" style="width: 100px; margin-top: 15px; display: inline-block" alt="">
+            <span style="font-family: 'Roboto', sans-serif; color: white; position: absolute; right: 10px; top: 10px;" onclick="document.location = '/'">X</span>
+            <br>
+            <br>
             <form method="post" enctype="multipart/form-data">
                 <div class="input-container">
-                    <input type="text" name="email"  placeholder="E-Posta" style="background: transparent; color: white" autofocus = "on">
+                    <input type="text" name="email"  placeholder="E-Posta" style="width: 100%;background: #2e2f33; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;" autofocus = "on">
                 </div>
                 <div class="input-container">
-                    <input type="password" name="password" style="background: transparent; color: white" placeholder="Şifre">
+                    <input type="password" name="password"  placeholder="Şifre" style="width: 100%; margin-top: 10px; background: #2e2f33; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;" autofocus = "on">
                 </div>
                 <br>
                 <div class="account-controls">
-                    <button>Giriş <i class="fas fa-solid fa-angle-right"></i></button>
+                    <button style="background: #101213; color: white; font-size: 1rem; padding: .7rem .75rem; margin-top: 5px; font-weight: 400; width: 100%; border-radius: 5px; border: none; outline: none;">Giriş Yap</button>
                 </div>
             </form>
-
-            <span class="line"></span>
-            <span class="other-login-text" style="color: white">Sosyal Medya Hesaplarımız</span>
-            <div class="social-logins" style="color: white">
-                <button class="social-login" style="background: transparent"><i style="color:#1e7bf2" class="fas fa-brands fa-facebook-f"></i></button>
-                <button class="social-login" style="background: transparent"><i style="color:#ea4335" class="fas fa-brands fa-instagram"></i></button>
-            </div>
-            <span class="signup-text" style="color: white">Hesabın yok mu? <a id = "signup-form-toggler" onclick="document.location = '/signup'"s style="color: #6a4898">Oluştur</a></span>
-            <span class="signup-text" style="color: white"><a onclick="document.location = '/forgot_password'" style="color: #6a4898">Şifremi Unuttum</a></span>
+            <p><a href="/forgot_password" style="color: white; text-decoration: none; font-family: 'Roboto'">Şifremi Unuttum</a></p>
+            <br>
         </div>
-        <div class="placeholder-banner"  id="banner">
-            <img src="/static/m2_kadromilyon_loginscreen_png.png" alt="" class="banner">
-        </div>
-        </div>
-    </div>
+    </center>
 </body>
-<!-- Change code above this line -->
 
 </html>

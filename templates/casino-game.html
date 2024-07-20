@@ -3,30 +3,47 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<title>Lidya Casino</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1; height=device-height" />
+	<title>KadroMilyon</title>
 	<link rel="stylesheet" href="/css/style.css" />
+	<link rel="stylesheet" href="/css/sportsbook.css" />
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/css/fontawesome.min.css" />
 	<link rel="stylesheet" href="/plugins/owl/owl.carousel.min.css" />
-	<script src="//code.tidio.co/6sibsyjb7qcqlirjvzar5yfkqjjk6ips.js" async></script>
+	<link rel="stylesheet" href="/plugins/perfect-scrollbar/perfect-scrollbar.css" />
+	<style>
+		body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .nvbr {
+            flex-shrink: 0;
+        }
+        .cntn {
+            flex: 1;
+        }
+	</style>
 </head>
 <body>
-	<app-header>
-		<app-home-header>
+	<app-header class="nvbr">
+		<app-home-header class="other-pages sticky-top">
 			<div class="nav">
 				<div class="logo"> <a href="/"> <img src="/img/logo.png" /> </a> </div>
-				<div class="fast-links">
-					<a href="#." class="btn"> <i class="km km-affiliate"></i> Affiliate </a>
-					<a href="#." class="btn"> <i class="km km-call"></i> Sizi Arayalım </a>
-					<a href="#." class="btn"> <i class="km km-whatsapp"></i> Whatsapp </a>
-					<a href="#." class="btn"> <i class="km km-telegram"></i> Telegram </a>
-					<a href="#." class="btn"> <i class="km km-twitter"></i> Twitter </a>
+				<div class="sportsbook-menu">
+					<div class="menu">
+						<a href="/" class="n-link"> <span>ANASAYFA</span> </a>
+						<a href="/promotions" class="n-link"> <span>KAMPANYALAR</span> </a>
+						<a href="/casino" class="n-link"> <span>CASINO</span> </a>
+						<a href="/casino" class="n-link"> <span>CANLI CASINO</span> </a>
+					</div>
 				</div>
 				<div class="rightmenu">
 					{% if not current_user.is_authenticated %}
 					<app-not-loggedin>
-							<a href="/login" class="btn login-btn"> <i class="fa-solid fa-right-to-bracket"></i> Giriş Yap </a>
+						<a href="/login" class="btn login-btn"> <i class="fa-solid fa-right-to-bracket"></i> Giriş Yap </a>
 							<a href="/signup" class="btn register-btn"> <i class="fa-solid fa-user-plus"></i> Kayıt Ol </a>
 						<div class="lang-select">
 							<div class="view"> <img src="/img/flag/tr.png" /> TR <i class="fa-solid fa-chevron-down"></i> </div>
@@ -63,94 +80,9 @@
 					{% endif %}
 				</div>
 			</div>
-			<div class="menu-container">
-				<div class="menu">
-					<a href="/casino" class="n-link"> <i class="km km-slot"></i> <span>SLOT</span> </a>
-					<a href="/casino?provider_id=122&provider_name=Evolution" class="n-link"> <i class="km km-live-casino"></i> <span>CANLI CASINO</span> </a>
-					<a href="/casino?provider_id=344&provider_name=Spribe" class="n-link"> <i class="km km-games"></i> <span>OYUNLAR</span> </a>
-					<a href="/casino?search_query=bingo" class="n-link"> <i class="km km-tomb"></i> <span>TOMBALA</span> </a>
-					<a href="/casino/1022357" class="n-link"> <i class="km km-aviator"></i> <span>AVIATOR</span> </a>
-					<a href="/promotions" class="n-link"> <i class="km km-promotions"></i> <span>PROMOSYONLAR</span> </a>
-				</div>
-			</div>
 		</app-home-header>
 	</app-header>
-	<app-content>
-		<div class="container">
-          <br>
-			<div class="row">
-                <iframe src="{{ game_iframe }}" style="width: 100%; height: 80vh" frameborder="0"></iframe>
-            </div>
-		</div>
-	</app-content>
-	<app-footer>
-		<div class="footer">
-			<div class="inner">
-				<div class="fast-links">
-					<a href="mailto:sales@m2betting.com" class="btn"> <i class="km km-affiliate"></i> Affiliate </a>
-					<a href="/signup" class="btn"> <i class="km km-call"></i> Sizi Arayalım </a>
-					<a href="#." class="btn"> <i class="km km-whatsapp"></i> Whatsapp </a>
-					<a href="#." class="btn"> <i class="km km-telegram"></i> Telegram </a>
-					<a href="#." class="btn"> <i class="km km-twitter"></i> Twitter </a>
-				</div>
-				<div class="details">
-					<div class="col-2">
-						<h3> Hakkımızda </h3>
-						<ul>
-							<li> <a href="/howtoplay?data=contact"> Firma Bilgileri </a> </li>
-							<li> <a href="/howtoplay?data=contact"> İletişim </a> </li>
-							<li> <a href="/howtoplay"> Yardım - SSS </a> </li>
-						</ul>
-					</div>
-					<div class="col-2">
-						<h3> ŞARTLAR VE KURALLAR </h3>
-						<ul>
-							<li> <a href="/howtoplay"> Genel Kural ve Şartlar </a> </li>
-							<li> <a href="#."> Gizlilik Politikası </a> </li>
-							<li> <a href="#."> Sorumlu Oyun </a> </li>
-						</ul>
-					</div>
-					<div class="col-2">
-						<h3> GÖSTERİMLER </h3>
-						<ul>
-							<li> <a href="#."> Affiliate </a> </li>
-							<li> <a href="/casino"> Turnuvalar </a> </li>
-							<li> <a href="/bahis"> Maç Programı </a> </li>
-						</ul>
-					</div>
-				</div>
-				<div class="providers">
-					<img src="/img/providers/desk.png" />
-				</div>
-				<div class="copy">
-					<a href="#." class="licence-url"> <img src="/img/licence.png" /> </a>
-					<p>  is operated by M2 Betting registered under No. XXXXXX at, St. Vincent & Grenadines. This website is licensed and regulated by St. Vincent and the Grenadines Gaming Company, license No. XXXXXX.  In
-	order to register for this website, the user is required to accept the “<a href="#.">General Terms and Conditions.</a>" In the event the ”<a href="#.">General Terms and Conditions</a>" are updated, existing users may choose to
-	discontinue using the products and services before the said update shall become effective, which is a minimum of two weeks after it has been announced.  </p>
-				</div>
-				<div class="finish">
-					<a href="/"> <img src="/img/logo.png" /> </a>
-					<p> 2024 © Lidya Casino </p>
-				</div>
-			</div>
-		</div>
-	</app-footer>
-	<app-mobilemenu>
-		<fast-menu>
-			<div class="area">
-				<div class="info"> <a href="/howtoplay"> <img src="/img/mobilemenu/i1.png" /> </a> </div>
-				<div class="line"></div>
-				<div class="livechat"> <a href="/contact"> <img src="/img/mobilemenu/i2.png" /> </a> </div>
-			</div>
-			<div class="mobile-menu">
-				<a href="/casino?provider_id=122&provider_name=Evolution"> <img src="/img/mobilemenu/i7.png" /> <span>Canlı Casino</span> </a>
-				<a href="/profile"> <img src="/img/mobilemenu/i4.png" /> <span>Profil</span> </a>
-				<a href='/'> <img src="/img/mobilemenu/i3.png" /> <span>Anasayfa</span> </a>
-				<a href="/promotions"> <img src="/img/mobilemenu/i5.png" /> <span>Promosyonlar</span> </a>
-				<a href="/casino"> <img src="/img/mobilemenu/i6.png" /> <span>Casino</span> </a>
-			</div>
-		</fast-menu>
-	</app-mobilemenu>C
+	<iframe src="{{ game_iframe }}" style="width: 100%;" class="cntn" frameborder="0"></iframe>
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/plugins/owl/owl.carousel.min.js"></script>

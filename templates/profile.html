@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lidya Casino | Güvenilir Casino</title>
+    <title>KadroMilyon | Güvenilir Casino</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="stylesheet" href="/css/style.css" />
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
@@ -22,7 +22,7 @@
 	}
 
         .form-main{
-            background-color: var(--categoryBackground); color: white; padding: 20px; box-sizing: border-box; width: 750px; height: 550px; max-width: 100vw; overflow-y: auto; border-radius: 15px;
+            background-color: var(--categoryBackground); color: white; padding: 20px; box-sizing: border-box; max-width: 100vw; overflow-y: auto; border-radius: 15px;
         }
         p{
             margin-top: 1rem;
@@ -38,7 +38,7 @@
             width: 80%;
             padding: 15px;
             box-sizing: border-box;
-            border-radius: 15px;
+            border-radius: 5px;
         }
 
         #main-content-wrapper {
@@ -167,7 +167,7 @@
     </style>
 </head>
 <body>
-<div style="width: 100%; box-sizing: border-box; height: 220px">
+<div style="width: 100%; box-sizing: border-box;">
         <app-header>
 		<app-home-header class="sticky-top">
 			<div class="nav" style="border-bottom: none">
@@ -238,7 +238,7 @@
                 Bahisler
             </span>
 	    <span class="navbar-item" style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('history', this)">
-		   İşlem Geçmişi 
+		   İşlem Geçmişi
 	    </span>
             {% if current_user.site_partner %}
             <span class="navbar-item" style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('partnership', this)">
@@ -298,7 +298,7 @@
 	</div>
         <div id="current-competitions" class="division-profile" style="display: none">
             <h1 style="color: white; text-align: left; font-family: 'Open Sans', sans-serif; width: 80%">Aktif Kadrolar</h1>
-            {% if current_user.active_drafts|length == 0%}
+            {% if current_user.active_drafts|length == 0 %}
                 <p style="color: white; text-align: left; margin-left: 10%">Henüz aktif bir kadronuz yok</p>
             {% endif %}
             {% for i in current_user.active_drafts %}
@@ -338,9 +338,20 @@
             {% endfor %}
         </div>
         <div id="bets" style="display: none; text-align: left; margin-left: 0; width: 80%; padding: 50px; box-sizing: border-box;" class="division-profile">
-            <h1 style="font-family: 'Open Sans', sans-serif; color: white; text-align: left;">
-                Bahislerim
-            </h1>
+            <div>
+                <div style="display: inline-block">
+                    <label for="start-date">Başlangıç Tarihi</label>
+                    <br>
+                    <input type="date" id="start-date" style="max-width: 60vw; margin-top: 10px; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
+                </div>
+                <div style="display: inline-block">
+                    <label for="end-date">Bitiş Tarihi</label>
+                    <br>
+                    <input type="date" id="end-date" style="max-width: 60vw; margin-top: 10px; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
+                    <!-- PROD WARNING: Implement actual filtering -->
+                </div>
+                <button style="max-width: 30vw; -webkit-appearance: none; margin-top: 10px; width: 200px; background: #ff7200; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">Filtrele</button>
+            </div>
             {% for i in current_user.mybets %}
                 {% if not i.status == "Oluşturuluyor" %}
                 <div style="display: inline-block; width: 320px; max-width: 100%; margin-top: 15px; vertical-align: top">
@@ -377,57 +388,66 @@
             {% endfor %}
         </div>
         <div id="profile-information" class="division-profile" style="display: block">
-            <center>
-                <div style="background-color: var(--baseColor); font-family: 'Open Sans', sans-serif; color: white; padding: 10px; width: 90%; text-align: left; margin-top: 25px" id="fill-profile-box">
-                    <p>
-                        Profilini Doldur
-                    </p>
-                </div>
-            </center>
-            <div style="background-color: var(--categoryBackground); width: fit-content; box-sizing: border-box;  margin-top: 50px">
+            <div style="background-color: var(--categoryBackground); width: fit-content; box-sizing: border-box; ">
                 <form method="post" enctype="multipart/form-data" class="form-main" style="max-width: 70vw">
-                    <img src="/img/logo.png" style="width: 150px" alt="">
                     <br>
                     <input type="text" name="form-type" value="user-info" style="display: none">
 
-    <div id="step-1">
+    <div id="step-1" style="text-align: left">
         <div style="display: inline-block;">
+            <p style="text-align: left">
+                Kişisel Bilgilerim
+            </p>
             <label for="username" style="font-family: sans-serif; font-size: 12px">İsim Soyisim</label>
             <br>
-            <input id="username" value="{{ current_user.user_information.name }}" name="name" type="text" style="width: 300px;padding: 5px;font-family: sans-serif;outline: none;font-size: 1.2rem;border-radius: 5px;border: none;max-width: 50vw;">
-            <br>
-            <label for="email" style="font-family: sans-serif; font-size: 12px;">E-Posta</label>
-            <br>
-            <input id="email" value="{{ current_user.email }}" name="email" type="text" style="width: 300px;padding: 5px;font-family: sans-serif;outline: none;font-size: 1.2rem;border-radius: 5px;border: none;max-width: 50vw;">
+            <input id="username" value="{{ current_user.user_information.name }}" name="name" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
             <br>
             <label for="gender" style="font-family: sans-serif; font-size: 12px">Cinsiyet</label>
             <br>
-            <input id="gender" value="{{ current_user.user_information.gender }}" name="gender" type="text" style="width: 300px;padding: 5px;font-family: sans-serif;outline: none;font-size: 1.2rem;border-radius: 5px;border: none;max-width: 50vw;">
+            <input id="gender" value="{{ current_user.user_information.gender }}" name="gender" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
             <br>
             <label for="tel_no" style="font-family: sans-serif; font-size: 12px">Telefon Numarası</label>
             <br>
-            <input id="tel_no" value="{{ current_user.user_information.tel_no }}" name="tel_no" type="text" style="width: 300px;padding: 5px;font-family: sans-serif;outline: none;font-size: 1.2rem;border-radius: 5px;border: none;max-width: 50vw;">
+            <input id="tel_no" value="{{ current_user.user_information.tel_no }}" name="tel_no" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
             <br>
-            <br>
-        </div>
-        <div style="display: inline-block;width: auto;vertical-align: top;" id="second-right">
             <label for="id_no" style="font-family: sans-serif; font-size: 12px">TC Kimlik No</label>
             <br>
-            <input id="id_no" value="{{current_user.user_information.tc_kimlik_no}}" name="id_no" type="text" style="width: 300px;padding: 5px;font-family: sans-serif;outline: none;font-size: 1.2rem;border-radius: 5px;border: none;max-width: 50vw;">
+            <input id="id_no" value="{{current_user.user_information.tc_kimlik_no}}" name="id_no" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
             <br>
             <label for="dob" style="font-family: sans-serif; font-size: 12px">Doğum Tarihi</label>
             <br>
-            <input id="dob" value="{{current_user.user_information.date_of_birth}}" name="dob" type="date" style="width: 300px;padding: 5px;font-family: sans-serif;outline: none;font-size: 1.2rem;border-radius: 5px;border: none;max-width: 50vw;">
+            <input id="dob" value="{{current_user.user_information.date_of_birth}}" name="dob" type="date" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
             <br>
-            <label for="address">Adres</label><br>
-            <textarea name="address" id="address" style="width: 300px;height: 75px;max-width: 50vw;">{{current_user.user_information.address}}</textarea>
+            <label for="address" style="font-family: sans-serif; font-size: 12px">Adres</label><br>
+            <input name="address" id="address" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;" value="{{current_user.user_information.address}}" />
+            <br style="clear: both">
+            <br>
+        </div>
+        <div style="display: inline-block;width: auto;vertical-align: top;" id="second-right">
+            <p style="text-align: left">
+                Üyelik Bilgileri
+            </p>
+            <label for="kayit-tarihi" style="font-family: sans-serif; font-size: 12px">Kayıt Tarihi</label>
+            <br>
+            <input id="kayit-tarihi" value="{{current_user.registration_date}}" name="s" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;" disabled>
+            <br>
+            <label for="uye-id" style="font-family: sans-serif; font-size: 12px">Üyelik Numarası</label>
+            <br>
+            <input id="uye-id" value="{{current_user.id }}" name="f" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;" disabled>
+            <br>
+            <label for="currency" style="font-family: sans-serif; font-size: 12px">Para Birimi</label>
+            <br>
+            <input id="currency" value="₺" name="a" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;" disabled>
+            <br>
+            <label for="email" style="font-family: sans-serif; font-size: 12px;">E-Posta</label>
+            <br>
+            <input id="email" value="{{ current_user.email }}" name="email" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
+            <br>
+            <br>
+            <center><button style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;" type="submit">Kaydet</button></center>
         </div>
     </div>
       <br>
-    <center><button style="color: white;font-family: sans-serif;width: 90%;padding: 10px;box-sizing: border-box;background-color: var(--baseColor);outline: none;border: none;max-width: 50vw;" type="submit">Güncelle</button></center>
-      <br>
-      <br>
-      <center>All right reserved. © Lidya Casino<p>2024</p></center>
 
       <script>
           let step = 1
@@ -444,16 +464,10 @@
             </div>
         </div>
         <div id="withdraw-money" class="division-profile" style="display: none">
-            <center>
-                <br>
-                <div style="background-color: var(--baseColor); font-family: 'Open Sans', sans-serif; color: white; padding: 10px; width: 90%; text-align: left; margin-top: 25px" id="fill-profile-box">
-                    <p>
-                        Para Çek
-                    </p>
-                </div>
-            </center>
-            <div style="background-color: var(--categoryBackground); width: fit-content; box-sizing: border-box;  margin-top: 50px">
-                <div style="width: 98%; max-width: 70vw;">
+            <div style="display: block">
+
+            <div style="background-color: var(--categoryBackground); width: fit-content; box-sizing: border-box;">
+                <div  id="withdraw-options-div" style="width: 98%; max-width: 70vw;">
                     {% for i in available_manual_accounts %}
                         <div onclick="document.getElementById('withdraw_type_{{i.id}}').value = '{{ i.payment_type }}'; this.style.opacity = 0.3; let withdraw_methods = document.getElementsByClassName('searchable-div'); document.getElementById('form_{{ i.id }}').style.display = 'block'; for(let i = 0; i < withdraw_methods.length; i++){withdraw_methods[i].onclick = function(){console.log('cannot change payment type')}}" style="display: inline-block" class="select-payment">
                             <div style="color: black; font-family: 'Open Sans', sans-serif; background-color: white; width: 200px; margin-top: -15px; padding: 10px; box-sizing: border-box; border-radius: 15px">
@@ -463,11 +477,17 @@
                       {% endfor %}
                       {% for key, item in available_withdraw_methods.items() %}
                         {% if not item == "kralpay_creditCard" %}
-                        <div onclick="document.getElementById('withdraw_type_{{item}}').value = '{{ item }}'; this.style.opacity = 0.3; let withdraw_methods = document.getElementsByClassName('searchable-div'); document.getElementById('form_{{ item }}').style.display = 'block'; for(let i = 0; i < withdraw_methods.length; i++){withdraw_methods[i].onclick = function(){console.log('cannot change payment type')}}" style="display: inline-block" class="select-payment">
-                            <div style="font-family: sans-serif; height: fit-content; display: inline-block; margin: 15px; background: white; box-sizing: border-box; width: 200px; border-radius: 15px;">
-                                    <img src="/img/payment_methods/{{ item }}.jpg" style="width: 200px; border-radius: 15px" alt="">
+                            <div onauxclick="select-payment" onclick="document.getElementById('withdraw-options-div').style.display = 'none'; document.getElementById('withdraw_type_{{item}}').value = '{{ item }}'; this.style.opacity = 0.3; let withdraw_methods = document.getElementsByClassName('searchable-div'); document.getElementById('form_{{ item }}').style.display = 'block'; for(let i = 0; i < withdraw_methods.length; i++){withdraw_methods[i].onclick = function(){console.log('cannot change payment type')}}" style="font-family: sans-serif; height: fit-content; display: inline-block; margin: 5px; background: #2e2f33; color: white; box-sizing: border-box; border-radius: 15px; max-width: 100vw" class="select-payment">
+                                <div style="font-family: sans-serif; height: fit-content; display: inline-block; margin: 15px; background: transparent; box-sizing: border-box; border-radius: 15px; padding: 25px; max-width: 100vw">
+                                        <img src="/img/payment_methods/{{ item }}.jpg" style="width: 100px; display: inline-block; vertical-align: middle;" alt="">
+                                            <div style="text-align: left; display: inline-block; vertical-align: middle; margin-left: 15px; font-size: 12px">
+                                                <b>{{ key }}</b><br>
+                                                Minimum Çekim Limiti 100₺
+                                                <br>
+                                                Maksimum Çekim Limiti 50000₺
+                                            </div>
+                                </div>
                             </div>
-                        </div>
                         {% endif %}
                       {% endfor %}
                 </div>
@@ -534,6 +554,7 @@
                         </div>
                     </div>
                     <br>
+                    <br>
                     <div style="background-color: var(--categoryBackground); text-align: left; padding: 10px; white-space: nowrap; max-width: 80vw; overflow-x: auto; border-radius: 5px">
                         <p style="color: white; margin-bottom: 5px; margin-top: 5px">Para çekmek için lütfen aşağıdaki tüm gerekli alanları doldurun.</p>
                     </div>
@@ -556,14 +577,18 @@
             </div>
             <br>
             <br>
-            <div style="width: 80%; background-color: var(--baseColor); color: white; text-align: left; padding: 10px">
+            {% if withdrawal_requests | length > 0%}
+                <div style="width: 80%; background-color: transparent; color: white; text-align: left; padding: 10px">
                 Geçmiş İşlemler
-            </div>
-            {% for i in withdrawal_requests %}
-                <div style="width: 80%; background-color: var(--backgroundDark); color: white; text-align: left; padding: 10px">
-                    {{ i.withdrawal_amount }}₺: {{ i.status }}
                 </div>
-            {% endfor %}
+                {% for i in withdrawal_requests %}
+                    <div style="width: 80%; background-color: var(--backgroundDark); color: white; text-align: left; padding: 10px">
+                        {{ i.withdrawal_amount }}₺: {{ i.status }}
+                    </div>
+                {% endfor %}
+                {% endif %}
+
+            </div>
         </div>
         {% if current_user.site_partner %}
 
@@ -632,8 +657,7 @@
             {% endfor %}
         </div>
         <div id="deposit-money" style="display: none" class="division-profile">
-            <h1 style="font-family: 'Open Sans', sans-serif; color: white">Para Yatır</h1>
-
+            <div>
             <div id="deposit-options-div">
                 {% for i in available_manual_accounts %}
                     <div onclick="document.getElementById('manual_deposit_{{ i.id }}').style.display = 'block'; document.getElementById('deposit-options-div').style.display = 'none'" style="display: inline-block" class="select-payment">
@@ -643,11 +667,17 @@
                     </div>
                 {% endfor %}
                 {% for key, item in available_withdraw_methods.items() %}
-                    <div onclick="document.getElementById('deposit_type_{{ item }}').value = '{{ item }}'; this.style.opacity = 0.3; let withdraw_methods = document.getElementsByClassName('searchable-div'); document.getElementById('deposit_form_{{ item }}').style.display = 'block'; for(let i = 0; i < withdraw_methods.length; i++){withdraw_methods[i].onclick = function(){console.log('cannot change payment type')}}; document.getElementById('deposit-options-div').style.display = 'none'" style="display: inline-block" class="select-payment">
-                        <div style="font-family: sans-serif; height: fit-content; display: inline-block; margin: 15px; background: white; box-sizing: border-box; width: 200px; border-radius: 15px;">
-                                <img src="/img/payment_methods/{{ item }}.jpg" style="width: 200px; border-radius: 15px" alt="">
-                        </div>
+                <div onclick="document.getElementById('deposit_type_{{ item }}').value = '{{ item }}'; this.style.opacity = 0.3; let withdraw_methods = document.getElementsByClassName('searchable-div'); document.getElementById('deposit_form_{{ item }}').style.display = 'block'; for(let i = 0; i < withdraw_methods.length; i++){withdraw_methods[i].onclick = function(){console.log('cannot change payment type')}}; document.getElementById('deposit-options-div').style.display = 'none'" style="font-family: sans-serif; height: fit-content; display: inline-block; margin: 5px; background: #2e2f33; color: white; box-sizing: border-box; border-radius: 15px; max-width: 100vw" class="select-payment">
+                    <div style="font-family: sans-serif; height: fit-content; display: inline-block; margin: 15px; background: transparent; box-sizing: border-box; border-radius: 15px; padding: 25px; max-width: 100vw">
+                            <img src="/img/payment_methods/{{ item }}.jpg" style="width: 100px; display: inline-block; vertical-align: middle;" alt="">
+                                <div style="text-align: left; display: inline-block; vertical-align: middle; margin-left: 15px; font-size: 12px">
+                                    <b>{{ key }}</b><br>
+                                    Minimum Yatırım Limiti 100₺
+                                    <br>
+                                    Maksimum Yatırım Limiti 50000₺
+                                </div>
                     </div>
+                </div>
                 {% endfor %}
             </div>
             <br>
@@ -703,6 +733,7 @@
                     <button style="color: white; max-width: 90%; font-family: sans-serif; width: 300px; padding: 10px; box-sizing: border-box; background-color: var(--baseColor); outline: none; border: none">Yatırım Yap</button>
                 </form>
             {% endfor %}
+                </div>
         </div>
 
         <div id="papara-modal" class="modal">
@@ -772,7 +803,7 @@
         }
     </script>
     <br>
-    <span style="opacity: 0">Lidya Casino</span>
+    <span style="opacity: 0">KadroMilyon</span>
     </div>
 </body>
 </html>
