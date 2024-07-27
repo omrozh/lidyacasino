@@ -171,30 +171,30 @@
     <center style="z-index: 10; position: relative">
         <div style="background-color: #26292d; padding: 5px; border-radius: 5px; box-sizing: border-box; width: 80vw">
         <div style="padding: 10px; overflow-x: auto; float: left; white-space: nowrap; width: 100%; box-sizing: border-box; background-color: #2e2f33; margin-bottom: 10px" id="navbar-main">
-            <span style="padding: 15px; box-sizing: border-box; display: inline-block; color: white" onclick="document.location = '/'">
-                <i style="color: white" class="fa-solid fa-house"></i> Anasayfa
+            <span style="padding: 5px 15px; box-sizing: border-box; display: inline-block; color: white" onclick="document.location = '/'">
+                ANASAYFA
             </span>
-            <span class="navbar-item" onclick="changeDivision('profile-information', this)" style="background-color: var(--baseColor); padding: 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; color: white; opacity: 0.5">
-                <i class="fa-solid fa-user" style="color: white"></i> Kullanıcı Bilgileri
+            <span class="navbar-item" onclick="changeDivision('profile-information', this)" style="background-color: var(--baseColor); padding: 5px 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; color: white; opacity: 0.5">
+                HESAP BİLGİLERİM
             </span>
-            <span onclick="changeDivision('deposit-money', this)" id="deposit-money-navbar-button" class="navbar-item" style="display: inline-block; border-radius: 5px; color: white; padding: 15px; box-sizing: border-box;">
-                <i class="fa-solid fa-money-bills" style="color: white"></i> Para Yatır
+            <span onclick="changeDivision('deposit-money', this)" id="deposit-money-navbar-button" class="navbar-item" style="display: inline-block; border-radius: 5px; color: white; padding: 5px 15px; box-sizing: border-box;">
+                PARA YATIR
             </span>
-            <span class="navbar-item" style="padding: 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('withdraw-money', this)">
-                <i class="fa-solid fa-money-bill-transfer" style="color: white"></i> Para Çek
+            <span class="navbar-item" style="padding: 5px 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('withdraw-money', this)">
+                PARA ÇEK
             </span>
-	    <span class="navbar-item" style="padding: 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('history', this)">
-		   <i class="fa-solid fa-database" style="color: white"></i> İşlem Geçmişi
+	    <span class="navbar-item" style="padding: 5px 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('history', this)">
+		   İŞLEM GEÇMİŞİ
 	    </span>
             {% if current_user.site_partner %}
-            <span class="navbar-item" style="padding: 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('partnership', this)">
-                Kasa İşlemleri
+            <span class="navbar-item" style="padding: 5px 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('partnership', this)">
+                KASA İŞLEMLERİ
             </span>
             {% endif %}
-            <span class="navbar-item" style="padding: 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; ; color: white" onclick="document.location = '/logout'">
-                <i class="fa-solid fa-right-from-bracket" style="color: white"></i> Çıkış Yap
+            <span class="navbar-item" style="padding: 5px 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; ; color: white" onclick="document.location = '/logout'">
+                ÇIKIŞ YAP
 	        </span>
-            <span class="navbar-item" style="padding: 15px 22.5px; border-radius: 5px; box-sizing: border-box; display: inline-block; background-color: var(--categoryBackground); color: white" onclick="document.location = '/'">
+            <span style="padding: 5px 22.5px; border-radius: 5px; box-sizing: border-box; display: inline-block; background-color: var(--categoryBackground); color: white" onclick="document.location = '/'">
                 X
 	        </span>
         </div>
