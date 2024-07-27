@@ -199,11 +199,13 @@
 	        </span>
         </div>
             <div style="display: flex; flex-direction: row; width: 100%; gap: 5px">
-                <div style="background-color: #56a957; width: 40%; flex: 1; text-align: left; color: white; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                <div style="position: relative; background: radial-gradient(circle at -14% 113%,rgb(86,169,87),rgba(86,169,87,0.65) 135%); width: 40%; flex: 1; text-align: left; color: white; padding: 10px; border-radius: 5px; margin-bottom: 10px;" class="bf-gradient">
                     <span style="font-size: 12px">ANA BAKİYE</span>
+                    <i style="position: absolute; color: rgb(86, 169, 87); top: 15px; right: 10px; font-size: 24px" class="fa-solid fa-dollar-sign"></i>
                     <p style="color: white; margin-top: -10px; margin-bottom: 0; font-size: 2rem; font-weight: bold">{{'%0.2f'| format(current_user.balance|float)}}₺</p>
                 </div>
-                <div style="background-color: #b9943d; width: 40%; flex: 1; text-align: left; color: white; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                <div style="position: relative; background: radial-gradient(circle at -14% 113%,#b9943d,rgba(185,148,61,0.65) 135%); width: 40%; flex: 1; text-align: left; color: white; padding: 10px; border-radius: 5px; margin-bottom: 10px;" class="bf-gradient">
+                    <i style="position: absolute; color: #b9943d; top: 15px; right: 10px; font-size: 24px" class="fa-solid fa-gift"></i>
                     <span style="font-size: 12px">TOPLAM BONUS</span>
                     <p style="color: white; margin-top: -10px; margin-bottom: 0; font-size: 2rem; font-weight: bold">{{'%0.2f'| format(current_user.casino_bonus_balance + current_user.sports_bonus_balance |float)}}₺</p>
                 </div>
