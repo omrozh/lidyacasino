@@ -486,6 +486,7 @@
                         {% endif %}
                       {% endfor %}
                 </div>
+                <br>
                 <form method="post" id="withdraw_form_default" enctype="multipart/form-data" style="background-color: var(--backgroundDark); border-radius: 5px; color: white; box-sizing: border-box; width: fit-content; height: fit-content; max-width: 70vw; padding: 15px; text-align: left">
                     <br>
                     <div style="background-color: var(--categoryBackground); text-align: left; padding: 10px; white-space: nowrap; max-width: 80vw; overflow-x: auto; border-radius: 5px">
@@ -714,8 +715,7 @@
                 </div>
                 {% endfor %}
             </div>
-            <br>
-            <br>
+                <br>
 
             {% for i in available_manual_accounts %}
                 <iframe style="display: none; width: 70vw; height: 40vw;" src="/deposit/{{ i.payment_type }}" id="manual_deposit_{{ i.id }}" frameborder="0"></iframe>
