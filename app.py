@@ -1464,7 +1464,7 @@ def profile():
     transactions = TransactionLog.query.filter_by(user_fk=current_user.id).all()
 
     return flask.render_template("profile.html", bank_banks=bank_list,
-                                 deposit_money=flask.request.args.get("deposit", False),
+                                 deposit_money=flask.request.args.get("deposit", "false") == "true",
                                  available_withdraw_methods=available_withdraw_methods, current_user=current_user,
                                  withdrawal_requests=list(reversed(
                                      WithdrawalRequest.query.filter_by(user_fk=current_user.id).all())),
