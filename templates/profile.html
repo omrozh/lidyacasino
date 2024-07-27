@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lidya Casino | Güvenilir Casino</title>
+    <title>KadroMilyon | Güvenilir Casino</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="stylesheet" href="/css/style.css" />
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
@@ -198,6 +198,16 @@
                 X
 	        </span>
         </div>
+            <div style="display: flex; flex-direction: row; width: 100%; gap: 5px">
+                <div style="background-color: #56a957; width: 40%; flex: 1; text-align: left; color: white; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                    <span style="font-size: 12px">ANA BAKİYE</span>
+                    <p style="color: white; margin-top: -10px; margin-bottom: 0; font-size: 2rem; font-weight: bold">{{'%0.2f'| format(current_user.balance|float)}}₺</p>
+                </div>
+                <div style="background-color: #b9943d; width: 40%; flex: 1; text-align: left; color: white; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                    <span style="font-size: 12px">TOPLAM BONUS PARA</span>
+                    <p style="color: white; margin-top: -10px; margin-bottom: 0; font-size: 2rem; font-weight: bold">{{'%0.2f'| format(current_user.casino_bonus_balance + current_user.sports_bonus_balance |float)}}₺</p>
+                </div>
+            </div>
 	<div id="history" class="division-profile" style="display: none">
 		<div class="table-responsive">
 			<table class="table table-hover table-nowrap">
