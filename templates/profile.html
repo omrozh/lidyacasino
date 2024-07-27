@@ -233,11 +233,6 @@
             <span onclick="changeDivision('deposit-money', this)" id="deposit-money-navbar-button" class="navbar-item" style="display: inline-block; border-radius: 5px; color: white; padding: 15px; box-sizing: border-box;">
                 Para Yatır
             </span>
-            <script>
-                {% if deposit_money %}
-                    changeDivision('deposit-money', document.getElementById('deposit-money-navbar-button'));
-                {% endif %}
-            </script>
             <span class="navbar-item" style="padding: 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('withdraw-money', this)">
                 Para Çek
             </span>
@@ -838,6 +833,9 @@
             clickElem.style.opacity = .5;
             document.getElementById(changeTo).style.display = "block";
         }
+        {% if deposit_money %}
+            changeDivision('deposit-money', document.getElementById('deposit-money-navbar-button'));
+        {% endif %}
     </script>
     <br>
     <span style="opacity: 0">Lidya Casino</span>
