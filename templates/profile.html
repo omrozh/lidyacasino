@@ -35,17 +35,13 @@
 
         .division-profile{
             background-color: var(--categoryBackground);
-            width: 80%;
+            width: 100%;
             padding: 15px;
             box-sizing: border-box;
             border-radius: 5px;
+            clear: both;
         }
 
-        #main-content-wrapper {
-            width: 95%;
-            float: right;
-            margin-left: -70px
-        }
 
         th, td {
             text-align: left;
@@ -202,7 +198,7 @@
 					</app-not-loggedin>
 					{% else %}
 					<app-loggedin>
-						<a href="#." class="btn price-btn"> <i class="fa-solid fa-turkish-lira-sign"></i>
+						<a href="/profile?deposit=true" class="btn price-btn"> <i class="fa-solid fa-turkish-lira-sign"></i>
 							{% if current_user.sports_bonus_balance + current_user.casino_bonus_balance > 0 %}
 								<span style="display: inline-block; vertical-align: middle">
 									<p style="font-size: 12px; margin-bottom: 0; margin-block-start: 0; margin-block-end: 0;">{{'%0.2f'| format(current_user.balance|float)}}</p>
@@ -221,34 +217,42 @@
 			</div>
 		</app-home-header>
 	</app-header>
-        <div style="padding: 20px 50px; overflow-x: auto; float: left; white-space: nowrap; width: 100vw; box-sizing: border-box" id="navbar-main">
-            <span style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; color: white" onclick="document.location = '/'">
+
+    </div>
+    <br>
+    <div id="main-content-wrapper">
+    <center>
+        <div style="background-color: #26292d; padding: 5px; border-radius: 5px; box-sizing: border-box; width: 80vw">
+        <div style="padding: 10px; overflow-x: auto; float: left; white-space: nowrap; width: 100%; box-sizing: border-box; background-color: #2e2f33; margin-bottom: 10px" id="navbar-main">
+            <span style="padding: 15px; box-sizing: border-box; display: inline-block; color: white" onclick="document.location = '/'">
                 Anasayfa
             </span>
-            <span class="navbar-item" onclick="changeDivision('profile-information', this)" style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; ; color: white; opacity: 0.5">
+            <span class="navbar-item" onclick="changeDivision('profile-information', this)" style="background-color: var(--baseColor); padding: 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; color: white; opacity: 0.5">
                 Kullanıcı Bilgileri
             </span>
-            <span onclick="changeDivision('deposit-money', this)" class="navbar-item" style="display: inline-block; ; color: white; background: #0f1012; ; padding: 15px; box-sizing: border-box;">
+            <span onclick="changeDivision('deposit-money', this)" id="deposit-money-navbar-button" class="navbar-item" style="display: inline-block; border-radius: 5px; color: white; padding: 15px; box-sizing: border-box;">
                 Para Yatır
             </span>
-            <span class="navbar-item" style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('withdraw-money', this)">
+            <script>
+                {% if deposit_money %}
+                    changeDivision('deposit-money', document.getElementById('deposit-money-navbar-button'));
+                {% endif %}
+            </script>
+            <span class="navbar-item" style="padding: 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('withdraw-money', this)">
                 Para Çek
             </span>
-	    <span class="navbar-item" style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('history', this)">
+	    <span class="navbar-item" style="padding: 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('history', this)">
 		   İşlem Geçmişi
 	    </span>
             {% if current_user.site_partner %}
-            <span class="navbar-item" style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('partnership', this)">
+            <span class="navbar-item" style="padding: 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; color: white" onclick="changeDivision('partnership', this)">
                 Kasa İşlemleri
             </span>
             {% endif %}
-            <span class="navbar-item" style="background: #0f1012; ; padding: 15px; box-sizing: border-box; display: inline-block; ; color: white" onclick="document.location = '/logout'">
+            <span class="navbar-item" style="padding: 15px; border-radius: 5px; box-sizing: border-box; display: inline-block; ; color: white" onclick="document.location = '/logout'">
                 Çıkış Yap
 	    </span>
         </div>
-    </div>
-    <div id="main-content-wrapper">
-    <center>
 	<div id="history" class="division-profile" style="display: none">
 		<div class="table-responsive">
 			<table class="table table-hover table-nowrap">
@@ -389,7 +393,6 @@
                 <form method="post" enctype="multipart/form-data" class="form-main" style="max-width: 70vw">
                     <br>
                     <input type="text" name="form-type" value="user-info" style="display: none">
-
     <div id="step-1" style="text-align: left">
         <div style="display: inline-block;">
             <p style="text-align: left">
@@ -464,7 +467,7 @@
             <div style="display: block">
 
             <div style="background-color: var(--categoryBackground); width: fit-content; box-sizing: border-box;">
-                <div  id="withdraw-options-div" style="width: 98%; max-width: 70vw;">
+                <div  id="withdraw-options-div" style="width: 98%; max-width: 70vw; overflow-y: auto; white-space: nowrap">
                     {% for i in available_manual_accounts %}
                         <div onclick="document.getElementById('withdraw_type_{{i.id}}').value = '{{ i.payment_type }}'; this.style.opacity = 0.3; let withdraw_methods = document.getElementsByClassName('searchable-div'); document.getElementById('form_{{ i.id }}').style.display = 'block'; for(let i = 0; i < withdraw_methods.length; i++){withdraw_methods[i].onclick = function(){console.log('cannot change payment type')}}" style="display: inline-block" class="select-payment">
                             <div style="color: black; font-family: 'Open Sans', sans-serif; background-color: white; width: 200px; margin-top: -15px; padding: 10px; box-sizing: border-box; border-radius: 15px">
@@ -655,7 +658,7 @@
         </div>
         <div id="deposit-money" style="display: none" class="division-profile">
             <div>
-            <div id="deposit-options-div">
+            <div id="deposit-options-div" style="white-space: nowrap; overflow-x: auto">
                 {% for i in available_manual_accounts %}
                     <div onclick="document.getElementById('manual_deposit_{{ i.id }}').style.display = 'block'; document.getElementById('deposit-options-div').style.display = 'none'" style="display: inline-block" class="select-payment">
                         <div style="color: black; font-family: 'Open Sans', sans-serif; background-color: white; width: 200px; margin-top: -15px; padding: 10px; box-sizing: border-box; border-radius: 15px">
@@ -664,7 +667,7 @@
                     </div>
                 {% endfor %}
                 {% for key, item in available_withdraw_methods.items() %}
-                <div onclick="document.getElementById('deposit_type_{{ item }}').value = '{{ item }}'; this.style.opacity = 0.3; let withdraw_methods = document.getElementsByClassName('searchable-div'); document.getElementById('deposit_form_{{ item }}').style.display = 'block'; for(let i = 0; i < withdraw_methods.length; i++){withdraw_methods[i].onclick = function(){console.log('cannot change payment type')}}; document.getElementById('deposit-options-div').style.display = 'none'" style="font-family: sans-serif; height: fit-content; display: inline-block; margin: 5px; background: #2e2f33; color: white; box-sizing: border-box; border-radius: 15px; max-width: 100vw" class="select-payment">
+                <div onclick="document.getElementById('deposit_form_default').style.display = 'none'; document.getElementById('deposit_type_{{ item }}').value = '{{ item }}'; this.style.opacity = 0.3; let withdraw_methods = document.getElementsByClassName('searchable-div'); document.getElementById('deposit_form_{{ item }}').style.display = 'block'; for(let i = 0; i < withdraw_methods.length; i++){withdraw_methods[i].onclick = function(){console.log('cannot change payment type')}}; document.getElementById('deposit-options-div').style.display = 'none'" style="font-family: sans-serif; height: fit-content; display: inline-block; margin: 5px; background: #2e2f33; color: white; box-sizing: border-box; border-radius: 15px; max-width: 100vw;" class="select-payment">
                     <div style="font-family: sans-serif; height: fit-content; display: inline-block; margin: 15px; background: transparent; box-sizing: border-box; border-radius: 15px; padding: 25px; max-width: 100vw">
                             <img src="/img/payment_methods/{{ item }}.jpg" style="width: 100px; display: inline-block; vertical-align: middle;" alt="">
                                 <div style="text-align: left; display: inline-block; vertical-align: middle; margin-left: 15px; font-size: 12px">
@@ -683,6 +686,40 @@
             {% for i in available_manual_accounts %}
                 <iframe style="display: none; width: 70vw; height: 40vw;" src="/deposit/{{ i.payment_type }}" id="manual_deposit_{{ i.id }}" frameborder="0"></iframe>
             {% endfor %}
+                <form method="post" id="deposit_form_default" enctype="multipart/form-data" style="background-color: var(--backgroundDark); border-radius: 5px; color: white; box-sizing: border-box; width: fit-content; height: fit-content; max-width: 70vw; padding: 15px; text-align: left">
+                    <br>
+                    <div style="background-color: var(--categoryBackground); text-align: left; padding: 10px; white-space: nowrap; max-width: 80vw; overflow-x: auto; border-radius: 5px">
+                        <div style="display: inline-block">
+                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">Yöntem Adı</p>
+                            Yöntem Seçin
+                        </div>
+                        <div style="display: inline-block; margin-left: 25px">
+                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">Ücret</p>
+                            -
+                        </div>
+                        <div style="display: inline-block; margin-left: 25px">
+                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">İşlem Süresi</p>
+                            -
+                        </div>
+                        <div style="display: inline-block; margin-left: 25px">
+                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">Minimum Tutar</p>
+                            -
+                        </div>
+                    </div>
+                    <br>
+                    <div style="background-color: var(--categoryBackground); text-align: left; padding: 10px; white-space: nowrap; max-width: 80vw; overflow-x: auto; border-radius: 5px">
+                        <p style="color: white; margin-bottom: 5px; margin-top: 5px">Para yatırmak için lütfen aşağıdaki tüm gerekli alanları doldurun.</p>
+                    </div>
+                    <input type="text" name="form-type" value="deposit-money" style="display: none">
+                    <input type="text" name="deposit_type" style="display: none" id="deposit_type_{{ item }}">
+                    <label for="amount" style="font-family: sans-serif; font-size: 12px">Yatırılacak Miktar</label>
+                    <br>
+                    <input id="amount" name="amount" type="text" style="width: 300px; max-width: 90%; padding: 5px; font-family: sans-serif; outline: none; font-size: 1rem; background-color: transparent; color: white; border-radius: 5px; border: 1px solid rgb(80, 80, 80)">
+                    <br>
+                    <br>
+
+                    <button style="color: white; max-width: 90%; font-family: sans-serif; width: 300px; padding: 10px; box-sizing: border-box; background-color: var(--baseColor); outline: none; border: none">Yatırım Yap</button>
+                </form>
 
             {% for key, item in available_withdraw_methods.items() %}
                 <form method="post" id="deposit_form_{{ item }}" enctype="multipart/form-data" style="background-color: var(--backgroundDark); border-radius: 5px; color: white; box-sizing: border-box; width: fit-content; height: fit-content; max-width: 70vw; display: none; padding: 15px; text-align: left">
@@ -783,6 +820,7 @@
               cursor: pointer;
             }
         </style>
+    </div>
     </center>
         <script src="//code.tidio.co/qeafxo2jnxjghzs7okkx7ahlzkdbd4fl.js" async></script>
     <script>
@@ -790,12 +828,14 @@
             let all_divs = document.getElementsByClassName("division-profile");
             let all_navbar = document.getElementsByClassName("navbar-item");
             for(let i = 0; i < all_navbar.length; i++){
+                all_navbar[i].style.backgroundColor = "transparent";
                 all_navbar[i].style.opacity = 1;
             }
             for(let i = 0; i < all_divs.length; i++){
                 all_divs[i].style.display = "none";
             }
-            clickElem.style.opacity = 0.5;
+            clickElem.style.backgroundColor = "var(--baseColor)";
+            clickElem.style.opacity = .5;
             document.getElementById(changeTo).style.display = "block";
         }
     </script>
