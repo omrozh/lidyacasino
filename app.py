@@ -3305,7 +3305,7 @@ def transaction_callback_vevopay(type):
     return "OK"
 
 
-@app.route("/api/kralpy/", methods=["POST", "GET"])
+@app.route("/api/py/", methods=["POST", "GET"])
 def transaction_callback_kralpay():
     if flask.request.method == "POST":
 
