@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>KadroMilyon | {%trans %}Güvenilir Casino{% endtrans %}</title>
+    <title>KadroMilyon | Güvenilir Casino</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="stylesheet" href="/css/style.css" />
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
@@ -226,37 +226,37 @@
             <br>
             <br>
             <div style="position: relative; background: radial-gradient(circle at -14% 113%,rgb(86,169,87),rgba(86,169,87,0.65) 135%); text-align: left; color: white; padding: 20px 10px; border-radius: 5px; margin-bottom: 10px; width: 100%;" class="bf-gradient">
-                <span style="font-size: 12px">{% trans %} ANA BAKİYE {% endtrans %}</span>
+                <span style="font-size: 12px"> ANA BAKİYE </span>
                 <i style="position: absolute; color: rgb(86, 169, 87); top: 15px; right: 10px; font-size: 24px" class="fa-solid fa-dollar-sign"></i>
                 <p style="color: white; margin-top: -10px; margin-bottom: 0; font-size: 1.5rem; font-weight: bold">{{'%0.2f'| format(current_user.balance|float)}}₺</p>
             </div>
             <div style="position: relative; background: radial-gradient(circle at -14% 113%,#b9943d,rgba(185,148,61,0.65) 135%); width: 100%; flex: 1; text-align: left; color: white; padding: 20px 10px; border-radius: 5px; margin-bottom: 10px;" class="bf-gradient">
                 <i style="position: absolute; color: #b9943d; top: 15px; right: 10px; font-size: 24px" class="fa-solid fa-gift"></i>
-                <span style="font-size: 12px">{% trans %} TOPLAM BONUS {% endtrans %}</span>
+                <span style="font-size: 12px"> TOPLAM BONUS </span>
                 <p style="color: white; margin-top: -10px; margin-bottom: 0; font-size: 1.5rem; font-weight: bold">{{'%0.2f'| format(current_user.casino_bonus_balance + current_user.sports_bonus_balance |float)}}₺</p>
             </div>
             <p style="padding: 15px 15px; box-sizing: border-box; color: white; background-color: rgba(255, 255, 255, 0.05); border-radius: 5px; width: 101%; text-align: left" onclick="document.location = '/'">
-                {% trans %} ANASAYFA {% endtrans %}
+                 ANASAYFA 
             </p>
             <p class="navbar-item" onclick="changeDivision('profile-information', this)" id="account-info">
-                {% trans %} HESAP BİLGİLERİM {% endtrans %}
+                 HESAP BİLGİLERİM 
             </p>
             <p onclick="changeDivision('deposit-money', this)" id="deposit-money-navbar-button" class="navbar-item" style="padding: 15px 15px; box-sizing: border-box; color: white; background-color: rgba(255, 255, 255, 0.05); border-radius: 5px; width: 101%; text-align: left">
-                {% trans %} PARA YATIR {% endtrans %}
+                 PARA YATIR 
             </p>
             <p class="navbar-item" style="padding: 15px 15px; box-sizing: border-box; color: white; background-color: rgba(255, 255, 255, 0.05); border-radius: 5px; width: 101%; text-align: left" onclick="changeDivision('withdraw-money', this)">
-                {% trans %} PARA ÇEK {% endtrans %}
+                 PARA ÇEK 
             </p>
             <p class="navbar-item" style="padding: 15px 15px; box-sizing: border-box; color: white; background-color: rgba(255, 255, 255, 0.05); border-radius: 5px; width: 101%; text-align: left" onclick="changeDivision('history', this)">
-               {% trans %} İŞLEM GEÇMİŞİ {% endtrans %}
+                İŞLEM GEÇMİŞİ 
             </p>
             {% if current_user.site_partner %}
             <p class="navbar-item" style="padding: 15px 15px; box-sizing: border-box; color: white; background-color: rgba(255, 255, 255, 0.05); border-radius: 5px; width: 101%; text-align: left" onclick="changeDivision('partnership', this)">
-                {% trans %} KASA İŞLEMLERİ {% endtrans %}
+                 KASA İŞLEMLERİ 
             </p>
             {% endif %}
             <p class="navbar-item" style="padding: 15px 15px; box-sizing: border-box; color: white; background-color: rgba(255, 255, 255, 0.05); border-radius: 5px; width: 101%; text-align: left" onclick="document.location = '/logout'">
-                {% trans %} ÇIKIŞ YAP {% endtrans %}
+                 ÇIKIŞ YAP 
 	        </p>
             <br>
             <br>
@@ -281,7 +281,7 @@
                 {% for i in transactions %}
                     <div style="display: flex; flex-direction: row; gap: 2px; margin-top: 2px;">
                         <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
-                            {% trans %} İşlem Türü {% endtrans %}
+                             İşlem Türü 
                         </div>
                         <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
                             {{ i.transaction_type }}
@@ -289,7 +289,7 @@
                     </div>
                     <div style="display: flex; flex-direction: row; gap: 2px; margin-top: 2px;">
                         <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
-                            {% trans %} Tutar {% endtrans %}
+                             Tutar 
                         </div>
                         <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
                             {{ i.transaction_amount }}₺
@@ -297,7 +297,7 @@
                     </div>
                     <div style="display: flex; flex-direction: row; gap: 2px; margin-top: 2px;">
                         <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
-                            {% trans %} İşlem Tarihi {% endtrans %}
+                             İşlem Tarihi 
                         </div>
                         <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
                             {{ i.transaction_date }}
@@ -305,7 +305,7 @@
                     </div>
                     <div style="display: flex; flex-direction: row; gap: 2px; margin-top: 2px;">
                         <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
-                            {% trans %} Kanal {% endtrans %}
+                             Kanal 
                         </div>
                         <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
                             {{ i.transaction_type }}
@@ -313,7 +313,7 @@
                     </div>
                     <div style="display: flex; flex-direction: row; gap: 2px; margin-top: 2px;">
                         <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
-                            {% trans %} Ek Bilgiler {% endtrans %}
+                             Ek Bilgiler 
                         </div>
                         <div style="overflow-x: scroll; background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
                             {{ i.payment_unique_number }}
@@ -321,7 +321,7 @@
                     </div>
                     <div style="display: flex; flex-direction: row; gap: 2px; margin-top: 2px;">
                         <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
-                            {% trans %} Statü {% endtrans %}
+                             Statü 
                         </div>
                         <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
                             {{ i.transaction_status }}
@@ -333,12 +333,12 @@
 			<table class="table table-hover table-nowrap desktop-only">
 			    <thead class="thead-light">
 				<tr>
-				    <th scope="col">{% trans %} İşlem Türü {% endtrans %}</th>
-				    <th scope="col">{% trans %} Tutar {% endtrans %}</th>
-				    <th scope="col">{% trans %} İşlem Tarihi {% endtrans %}</th>
-				    <th scope="col">{% trans %} Kanal {% endtrans %}</th>
-				    <th scope="col">{% trans %} Ek Bilgiler {% endtrans %}</th>
-				    <th scope="col">{% trans %} Statü {% endtrans %}</th>
+				    <th scope="col"> İşlem Türü </th>
+				    <th scope="col"> Tutar </th>
+				    <th scope="col"> İşlem Tarihi </th>
+				    <th scope="col"> Kanal </th>
+				    <th scope="col"> Ek Bilgiler </th>
+				    <th scope="col"> Statü </th>
 				</tr>
 			    </thead>
 			    <tbody>
@@ -412,48 +412,48 @@
         <div id="bets" style="display: none; text-align: left; margin-left: 0; width: 80%; padding: 50px; box-sizing: border-box;" class="division-profile">
             <div>
                 <div style="display: inline-block">
-                    <label for="start-date">{% trans %} Başlangıç Tarihi {% endtrans %}</label>
+                    <label for="start-date"> Başlangıç Tarihi </label>
                     <br>
                     <input type="date" id="start-date" style="max-width: 60vw; margin-top: 10px; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
                 </div>
                 <div style="display: inline-block">
-                    <label for="end-date">{% trans %} Bitiş Tarihi {% endtrans %}</label>
+                    <label for="end-date"> Bitiş Tarihi </label>
                     <br>
                     <input type="date" id="end-date" style="max-width: 60vw; margin-top: 10px; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
                     <!-- PROD WARNING: Implement actual filtering -->
                 </div>
-                <button style="max-width: 30vw; -webkit-appearance: none; margin-top: 10px; width: 200px; background: #ff7200; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">{% trans %} Filtrele {% endtrans %}</button>
+                <button style="max-width: 30vw; -webkit-appearance: none; margin-top: 10px; width: 200px; background: #ff7200; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;"> Filtrele </button>
             </div>
             {% for i in current_user.mybets %}
                 {% if not i.status == "Oluşturuluyor" %}
                 <div style="display: inline-block; width: 320px; max-width: 100%; margin-top: 15px; vertical-align: top">
                     <div style="background-color: var(--baseColor); padding: 5px; width: 95%; box-sizing: border-box; border-radius: 15px 15px 0 0">
-                        <p style="color: white">{% trans %} Kupon {% endtrans %} - {{ i.id }}</p>
+                        <p style="color: white"> Kupon  - {{ i.id }}</p>
                     </div>
                     {% for c in i.all_selects %}
                     <div style="background-color: white; width: 95%; padding: 5px; box-sizing: border-box; border-top: 1px solid gray;">
-                        <p style="color: gray">{% trans %}Maç{% endtrans %}: {{ c.match_name }}</p>
+                        <p style="color: gray">Maç: {{ c.match_name }}</p>
                         <p style="color: gray">{{ c.game_name }}</p>
                         <p style="color: gray">{{ c.odd.value }}</p>
-                        <p style="color: gray">{% trans %}Oran{%endtrans %}: {{ c.odd_locked_in_rate }}</p>
+                        <p style="color: gray">Oran: {{ c.odd_locked_in_rate }}</p>
                     </div>
                     {% endfor %}
                     <div style="color: gray; background-color: white; padding: 5px; width: 95%; box-sizing: border-box; border-top: 1px solid gray">
                         <p>
-                            {% trans %}Toplam Oran{%endtrans%}: {{ '%0.2f' | format(i.total_odd) }}
+                            Toplam Oran: {{ '%0.2f' | format(i.total_odd) }}
                         </p>
                         <p>
-                            {%trans%}Yatırım Tutarı{%endtrans%}: {{ i.total_value }}₺
+                            Yatırım Tutarı: {{ i.total_value }}₺
                         </p>
                         <p>
-                            {%trans%}Potansiyel Kazanç{%endtrans%}: {{ '%0.2f' | format(i.total_value * i.total_odd) }}₺
+                            Potansiyel Kazanç: {{ '%0.2f' | format(i.total_value * i.total_odd) }}₺
                         </p>
                         <p>
-                            {%trans%}Sonuç{%endtrans%}: {{ i.status }}
+                            Sonuç: {{ i.status }}
                         </p>
                     </div>
                     <center onclick="document.location = '/claim/bet/{{ i.id }}'" style="background-color: var(--baseColor); padding-top: 5px; padding-bottom: 5px; width: 95%; box-sizing: border-box; border-radius: 0 0 15px 15px">
-                        <p style="color: white">{% trans %}Ödül Al{% endtrans %}</p>
+                        <p style="color: white">Ödül Al</p>
                     </center>
                 </div>
                 {% endif %}
@@ -467,55 +467,55 @@
     <div id="step-1" style="text-align: left">
         <div style="display: inline-block;">
             <p style="text-align: left">
-                {% trans %}Kişisel Bilgilerim{% endtrans %}
+                Kişisel Bilgilerim
             </p>
-            <label for="username" style="font-family: sans-serif; font-size: 12px">{% trans %} İsim Soyisim {% endtrans %}</label>
+            <label for="username" style="font-family: sans-serif; font-size: 12px"> İsim Soyisim </label>
             <br>
             <input id="username" value="{{ current_user.user_information.name }}" name="name" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
             <br>
-            <label for="gender" style="font-family: sans-serif; font-size: 12px">{% trans %} Cinsiyet {% endtrans %}</label>
+            <label for="gender" style="font-family: sans-serif; font-size: 12px"> Cinsiyet </label>
             <br>
             <input id="gender" value="{{ current_user.user_information.gender }}" name="gender" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
             <br>
-            <label for="tel_no" style="font-family: sans-serif; font-size: 12px">{% trans %}Telefon Numarası {% endtrans %}</label>
+            <label for="tel_no" style="font-family: sans-serif; font-size: 12px">Telefon Numarası </label>
             <br>
             <input id="tel_no" value="{{ current_user.user_information.tel_no }}" name="tel_no" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
             <br>
-            <label for="id_no" style="font-family: sans-serif; font-size: 12px">{% trans %} TC Kimlik No {% endtrans %}</label>
+            <label for="id_no" style="font-family: sans-serif; font-size: 12px"> TC Kimlik No </label>
             <br>
             <input id="id_no" value="{{current_user.user_information.tc_kimlik_no}}" name="id_no" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
             <br>
-            <label for="dob" style="font-family: sans-serif; font-size: 12px">{% trans %}Doğum Tarihi{%endtrans%}</label>
+            <label for="dob" style="font-family: sans-serif; font-size: 12px">Doğum Tarihi</label>
             <br>
             <input id="dob" value="{{current_user.user_information.date_of_birth}}" name="dob" type="date" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
             <br>
-            <label for="address" style="font-family: sans-serif; font-size: 12px">{%trans%}Adres{%endtrans%}</label><br>
+            <label for="address" style="font-family: sans-serif; font-size: 12px">Adres</label><br>
             <input name="address" id="address" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;" value="{{current_user.user_information.address}}" />
             <br style="clear: both">
             <br>
         </div>
         <div style="display: inline-block;width: auto;vertical-align: top;" id="second-right">
             <p style="text-align: left">
-                {%trans%}Üyelik Bilgileri{%endtrans%}
+                Üyelik Bilgileri
             </p>
-            <label for="kayit-tarihi" style="font-family: sans-serif; font-size: 12px">{%trans%}Kayıt Tarihi{%endtrans%}</label>
+            <label for="kayit-tarihi" style="font-family: sans-serif; font-size: 12px">Kayıt Tarihi</label>
             <br>
             <input id="kayit-tarihi" value="{{current_user.registration_date}}" name="s" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;" disabled>
             <br>
-            <label for="uye-id" style="font-family: sans-serif; font-size: 12px">{%trans%}Üyelik Numarası{%endtrans%}</label>
+            <label for="uye-id" style="font-family: sans-serif; font-size: 12px">Üyelik Numarası</label>
             <br>
             <input id="uye-id" value="{{current_user.id }}" name="f" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;" disabled>
             <br>
-            <label for="currency" style="font-family: sans-serif; font-size: 12px">{%trans%}Para Birimi{%endtrans%}</label>
+            <label for="currency" style="font-family: sans-serif; font-size: 12px">Para Birimi</label>
             <br>
             <input id="currency" value="₺" name="a" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;" disabled>
             <br>
-            <label for="email" style="font-family: sans-serif; font-size: 12px;">{%trans%}E-Posta{%endtrans%}</label>
+            <label for="email" style="font-family: sans-serif; font-size: 12px;">E-Posta</label>
             <br>
             <input id="email" value="{{ current_user.email }}" name="email" type="text" style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;">
             <br>
             <br>
-            <center><button style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;" type="submit">{%trans%}Kaydet{%endtrans%}</button></center>
+            <center><button style="max-width: 60vw; -webkit-appearance: none; width: 400px; background: #2e2f33; vertical-align: middle; color: white; font-size: 1rem; padding: 1rem .75rem; font-weight: 400; border-radius: 5px; border: none; outline: none;" type="submit">Kaydet</button></center>
         </div>
     </div>
       <br>
@@ -542,7 +542,7 @@
                     {% for i in available_manual_accounts %}
                         <div onclick="document.getElementById('withdraw_type_{{i.id}}').value = '{{ i.payment_type }}'; this.style.opacity = 0.3; let withdraw_methods = document.getElementsByClassName('searchable-div'); document.getElementById('form_{{ i.id }}').style.display = 'block'; for(let i = 0; i < withdraw_methods.length; i++){withdraw_methods[i].onclick = function(){console.log('cannot change payment type')}}" style="display: inline-block" class="select-payment">
                             <div style="color: black; font-family: 'Open Sans', sans-serif; background-color: white; width: 200px; margin-top: -15px; padding: 10px; box-sizing: border-box; border-radius: 15px">
-                                {{ i.payment_type.capitalize() }} {%trans%}Çekim Talebi{%endtrans%}
+                                {{ i.payment_type.capitalize() }} Çekim Talebi
                             </div>
                         </div>
                       {% endfor %}
@@ -552,7 +552,7 @@
                     <div onclick="document.getElementById('withdraw-mobile').style.display = 'none'; document.getElementById('withdraw_type_{{item}}').value = '{{ item }}';this.style.opacity = 0.3;let withdraw_methods = document.getElementsByClassName('select-withdraw');document.getElementById('form_{{ item }}').style.display = 'block';for (let i = 0; i < withdraw_methods.length; i++) {withdraw_methods[i].onclick = function() {console.log('cannot change payment type')}}">
                         <div style="display: flex; flex-direction: row; gap: 2px; margin-top: 2px;">
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
-                                {% trans %} Yöntem: {% endtrans %}
+                                 Yöntem: 
                             </div>
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
                                 <img src="/img/payment_methods/{{ item }}.jpg" style="height: 30px; width: 100px; display: inline-block; vertical-align: middle; max-width: 100px" alt="">
@@ -560,7 +560,7 @@
                         </div>
                         <div style="display: flex; flex-direction: row; gap: 2px; margin-top: 2px;">
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
-                                {% trans %} Yöntem Adı: {% endtrans %}
+                                 Yöntem Adı: 
                             </div>
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
                                 {{ key }}
@@ -568,7 +568,7 @@
                         </div>
                         <div style="display: flex; flex-direction: row; gap: 2px; margin-top: 2px;">
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
-                                {% trans %} Min. Çekim: {% endtrans %}
+                                 Min. Çekim: 
                             </div>
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
                                 100₺
@@ -576,7 +576,7 @@
                         </div>
                         <div style="display: flex; flex-direction: row; gap: 2px; margin-top: 2px;">
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
-                                {% trans %} Min. Çekim: {% endtrans %}
+                                 Min. Çekim: 
                             </div>
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
                                 50000₺
@@ -600,10 +600,10 @@
                                     {{ key }}
                                 </td>
                                 <td>
-                                    {%trans%}Min. Çekim{%endtrans%} 100₺
+                                    Min. Çekim 100₺
                                 </td>
                                 <td>
-                                    {%trans%}Maks. Çekim{%endtrans%} 50000₺
+                                    Maks. Çekim 50000₺
                                 </td>
                             </tr>
                     {% endif %}
@@ -619,40 +619,40 @@
                     <br>
                     <div style="background-color: var(--categoryBackground); text-align: left; padding: 10px; white-space: nowrap; max-width: 80vw; overflow-x: auto; border-radius: 5px">
                         <div style="display: inline-block">
-                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">{%trans%}Yöntem Adı{%endtrans%}</p>
+                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">Yöntem Adı</p>
                             {{ i.payment_method }}
                         </div>
                         <div style="display: inline-block; margin-left: 25px">
-                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">{%trans%}Ücret{%endtrans%}</p>
-                            {%trans%}Ücretsiz{%endtrans%}
+                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">Ücret</p>
+                            Ücretsiz
                         </div>
                         <div style="display: inline-block; margin-left: 25px">
-                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">{%trans%}İşlem Süresi{%endtrans%}</p>
-                            {%trans%}Anlık{%endtrans%}
+                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">İşlem Süresi</p>
+                            Anlık
                         </div>
                         <div style="display: inline-block; margin-left: 25px">
-                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">{%trans%}Minimum Tutar{%endtrans%}</p>
+                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">Minimum Tutar</p>
                             100₺
                         </div>
                     </div>
                     <br>
                     <div style="background-color: var(--categoryBackground); text-align: left; padding: 10px; white-space: nowrap; max-width: 80vw; overflow-x: auto; border-radius: 5px">
-                        <p style="color: white; margin-bottom: 5px; margin-top: 5px">{%trans%}Para çekmek için lütfen aşağıdaki tüm gerekli alanları doldurun.{%endtrans%}</p>
+                        <p style="color: white; margin-bottom: 5px; margin-top: 5px">Para çekmek için lütfen aşağıdaki tüm gerekli alanları doldurun.</p>
                     </div>
                     <input type="text" name="form-type" value="withdraw-money" style="display: none">
                     <input type="text" name="withdraw_type" style="display: none" id="withdraw_type_{{i.id}}">
                     <br>
-                    <label for="amount" style="font-family: sans-serif; font-size: 12px">{% trans%}Çekmek İstenen Miktar{%endtrans%}</label>
+                    <label for="amount" style="font-family: sans-serif; font-size: 12px">Çekmek İstenen Miktar</label>
                     <br>
                     <input id="amount" name="amount" type="text" style="width: 300px; max-width: 90%; padding: 5px; font-family: sans-serif; outline: none; font-size: 1rem; background-color: transparent; color: white; border-radius: 5px; border: 1px solid rgb(80, 80, 80)">
                     <br>
                     <br>
-                    <label for="iban" style="font-family: sans-serif; font-size: 12px">{%trans%}Hesap Adresi{%endtrans%}</label>
+                    <label for="iban" style="font-family: sans-serif; font-size: 12px">Hesap Adresi</label>
                     <br>
                     <input id="iban" name="iban" type="text" style="width: 300px; max-width: 90%; padding: 5px; font-family: sans-serif; outline: none; font-size: 1rem; background-color: transparent; color: white; border-radius: 5px; border: 1px solid rgb(80, 80, 80)">
                     <br>
                     <br>
-                    <button style="color: white; font-family: sans-serif; width: 300px; max-width: 90%; padding: 10px; box-sizing: border-box; background-color: var(--baseColor); outline: none; border: none">{%trans%}Para Çek{%endtrans%}</button>
+                    <button style="color: white; font-family: sans-serif; width: 300px; max-width: 90%; padding: 10px; box-sizing: border-box; background-color: var(--baseColor); outline: none; border: none">Para Çek</button>
                 </form>
                 {% endfor %}
                 {% for key, item in available_withdraw_methods.items() %}
@@ -660,47 +660,47 @@
                     <br>
                     <div style="background-color: var(--categoryBackground); text-align: left; padding: 10px; white-space: nowrap; max-width: 80vw; overflow-x: auto; border-radius: 5px">
                         <div style="display: inline-block">
-                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">{%trans%}Yöntem Adı{%endtrans%}</p>
+                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">Yöntem Adı</p>
                             {{ key }}
                         </div>
                         <div style="display: inline-block; margin-left: 25px">
-                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">{%trans%}Ücret{%endtrans%}</p>
-                            {%trans%}Ücretsiz{%endtrans%}
+                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">Ücret</p>
+                            Ücretsiz
                         </div>
                         <div style="display: inline-block; margin-left: 25px">
-                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">{%trans%}İşlem Süresi{%endtrans%}</p>
-                            {%trans%}Anlık{%endtrans%}
+                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">İşlem Süresi</p>
+                            Anlık
                         </div>
                         <div style="display: inline-block; margin-left: 25px">
-                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">{%trans%}Minimum Tutar{%endtrans%}</p>
+                            <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">Minimum Tutar</p>
                             100₺
                         </div>
                     </div>
                     <br>
                     <br>
                     <div style="background-color: var(--categoryBackground); text-align: left; padding: 10px; white-space: nowrap; max-width: 80vw; overflow-x: auto; border-radius: 5px">
-                        <p style="color: white; margin-bottom: 5px; margin-top: 5px">{%trans%}Para çekmek için lütfen aşağıdaki tüm gerekli alanları doldurun.{%endtrans%}</p>
+                        <p style="color: white; margin-bottom: 5px; margin-top: 5px">Para çekmek için lütfen aşağıdaki tüm gerekli alanları doldurun.</p>
                     </div>
                     <input type="text" name="form-type" value="withdraw-money" style="display: none">
                     <input type="text" name="withdraw_type" style="display: none" id="withdraw_type_{{item}}">
                     <br>
-                    <label for="amount" style="font-family: sans-serif; font-size: 12px">{%trans%}Çekmek İstenen Miktar{%endtrans%}</label>
+                    <label for="amount" style="font-family: sans-serif; font-size: 12px">Çekmek İstenen Miktar</label>
                     <br>
                     <input id="amount" name="amount" type="text" style="width: 300px; max-width: 90%; padding: 5px; font-family: sans-serif; outline: none; font-size: 1rem; background-color: transparent; color: white; border-radius: 5px; border: 1px solid rgb(80, 80, 80)">
                     <br>
                     <br>
-                    <label for="iban" style="font-family: sans-serif; font-size: 12px">{%trans%}Hesap Adresi{%endtrans%}</label>
+                    <label for="iban" style="font-family: sans-serif; font-size: 12px">Hesap Adresi</label>
                     <br>
                     <input id="iban" name="iban" type="text" style="width: 300px; max-width: 90%; padding: 5px; font-family: sans-serif; outline: none; font-size: 1rem; background-color: transparent; color: white; border-radius: 5px; border: 1px solid rgb(80, 80, 80)">
                     <br>
                     <br>
-                    <button style="color: white; font-family: sans-serif; width: 300px; max-width: 90%; padding: 10px; box-sizing: border-box; background-color: var(--baseColor); outline: none; border: none">{%trans%}Para Çek{%endtrans%}</button>
+                    <button style="color: white; font-family: sans-serif; width: 300px; max-width: 90%; padding: 10px; box-sizing: border-box; background-color: var(--baseColor); outline: none; border: none">Para Çek</button>
                 </form>
                 {% endfor %}
             </div>
             {% if withdrawal_requests | length > 0%}
                 <div style="width: 80%; background-color: transparent; color: white; text-align: left; padding: 10px">
-                {%trans%}Geçmiş İşlemler{%endtrans%}
+                Geçmiş İşlemler
                 </div>
                 {% for i in withdrawal_requests %}
                     <div style="width: 80%; background-color: var(--backgroundDark); color: white; text-align: left; padding: 10px">
@@ -716,7 +716,7 @@
             {% for i in available_manual_accounts %}
                 <div onclick="document.getElementById('manual_deposit_{{ i.id }}').style.display = 'block';" style="display: inline-block" class="select-payment">
                     <div style="color: black; font-family: 'Open Sans', sans-serif; background-color: white; width: 200px; margin-top: -15px; padding: 10px; box-sizing: border-box; border-radius: 15px">
-                        {{ i.payment_type.capitalize() }} {% trans %}Yatırım Talebi{% endtrans %}
+                        {{ i.payment_type.capitalize() }} Yatırım Talebi
                     </div>
                 </div>
             {% endfor %}
@@ -725,7 +725,7 @@
                     <div onclick="document.getElementById('deposit-mobile').style.display = 'none'; this.style.opacity = 0.3;let deposit_methods = document.getElementsByClassName('select-deposit');document.getElementById('deposit_form_{{ item }}').style.display = 'block';for (let i = 0; i < deposit_methods.length; i++) {deposit_methods[i].onclick = function() {console.log('cannot change payment type')}};">
                         <div style="display: flex; flex-direction: row; gap: 2px; margin-top: 2px;">
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
-                                {% trans %} Yöntem: {% endtrans %}
+                                 Yöntem: 
                             </div>
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
                                 <img src="/img/payment_methods/{{ item }}.jpg" style="height: 30px; width: 100px; display: inline-block; vertical-align: middle; max-width: 100px" alt="">
@@ -733,7 +733,7 @@
                         </div>
                         <div style="display: flex; flex-direction: row; gap: 2px; margin-top: 2px;">
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
-                                {% trans %} Yöntem Adı: {% endtrans %}
+                                 Yöntem Adı: 
                             </div>
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
                                 {{ key }}
@@ -741,7 +741,7 @@
                         </div>
                         <div style="display: flex; flex-direction: row; gap: 2px; margin-top: 2px;">
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
-                                {% trans %} Min. Yatırım: {% endtrans %}
+                                 Min. Yatırım: 
                             </div>
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
                                 100₺
@@ -749,7 +749,7 @@
                         </div>
                         <div style="display: flex; flex-direction: row; gap: 2px; margin-top: 2px;">
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
-                                {% trans %} Min. Yatırım: {% endtrans %}
+                                 Min. Yatırım: 
                             </div>
                             <div style="background-color: rgba(255, 255, 255, 0.05); flex: 1; color: white; padding: 5px 15px">
                                 50000₺
@@ -773,10 +773,10 @@
                                     {{ key }}
                                 </td>
                                 <td>
-                                    {%trans%}Min. Yatırım{%endtrans%} 100₺
+                                    Min. Yatırım 100₺
                                 </td>
                                 <td>
-                                    {%trans%}Maks. Yatırım{%endtrans%} 50000₺
+                                    Maks. Yatırım 50000₺
                                 </td>
                             </tr>
 
@@ -795,30 +795,30 @@
                 <br>
                 <div style="background-color: var(--categoryBackground); text-align: left; padding: 10px; white-space: nowrap; max-width: 80vw; overflow-x: auto; border-radius: 5px">
                     <div style="display: inline-block">
-                        <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">{% trans %}Yöntem Adı{% endtrans %}</p>
+                        <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">Yöntem Adı</p>
                         {{ key }}
                     </div>
                     <div style="display: inline-block; margin-left: 25px">
-                        <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">{% trans %}Ücret{% endtrans %}</p>
-                        {% trans %}Ücretsiz{% endtrans %}
+                        <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">Ücret</p>
+                        Ücretsiz
                     </div>
                     <div style="display: inline-block; margin-left: 25px">
-                        <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">{% trans %}İşlem Süresi{% endtrans %}</p>
-                        {% trans %}Anlık{% endtrans %}
+                        <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">İşlem Süresi</p>
+                        Anlık
                     </div>
                     <div style="display: inline-block; margin-left: 25px">
-                        <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">{% trans %}Minimum Tutar{% endtrans %}</p>
-                        {% trans %}100₺{% endtrans %}
+                        <p style="color: grey; font-size: 12px; margin-bottom: 5px; margin-top: 5px">Minimum Tutar</p>
+                        100₺
                     </div>
                 </div>
                 <br>
                 <div style="background-color: var(--categoryBackground); text-align: left; padding: 10px; white-space: nowrap; max-width: 80vw; overflow-x: auto; border-radius: 5px">
-                    <p style="color: white; margin-bottom: 5px; margin-top: 5px">{% trans %}Para yatırmak için lütfen aşağıdaki tüm gerekli alanları doldurun.{% endtrans %}</p>
+                    <p style="color: white; margin-bottom: 5px; margin-top: 5px">Para yatırmak için lütfen aşağıdaki tüm gerekli alanları doldurun.</p>
                 </div>
                 {% if item == "kralpay_banka" %}
                 <br>
                 <select name="bank_id" style="width: 300px; max-width: 90%; padding: 5px; font-family: sans-serif; outline: none; font-size: 1rem; border: 1px solid white; background-color: transparent; color: white; -webkit-appearance: none;">
-                    <option value="no-bank">{% trans %}Banka Seçin{% endtrans %}</option>
+                    <option value="no-bank">Banka Seçin</option>
                     {% for key, item in bank_banks.items() %}
                         <option value="{{item}}">{{ key }}</option>
                     {% endfor %}
@@ -827,13 +827,13 @@
                 <br>
                 <input type="text" name="form-type" value="deposit-money" style="display: none">
                 <input type="text" name="deposit_type" style="display: none" id="deposit_type_{{ item }}">
-                <label for="amount" style="font-family: sans-serif; font-size: 12px">{% trans %}Yatırılacak Miktar{% endtrans %}</label>
+                <label for="amount" style="font-family: sans-serif; font-size: 12px">Yatırılacak Miktar</label>
                 <br>
                 <input id="amount" name="amount" type="text" style="width: 300px; max-width: 90%; padding: 5px; font-family: sans-serif; outline: none; font-size: 1rem; background-color: transparent; color: white; border-radius: 5px; border: 1px solid rgb(80, 80, 80)">
                 <br>
                 <br>
 
-                <button style="color: white; max-width: 90%; font-family: sans-serif; width: 300px; padding: 10px; box-sizing: border-box; background-color: var(--baseColor); outline: none; border: none">{% trans %}Yatırım Yap{% endtrans %}</button>
+                <button style="color: white; max-width: 90%; font-family: sans-serif; width: 300px; padding: 10px; box-sizing: border-box; background-color: var(--baseColor); outline: none; border: none">Yatırım Yap</button>
             </form>
         {% endfor %}
     </div>
@@ -845,16 +845,16 @@
                     <br>
                     <div style="background-color: var(--baseColor); font-family: 'Open Sans', sans-serif; color: white; padding: 10px; width: 90%; text-align: left; margin-top: 25px">
                         <p>
-                            {%trans%}Kasa İşlemleri{%endtrans%}
+                            Kasa İşlemleri
                         </p>
                     </div>
                 </center>
                 <div style="background-color: var(--categoryBackground); box-sizing: border-box;  margin-top: 50px">
                     <p style="background-color: gray; padding: 5px; border-radius: 5px; color: white"><span id="current-website"></span>/?ref={{ current_user.reference_code }}</p>
-                    <h3 style="color: var(--generalTextColor)">{%trans%}Partner Statüsü{%endtrans%}: {{ current_user.site_partner.partnership_status }}</h3>
-                    <h3 style="color: var(--generalTextColor)">{%trans%}Komisyon Oranı{%endtrans%}: %{{ current_user.site_partner.commission_rate }}</h3>
-                    <h3 style="color: var(--generalTextColor)">{%trans%}Kasa Bakiyesi{%endtrans%}: {{'%0.2f'| format(current_user.site_partner.partnership_balance|float)}}₺</h3>
-                    <h3 style="color: var(--generalTextColor)">{%trans%}Kasa Kazancı{%endtrans%}: {{'%0.2f'| format(current_user.site_partner.partnership_earnings|float)}}₺</h3>
+                    <h3 style="color: var(--generalTextColor)">Partner Statüsü: {{ current_user.site_partner.partnership_status }}</h3>
+                    <h3 style="color: var(--generalTextColor)">Komisyon Oranı: %{{ current_user.site_partner.commission_rate }}</h3>
+                    <h3 style="color: var(--generalTextColor)">Kasa Bakiyesi: {{'%0.2f'| format(current_user.site_partner.partnership_balance|float)}}₺</h3>
+                    <h3 style="color: var(--generalTextColor)">Kasa Kazancı: {{'%0.2f'| format(current_user.site_partner.partnership_earnings|float)}}₺</h3>
                     <script>
                         document.getElementById("current-website").innerHTML = window.location.origin;
                     </script>
